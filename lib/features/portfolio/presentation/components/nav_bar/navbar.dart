@@ -33,31 +33,15 @@ class Navbar extends StatefulWidget implements PreferredSizeWidget {
 
 class _NavbarState extends State<Navbar> {
   bool _isDrawerOpen = false;
-  bool _isExpanded = true;
-  double _lastOffset = 0.0;
 
   @override
   void initState() {
     super.initState();
-    widget.scrollController.addListener(_onScroll);
   }
 
   @override
   void dispose() {
-    widget.scrollController.removeListener(_onScroll);
     super.dispose();
-  }
-
-  void _onScroll() {
-    final currentOffset = widget.scrollController.offset;
-    if (currentOffset <= 0) {
-      if (!_isExpanded) setState(() => _isExpanded = true);
-    } else if (currentOffset > _lastOffset && currentOffset > 50) {
-      if (_isExpanded) setState(() => _isExpanded = false);
-    } else if (currentOffset < _lastOffset - 10) {
-      if (!_isExpanded) setState(() => _isExpanded = true);
-    }
-    _lastOffset = currentOffset;
   }
 
   void _scrollToSection(GlobalKey key, BuildContext context) {
@@ -129,7 +113,7 @@ class _NavbarState extends State<Navbar> {
           curve: Curves.easeInOut,
           margin: const EdgeInsets.only(top: 20, left: 24, right: 24),
           height: 64, // height for the liquid glass pill
-          width: _isExpanded ? (screenWidth - 48) : 64,
+          width: screenWidth - 48,
           decoration: BoxDecoration(
             color: Colors.white.withValues(alpha: 0.05),
             borderRadius: BorderRadius.circular(32),
@@ -157,11 +141,7 @@ class _NavbarState extends State<Navbar> {
                         left: 0,
                         child: GestureDetector(
                           onTap: () {
-                            if (!_isExpanded) {
-                              setState(() => _isExpanded = true);
-                            } else {
-                              _scrollToTop(context);
-                            }
+                            _scrollToTop(context);
                           },
                           child: Container(
                             width: 64,
@@ -192,7 +172,7 @@ class _NavbarState extends State<Navbar> {
                               widget.experienceKey,
                             ),
                             const SizedBox(width: 20),
-                            _buildNavItem(AppStrings.contact, widget.contactKey),
+                            _buildNavItem("Packages", widget.contactKey),
                           ],
                         ),
                       ),

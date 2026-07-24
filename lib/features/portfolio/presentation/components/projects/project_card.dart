@@ -1,28 +1,45 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ismailmagdy/core/constants/app_images.dart';
 import 'package:ismailmagdy/core/constants/app_strings.dart';
-import 'package:ismailmagdy/core/helpers/spacing.dart';
 import 'package:ismailmagdy/core/theme/app_colors.dart';
 import 'package:ismailmagdy/core/constants/app_dimensions.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:ismailmagdy/features/portfolio/presentation/components/projects/github_button.dart';
+import 'package:ismailmagdy/features/portfolio/presentation/screens/project_details_screen.dart';
 import '../../../domain/models/project_model.dart';
 
-class ProjectCard extends StatelessWidget {
+class ProjectCard extends StatefulWidget {
   final ProjectModel project;
 
   const ProjectCard({super.key, required this.project});
 
-  Future<void> _launchUrl(String url) async {
-    final uri = Uri.parse(url);
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri, mode: .externalApplication);
-    }
+  @override
+  State<ProjectCard> createState() => _ProjectCardState();
+}
+
+class _ProjectCardState extends State<ProjectCard>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _arrowController;
+  late Animation<double> _arrowAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _arrowController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 1200),
+    )..repeat(reverse: true);
+
+    _arrowAnimation = Tween<double>(begin: 0.0, end: 6.0).animate(
+      CurvedAnimation(parent: _arrowController, curve: Curves.easeInOut),
+    );
   }
 
-  ///
+  @override
+  void dispose() {
+    _arrowController.dispose();
+    super.dispose();
+  }
+
   String _getProjectImagePath(String projectTitle) {
     switch (projectTitle.toLowerCase()) {
       case AppStrings.mealMonkey:
@@ -38,147 +55,95 @@ class ProjectCard extends StatelessWidget {
     }
   }
 
-  //
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final isMobile = screenWidth < 768;
-
-    return Card(
-      color: AppColors.backgroundDark,
-      elevation: 5,
-      shape: RoundedRectangleBorder(
-        borderRadius: .circular(AppDimensions.cardBorderRadius),
-      ),
-      child: Column(
-        crossAxisAlignment: .start,
-        mainAxisSize: .min,
-        children: [
-          // Project Image
-          Container(
-            width: .infinity,
-            decoration: BoxDecoration(
-              color: AppColors.primary.withValues(alpha: 0.1),
-              borderRadius: .circular(AppDimensions.cardBorderRadius),
-            ),
-            child: ClipRRect(
-              borderRadius: const .only(
-                topLeft: .circular(AppDimensions.cardBorderRadius),
-                topRight: .circular(AppDimensions.cardBorderRadius),
-              ),
-              // Image
-              child: Image.asset(
-                _getProjectImagePath(project.title),
-                fit: .cover,
-                errorBuilder: (context, error, stackTrace) {
-                  return Container(
-                    color: AppColors.primary.withValues(alpha: 0.1),
-                    child: Icon(
-                      Icons.image,
-                      size: 50,
-                      color: AppColors.primary,
-                    ),
-                  );
-                },
-              ),
-            ),
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ProjectDetailsScreen(project: widget.project),
           ),
-          //
-          Padding(
-            padding: .all(20),
-            child: Column(
-              crossAxisAlignment: .start,
-              mainAxisSize: .min,
-              children: [
-                // Project Title
-                Text(
-                  project.title,
-                  style: GoogleFonts.poppins(
-                    fontSize: 20,
-                    fontWeight: .bold,
-                    color: AppColors.textDark,
+        );
+      },
+      borderRadius: BorderRadius.circular(AppDimensions.cardBorderRadius),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(AppDimensions.cardBorderRadius),
+        child: Container(
+          color: AppColors.backgroundDark,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              // Project Image — takes remaining space
+              Expanded(
+                child: Hero(
+                  tag: widget.project.title,
+                  child: ClipRRect(
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(AppDimensions.cardBorderRadius),
+                      topRight: Radius.circular(AppDimensions.cardBorderRadius),
+                    ),
+                    child: Image.asset(
+                      _getProjectImagePath(widget.project.title),
+                      fit: BoxFit.cover,
+                      width: double.infinity,
+                      errorBuilder: (context, error, stackTrace) {
+                        return Container(
+                          color: AppColors.primary.withValues(alpha: 0.1),
+                          child: const Icon(
+                            Icons.image,
+                            size: 50,
+                            color: AppColors.primary,
+                          ),
+                        );
+                      },
+                    ),
                   ),
                 ),
-                //
-                verticalSpace(12),
-                //
-                // Project Description
-                Text(
-                  project.description,
-                  style: GoogleFonts.poppins(
-                    fontSize: 12,
-                    height: 1.6,
-                    color: AppColors.textDark.withValues(alpha: 0.7),
-                  ),
-                  maxLines: 3,
-                  overflow: .ellipsis,
+              ),
+              // Title + Animated Arrow
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 14,
                 ),
-                //
-                verticalSpace(12),
-                //
-                // Tech Stack
-                Wrap(
-                  spacing: 8,
-                  runSpacing: 8,
-                  children: project.techStack
-                      .map(
-                        (tech) => Container(
-                          padding: const .symmetric(
-                            horizontal: 12,
-                            vertical: 6,
-                          ),
-                          decoration: BoxDecoration(
-                            color: AppColors.primary.withValues(alpha: 0.2),
-                            borderRadius: .circular(20),
-                          ),
-                          child: Text(
-                            tech,
-                            style: GoogleFonts.poppins(
-                              fontSize: 12,
-                              color: AppColors.primary,
-                              fontWeight: .w500,
-                            ),
-                          ),
-                        ),
-                      )
-                      .toList(),
-                ),
-                //
-                verticalSpace(isMobile ? 16 : 40),
-                // Action Buttons
-                Row(
+                child: Row(
                   children: [
                     Expanded(
-                      child: GithubButton(
-                        onPressed: () => _launchUrl(project.githubUrl),
+                      child: Text(
+                        widget.project.title,
+                        style: GoogleFonts.poppins(
+                          fontSize: 17,
+                          fontWeight: FontWeight.w600,
+                          color: AppColors.textDark,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
-                    if (project.liveDemoUrl != null) ...[
-                      horizontalSpace(12),
-                      //
-                      Expanded(
-                        child: ElevatedButton.icon(
-                          onPressed: () => _launchUrl(project.liveDemoUrl!),
-                          icon: const FaIcon(FontAwesomeIcons.globe, size: 16),
-                          label: const Text(AppStrings.liveDemo),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: AppColors.primary,
-                            foregroundColor: Colors.white,
-                            padding: const .symmetric(vertical: 12),
-                          ),
-                        ),
+                    const SizedBox(width: 8),
+                    // Animated sliding arrow
+                    AnimatedBuilder(
+                      animation: _arrowAnimation,
+                      builder: (context, child) {
+                        return Transform.translate(
+                          offset: Offset(_arrowAnimation.value, 0),
+                          child: child,
+                        );
+                      },
+                      child: Icon(
+                        Icons.keyboard_double_arrow_right,
+                        color: AppColors.primary.withValues(alpha: 0.7),
+                        size: 22,
                       ),
-                      //
-                    ],
+                    ),
                   ],
                 ),
-                //
-              ],
-            ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
 }
-// 202

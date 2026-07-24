@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:ismailmagdy/core/theme/app_colors.dart';
 import '../components/nav_bar/navbar.dart';
 import '../components/nav_bar/mobile_bottom_navbar.dart';
 import '../components/hero/hero_section.dart';
 import '../components/projects/projects_section.dart';
 import '../components/experience/experience_section.dart';
-import '../components/contact/contact_section.dart';
+import '../components/open_source/open_source_section.dart';
 import '../components/footer/footer.dart';
 import 'package:ismailmagdy/features/portfolio/presentation/components/skills/widgets/skills_section.dart';
+import '../components/background/animated_background.dart';
 
 /// The main HomePage of the portfolio.
 
@@ -102,7 +102,6 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       extendBody: true,
-      backgroundColor: AppColors.backgroundDark,
       // NavBar
       appBar: Navbar(
         aboutKey: aboutKey,
@@ -126,42 +125,37 @@ class _HomePageState extends State<HomePage> {
             )
           : null,
       //
-      body: SingleChildScrollView(
-        controller: _scrollController,
-        child: Column(
-          children: [
-            // Hero Section
-            Container(key: aboutKey, child: HeroSection()),
-            //
-            // Skills Section
-            Container(key: skillsKey, child: const SkillsSection()),
-            //
-            // Projects Section
-            Container(
-              key: projectsKey,
-              color: AppColors.backgroundDark,
-              child: const ProjectsSection(),
+      body: Stack(
+        children: [
+          // Background Animation
+          const Positioned.fill(child: AnimatedBackground()),
+          // Content
+          SingleChildScrollView(
+            controller: _scrollController,
+            child: Column(
+              children: [
+                // Hero Section
+                Container(key: aboutKey, child: HeroSection()),
+                //
+                // Skills Section
+                Container(key: skillsKey, child: const SkillsSection()),
+                //
+                // Projects Section
+                Container(key: projectsKey, child: const ProjectsSection()),
+                //
+                // Experience Section
+                Container(key: experienceKey, child: const ExperienceSection()),
+                //
+                // Open Source & Packages Section
+                Container(key: contactKey, child: const OpenSourceSection()),
+                //
+                // Footer Section
+                const Footer(),
+                //
+              ],
             ),
-            //
-            // Experience Section
-            Container(
-              key: experienceKey,
-              color: AppColors.backgroundDark,
-              child: const ExperienceSection(),
-            ),
-            //
-            // Contact Section
-            Container(
-              key: contactKey,
-              color: AppColors.backgroundDark,
-              child: const ContactSection(),
-            ),
-            //
-            // Footer Section
-            const Footer(),
-            //
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

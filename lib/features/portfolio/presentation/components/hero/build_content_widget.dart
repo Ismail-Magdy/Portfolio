@@ -149,7 +149,7 @@ class BuildContentWidget extends StatelessWidget {
   Future<void> _downloadCV() async {
     //
     final Uri cvUrl = Uri.parse(
-      "https://drive.google.com/file/d/163K7L8rFcuNiOqvngyQLGhtNDA_UKy1_/view?usp=sharing",
+      "https://drive.google.com/file/d/14fqxUzi24H-C4mcFgNl40k0TKMK3nTjL/view?usp=sharing",
     );
     if (await canLaunchUrl(cvUrl)) {
       await launchUrl(cvUrl, webOnlyWindowName: '_blank');

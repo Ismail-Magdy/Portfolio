@@ -14,7 +14,7 @@ class ProjectsSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
 
-    final bool isDesktop = screenWidth >= 1024;
+    //  final bool isDesktop = screenWidth >= 1024;
     final bool isTablet = screenWidth >= 600 && screenWidth < 1024;
     final bool isMobile = screenWidth < 600;
 
@@ -26,23 +26,23 @@ class ProjectsSection extends StatelessWidget {
         maxWidth: AppDimensions.maxContentWidth,
       ),
       padding: EdgeInsets.symmetric(
-        horizontal: isMobile ? (12.0) : (AppDimensions.sectionPadding * 0.4),
+        horizontal: isMobile ? 12.0 : 24.0,
         vertical: 80,
       ),
       child: Column(
-        crossAxisAlignment: .start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Text Project
           Text(
             AppStrings.projectsTitle,
             style: GoogleFonts.poppins(
               fontSize: 36,
-              fontWeight: .bold,
+              fontWeight: FontWeight.bold,
               color: AppColors.textDark,
             ),
           ),
           //
-          verticalSpace(40),
+          verticalSpace(8),
           //
           // All Projects
           GridView.builder(
@@ -54,26 +54,17 @@ class ProjectsSection extends StatelessWidget {
                   : isTablet
                   ? 2
                   : 3,
-              crossAxisSpacing: 50,
+              crossAxisSpacing: 24,
               mainAxisSpacing: 24,
-              childAspectRatio: isDesktop
-                  ? 0.599
+              childAspectRatio: isMobile
+                  ? 1.1
                   : isTablet
-                  ? 0.5
-                  : 0.72,
+                  ? 0.9
+                  : 0.95,
             ),
             itemCount: projects.length,
             itemBuilder: (context, index) {
-              return Container(
-                decoration: BoxDecoration(
-                  border: .all(
-                    color: AppColors.primaryRedesign.withValues(alpha: 0.5),
-                    width: 1,
-                  ),
-                  borderRadius: .circular(AppDimensions.cardBorderRadius),
-                ),
-                child: ProjectCard(project: projects[index]),
-              );
+              return ProjectCard(project: projects[index]);
             },
           ),
           //

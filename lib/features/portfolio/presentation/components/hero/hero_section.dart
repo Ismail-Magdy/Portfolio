@@ -19,11 +19,15 @@ class HeroSection extends StatelessWidget {
       constraints: const BoxConstraints(
         maxWidth: AppDimensions.maxContentWidth,
       ),
-      padding: .symmetric(
-        horizontal: isMobile
+      padding: EdgeInsets.only(
+        left: isMobile
             ? AppDimensions.mobileSectionPadding
             : AppDimensions.sectionPadding,
-        vertical: 80,
+        right: isMobile
+            ? AppDimensions.mobileSectionPadding
+            : AppDimensions.sectionPadding,
+        top: 180,
+        bottom: 80,
       ),
       child: isMobile
           // Mobile
