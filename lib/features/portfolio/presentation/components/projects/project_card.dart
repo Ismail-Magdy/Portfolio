@@ -3,8 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:ismailmagdy/core/constants/app_images.dart';
 import 'package:ismailmagdy/core/constants/app_strings.dart';
 import 'package:ismailmagdy/core/theme/app_colors.dart';
-import 'package:ismailmagdy/core/constants/app_dimensions.dart';
-import 'package:ismailmagdy/features/portfolio/presentation/screens/project_details_screen.dart';
+import 'package:ismailmagdy/features/portfolio/presentation/components/projects/project_details_screen.dart';
 import '../../../domain/models/project_model.dart';
 
 class ProjectCard extends StatefulWidget {
@@ -66,27 +65,26 @@ class _ProjectCardState extends State<ProjectCard>
           ),
         );
       },
-      borderRadius: BorderRadius.circular(AppDimensions.cardBorderRadius),
+      borderRadius: .circular(12),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(AppDimensions.cardBorderRadius),
+        borderRadius: .circular(12),
         child: Container(
           color: AppColors.backgroundDark,
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
+            crossAxisAlignment: .stretch,
             children: [
-              // Project Image — takes remaining space
+              // Project Image
               Expanded(
                 child: Hero(
                   tag: widget.project.title,
                   child: ClipRRect(
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(AppDimensions.cardBorderRadius),
-                      topRight: Radius.circular(AppDimensions.cardBorderRadius),
-                    ),
+                    borderRadius: const .all(.circular(12)),
                     child: Image.asset(
+                      //
                       _getProjectImagePath(widget.project.title),
-                      fit: BoxFit.cover,
-                      width: double.infinity,
+                      //
+                      fit: .cover,
+                      width: .infinity,
                       errorBuilder: (context, error, stackTrace) {
                         return Container(
                           color: AppColors.primary.withValues(alpha: 0.1),
@@ -101,26 +99,27 @@ class _ProjectCardState extends State<ProjectCard>
                   ),
                 ),
               ),
+              //
               // Title + Animated Arrow
               Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 14,
-                ),
+                padding: const .symmetric(horizontal: 10, vertical: 14),
                 child: Row(
+                  mainAxisAlignment: .start,
                   children: [
+                    //
                     Expanded(
                       child: Text(
                         widget.project.title,
                         style: GoogleFonts.poppins(
                           fontSize: 17,
-                          fontWeight: FontWeight.w600,
+                          fontWeight: .w600,
                           color: AppColors.textDark,
                         ),
                         maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
+                        overflow: .ellipsis,
                       ),
                     ),
+                    //
                     const SizedBox(width: 8),
                     // Animated sliding arrow
                     AnimatedBuilder(
@@ -137,6 +136,7 @@ class _ProjectCardState extends State<ProjectCard>
                         size: 22,
                       ),
                     ),
+                    //
                   ],
                 ),
               ),

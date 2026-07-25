@@ -10,6 +10,7 @@ import 'package:url_launcher/url_launcher.dart';
 class Footer extends StatelessWidget {
   const Footer({super.key});
 
+  ///
   Future<void> _launchUrl(String url) async {
     final uri = Uri.parse(url);
     if (await canLaunchUrl(uri)) {
@@ -53,6 +54,7 @@ class Footer extends StatelessWidget {
       ),
       child: Column(
         children: [
+          //
           Row(
             mainAxisAlignment: .center,
             children: socialLinks
@@ -72,7 +74,9 @@ class Footer extends StatelessWidget {
                 )
                 .toList(),
           ),
+          //
           verticalSpace(20),
+          //
           Text(
             AppStrings.copyright,
             style: GoogleFonts.poppins(
@@ -80,6 +84,7 @@ class Footer extends StatelessWidget {
               color: AppColors.textDark.withValues(alpha: 0.6),
             ),
           ),
+          //
         ],
       ),
     );

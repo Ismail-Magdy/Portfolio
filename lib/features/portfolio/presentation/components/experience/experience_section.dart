@@ -3,7 +3,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:ismailmagdy/core/constants/app_strings.dart';
 import 'package:ismailmagdy/core/helpers/spacing.dart';
 import 'package:ismailmagdy/core/theme/app_colors.dart';
-import 'package:ismailmagdy/core/constants/app_dimensions.dart';
 import 'package:ismailmagdy/features/portfolio/data/repositories/experience_repository.dart';
 import 'package:ismailmagdy/features/portfolio/presentation/components/experience/experience_card.dart';
 import 'package:ismailmagdy/core/animations/staggered_fade_in.dart';
@@ -19,19 +18,13 @@ class ExperienceSection extends StatelessWidget {
     final experiences = repository.getExperiences();
 
     return Container(
-      constraints: const BoxConstraints(
-        maxWidth: AppDimensions.maxContentWidth,
-      ),
-      padding: .symmetric(
-        horizontal: isMobile
-            ? AppDimensions.mobileSectionPadding
-            : AppDimensions.sectionPadding,
-        vertical: 80,
-      ),
+      constraints: const BoxConstraints(maxWidth: 1200),
+      padding: .symmetric(horizontal: isMobile ? 40 : 80, vertical: 80),
 
       child: Column(
         crossAxisAlignment: .start,
         children: [
+          //
           Text(
             AppStrings.professionalExperience,
             style: GoogleFonts.poppins(
@@ -50,7 +43,9 @@ class ExperienceSection extends StatelessWidget {
               color: AppColors.textDark.withValues(alpha: 0.7),
             ),
           ),
+          //
           verticalSpace(60),
+          //
           ...experiences.asMap().entries.map((entry) {
             final index = entry.key;
             final experience = entry.value;
@@ -64,6 +59,7 @@ class ExperienceSection extends StatelessWidget {
               ),
             );
           }),
+          //
         ],
       ),
     );

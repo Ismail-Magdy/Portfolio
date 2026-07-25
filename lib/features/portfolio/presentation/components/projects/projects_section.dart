@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ismailmagdy/core/helpers/spacing.dart';
 import 'package:ismailmagdy/core/theme/app_colors.dart';
-import 'package:ismailmagdy/core/constants/app_dimensions.dart';
 import 'package:ismailmagdy/core/constants/app_strings.dart';
 import 'package:ismailmagdy/features/portfolio/data/repositories/projects_repository.dart';
 import 'project_card.dart';
@@ -22,22 +21,17 @@ class ProjectsSection extends StatelessWidget {
     final projects = repository.getProjects();
 
     return Container(
-      constraints: const BoxConstraints(
-        maxWidth: AppDimensions.maxContentWidth,
-      ),
-      padding: EdgeInsets.symmetric(
-        horizontal: isMobile ? 12.0 : 24.0,
-        vertical: 80,
-      ),
+      constraints: const BoxConstraints(maxWidth: 1200),
+      padding: .symmetric(horizontal: isMobile ? 12.0 : 24.0, vertical: 80),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: .start,
         children: [
           // Text Project
           Text(
             AppStrings.projectsTitle,
             style: GoogleFonts.poppins(
               fontSize: 36,
-              fontWeight: FontWeight.bold,
+              fontWeight: .bold,
               color: AppColors.textDark,
             ),
           ),

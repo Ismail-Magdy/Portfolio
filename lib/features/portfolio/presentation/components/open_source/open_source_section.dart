@@ -1,7 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ismailmagdy/core/constants/app_dimensions.dart';
 import 'package:ismailmagdy/core/theme/app_colors.dart';
 
 class OpenSourceSection extends StatefulWidget {
@@ -62,15 +61,10 @@ class _OpenSourceSectionState extends State<OpenSourceSection>
     final isMobile = screenWidth < 768;
 
     return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: isMobile ? 20 : AppDimensions.sectionPadding,
-        vertical: 80,
-      ),
+      padding: .symmetric(horizontal: isMobile ? 20 : 80, vertical: 80),
       child: Center(
         child: ConstrainedBox(
-          constraints: const BoxConstraints(
-            maxWidth: AppDimensions.maxContentWidth,
-          ),
+          constraints: const BoxConstraints(maxWidth: 1200),
           child: Column(
             children: [
               // Section Title
@@ -78,15 +72,17 @@ class _OpenSourceSectionState extends State<OpenSourceSection>
                 "Open Source & Packages",
                 style: GoogleFonts.poppins(
                   fontSize: isMobile ? 26 : 32,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: .bold,
                   color: AppColors.textDark,
                 ),
-                textAlign: TextAlign.center,
+                textAlign: .center,
               ),
+              //
               const SizedBox(height: 60),
-
+              //
               // Coming Soon Card
               _buildComingSoonCard(isMobile),
+              //
             ],
           ),
         ),
@@ -101,21 +97,21 @@ class _OpenSourceSectionState extends State<OpenSourceSection>
         return Transform.translate(
           offset: Offset(0, _floatAnimation.value),
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(24),
+            borderRadius: .circular(24),
             child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+              filter: .blur(sigmaX: 10, sigmaY: 10),
               child: Container(
-                width: double.infinity,
+                width: .infinity,
                 constraints: BoxConstraints(
-                  maxWidth: isMobile ? double.infinity : 650,
+                  maxWidth: isMobile ? .infinity : 650,
                 ),
-                padding: EdgeInsets.symmetric(
+                padding: .symmetric(
                   horizontal: isMobile ? 24 : 48,
                   vertical: isMobile ? 40 : 56,
                 ),
                 decoration: BoxDecoration(
                   color: Colors.white.withValues(alpha: 0.04),
-                  borderRadius: BorderRadius.circular(24),
+                  borderRadius: .circular(24),
                   border: Border.all(
                     color: AppColors.primary.withValues(alpha: 0.3),
                     width: 1.5,
@@ -131,27 +127,24 @@ class _OpenSourceSectionState extends State<OpenSourceSection>
                   ],
                 ),
                 child: Column(
-                  mainAxisSize: MainAxisSize.min,
+                  mainAxisSize: .min,
                   children: [
                     // Animated Terminal Icon
                     _buildAnimatedIcon(),
+                    //
                     const SizedBox(height: 32),
-
                     // "Coming Soon" badge
                     Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 20,
-                        vertical: 8,
-                      ),
+                      padding: const .symmetric(horizontal: 20, vertical: 8),
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: .circular(20),
                         gradient: LinearGradient(
                           colors: [
                             AppColors.primary.withValues(alpha: 0.3),
                             AppColors.primary.withValues(alpha: 0.15),
                           ],
                         ),
-                        border: Border.all(
+                        border: .all(
                           color: AppColors.primary.withValues(alpha: 0.4),
                         ),
                       ),
@@ -159,7 +152,7 @@ class _OpenSourceSectionState extends State<OpenSourceSection>
                         "COMING SOON",
                         style: GoogleFonts.poppins(
                           fontSize: 12,
-                          fontWeight: FontWeight.w700,
+                          fontWeight: .w700,
                           color: AppColors.primary,
                           letterSpacing: 2.5,
                         ),
@@ -169,13 +162,13 @@ class _OpenSourceSectionState extends State<OpenSourceSection>
 
                     // Teaser text
                     Text(
-                      "Cooking something special...",
+                      "Cooking something special",
                       style: GoogleFonts.poppins(
                         fontSize: isMobile ? 18 : 22,
-                        fontWeight: FontWeight.w600,
+                        fontWeight: .w600,
                         color: AppColors.textDark,
                       ),
-                      textAlign: TextAlign.center,
+                      textAlign: .center,
                     ),
                     const SizedBox(height: 16),
                     Text(
@@ -185,12 +178,13 @@ class _OpenSourceSectionState extends State<OpenSourceSection>
                         height: 1.7,
                         color: AppColors.textDark.withValues(alpha: 0.7),
                       ),
-                      textAlign: TextAlign.center,
+                      textAlign: .center,
                     ),
                     const SizedBox(height: 32),
 
                     // Terminal-style text with blinking cursor
                     _buildTerminalText(),
+                    //
                   ],
                 ),
               ),
@@ -210,8 +204,8 @@ class _OpenSourceSectionState extends State<OpenSourceSection>
           width: 80,
           height: 80,
           decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            border: Border.all(
+            shape: .circle,
+            border: .all(
               color: AppColors.primary.withValues(
                 alpha: 0.3 + _pulseAnimation.value * 0.3,
               ),
@@ -240,25 +234,25 @@ class _OpenSourceSectionState extends State<OpenSourceSection>
   /// A terminal-style line with a blinking cursor.
   Widget _buildTerminalText() {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+      padding: const .symmetric(horizontal: 20, vertical: 14),
       decoration: BoxDecoration(
         color: const Color(0xFF0D1117),
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.white.withValues(alpha: 0.08)),
+        borderRadius: .circular(12),
+        border: .all(color: Colors.white.withValues(alpha: 0.08)),
       ),
       child: Row(
-        mainAxisSize: MainAxisSize.min,
+        mainAxisSize: .min,
         children: [
           Text(
             "\$ ",
             style: GoogleFonts.firaCode(
               fontSize: 14,
               color: AppColors.primary,
-              fontWeight: FontWeight.w600,
+              fontWeight: .w600,
             ),
           ),
           Text(
-            "flutter pub add glass_bottom_nav",
+            "flutter pub add glass_bottom_nav_bar",
             style: GoogleFonts.firaCode(
               fontSize: 14,
               color: AppColors.textDark.withValues(alpha: 0.6),
@@ -284,3 +278,4 @@ class _OpenSourceSectionState extends State<OpenSourceSection>
     );
   }
 }
+//

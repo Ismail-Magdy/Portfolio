@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ismailmagdy/core/constants/app_dimensions.dart';
 import 'package:ismailmagdy/core/helpers/spacing.dart';
 import 'package:ismailmagdy/core/theme/app_colors.dart';
 import 'package:ismailmagdy/features/portfolio/domain/models/experience_model.dart';
@@ -36,6 +35,7 @@ class ExperienceCard extends StatelessWidget {
           // Timeline indicator
           Column(
             children: [
+              //
               Container(
                 width: 16,
                 height: 16,
@@ -45,29 +45,33 @@ class ExperienceCard extends StatelessWidget {
                   border: .all(color: AppColors.backgroundDark, width: 3),
                 ),
               ),
+              //
               if (index < total - 1)
+                //
                 Container(
                   width: 2,
                   height: isMobile ? 200 : 150,
                   color: AppColors.primary.withValues(alpha: 0.3),
                   margin: const .symmetric(vertical: 8),
                 ),
+              //
             ],
           ),
+          //
           horizontalSpace(24),
+          //
           // Experience Card
           Expanded(
             child: Card(
               elevation: 2,
               color: AppColors.cardBackgroundDark,
-              shape: RoundedRectangleBorder(
-                borderRadius: .circular(AppDimensions.cardBorderRadius),
-              ),
+              shape: RoundedRectangleBorder(borderRadius: .circular(12)),
               child: Padding(
                 padding: const .all(24),
                 child: Column(
                   crossAxisAlignment: .start,
                   children: [
+                    //
                     Text(
                       experience.period,
                       style: GoogleFonts.poppins(
@@ -75,7 +79,9 @@ class ExperienceCard extends StatelessWidget {
                         color: AppColors.textDark.withValues(alpha: 0.6),
                       ),
                     ),
+                    //
                     verticalSpace(8),
+                    //
                     Text(
                       experience.title,
                       style: GoogleFonts.poppins(
@@ -84,7 +90,9 @@ class ExperienceCard extends StatelessWidget {
                         color: AppColors.textDark,
                       ),
                     ),
+                    //
                     verticalSpace(4),
+                    //
                     Text(
                       experience.company,
                       style: GoogleFonts.poppins(
@@ -93,7 +101,9 @@ class ExperienceCard extends StatelessWidget {
                         color: AppColors.textDark,
                       ),
                     ),
+                    //
                     verticalSpace(16),
+                    //
                     Text(
                       experience.description,
                       style: GoogleFonts.poppins(
@@ -102,7 +112,9 @@ class ExperienceCard extends StatelessWidget {
                         color: AppColors.textDark.withValues(alpha: 0.8),
                       ),
                     ),
+                    //
                     verticalSpace(20),
+                    //
                     Wrap(
                       spacing: 12,
                       runSpacing: 12,
@@ -133,11 +145,13 @@ class ExperienceCard extends StatelessWidget {
                           )
                           .toList(),
                     ),
+                    //
                   ],
                 ),
               ),
             ),
           ),
+          //
         ],
       ),
     );

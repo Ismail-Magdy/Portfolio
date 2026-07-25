@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:ismailmagdy/features/portfolio/presentation/components/skills/skills_section.dart';
 import '../components/nav_bar/navbar.dart';
 import '../components/nav_bar/mobile_bottom_navbar.dart';
-import '../components/hero/hero_section.dart';
+import '../components/hero/components/hero_section.dart';
 import '../components/projects/projects_section.dart';
 import '../components/experience/experience_section.dart';
 import '../components/open_source/open_source_section.dart';
 import '../components/footer/footer.dart';
-import 'package:ismailmagdy/features/portfolio/presentation/components/skills/widgets/skills_section.dart';
 import '../components/background/animated_background.dart';
 
 /// The main HomePage of the portfolio.
@@ -26,7 +26,7 @@ class _HomePageState extends State<HomePage> {
   final projectsKey = GlobalKey();
   final skillsKey = GlobalKey();
   final experienceKey = GlobalKey();
-  final contactKey = GlobalKey();
+  final packagesKey = GlobalKey();
 
   @override
   void initState() {
@@ -42,7 +42,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _onScroll() {
-    final keys = [aboutKey, skillsKey, projectsKey, experienceKey, contactKey];
+    final keys = [aboutKey, skillsKey, projectsKey, experienceKey, packagesKey];
 
     int newIndex = 0;
     for (int i = keys.length - 1; i >= 0; i--) {
@@ -81,7 +81,7 @@ class _HomePageState extends State<HomePage> {
         skillsKey,
         projectsKey,
         experienceKey,
-        contactKey,
+        packagesKey,
       ];
       final keyContext = keys[index].currentContext;
       if (keyContext != null) {
@@ -107,7 +107,7 @@ class _HomePageState extends State<HomePage> {
         aboutKey: aboutKey,
         projectsKey: projectsKey,
         skillsKey: skillsKey,
-        contactKey: contactKey,
+        packagesKey: packagesKey,
         experienceKey: experienceKey,
         scrollController: _scrollController,
       ),
@@ -117,7 +117,7 @@ class _HomePageState extends State<HomePage> {
               aboutKey: aboutKey,
               projectsKey: projectsKey,
               skillsKey: skillsKey,
-              contactKey: contactKey,
+              packagesKey: packagesKey,
               experienceKey: experienceKey,
               scrollController: _scrollController,
               activeIndex: _activeIndex,
@@ -147,7 +147,7 @@ class _HomePageState extends State<HomePage> {
                 Container(key: experienceKey, child: const ExperienceSection()),
                 //
                 // Open Source & Packages Section
-                Container(key: contactKey, child: const OpenSourceSection()),
+                Container(key: packagesKey, child: const OpenSourceSection()),
                 //
                 // Footer Section
                 const Footer(),
@@ -157,6 +157,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
+      //
     );
   }
 }

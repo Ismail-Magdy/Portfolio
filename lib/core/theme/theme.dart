@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ismailmagdy/core/theme/app_colors.dart';
-import 'package:ismailmagdy/core/constants/app_dimensions.dart';
 
 class AppTheme {
   static ThemeData get lightTheme => ThemeData(
@@ -32,9 +31,7 @@ class AppTheme {
     cardTheme: CardThemeData(
       color: AppColors.cardBackgroundLight,
       elevation: 2,
-      shape: RoundedRectangleBorder(
-        borderRadius: .circular(AppDimensions.cardBorderRadius),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: .circular(12)),
     ),
   );
 
@@ -66,9 +63,7 @@ class AppTheme {
     cardTheme: CardThemeData(
       color: AppColors.cardBackgroundDark,
       elevation: 2,
-      shape: RoundedRectangleBorder(
-        borderRadius: .circular(AppDimensions.cardBorderRadius),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: .circular(12)),
     ),
   );
 }
