@@ -16,7 +16,7 @@ class HeroSection extends StatelessWidget {
 
     return Container(
       constraints: const BoxConstraints(maxWidth: 1200),
-      padding: .only(
+      padding: EdgeInsets.only(
         left: isMobile ? 40 : 80,
         right: isMobile ? 40 : 80,
         top: 180,
@@ -25,10 +25,10 @@ class HeroSection extends StatelessWidget {
       child: isMobile
           // Mobile
           ? Column(
-              crossAxisAlignment: .center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 // Image Mobile
-                ProfileImageWidget(),
+                const ProfileImageWidget(),
                 //
                 verticalSpace(40),
                 // Content Mobile
@@ -39,7 +39,7 @@ class HeroSection extends StatelessWidget {
           //
           // Not Mobile
           : Row(
-              crossAxisAlignment: .center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 //
                 Expanded(
@@ -49,7 +49,7 @@ class HeroSection extends StatelessWidget {
                 ),
                 horizontalSpace(60),
                 // Image Not Mobile
-                Expanded(flex: 1, child: ProfileImageWidget()),
+                const Expanded(flex: 1, child: ProfileImageWidget()),
               ],
             ),
       //

@@ -217,54 +217,56 @@ class _PackageDetailsScreenState extends State<PackageDetailsScreen>
     const double borderPad = 4.0;
     const double borderRadius = 20.0;
 
-    return ConstrainedBox(
-      constraints: const BoxConstraints(maxWidth: 600),
-      child: AnimatedBuilder(
-        animation: _borderGlowController,
-        builder: (context, child) {
-          return CustomPaint(
-            foregroundPainter: _SweepBorderPainter(
-              progress: _borderGlowController.value,
-              borderRadius: borderRadius + borderPad,
-              padding: borderPad,
-              glowColor: AppColors.primary,
-            ),
-            child: child,
-          );
-        },
-        child: Padding(
-          padding: const EdgeInsets.all(borderPad),
-          child: Hero(
-            tag: widget.package.title,
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(borderRadius),
-                boxShadow: [
-                  BoxShadow(
-                    color: AppColors.primary.withValues(alpha: 0.10),
-                    blurRadius: 30,
-                    spreadRadius: 2,
-                    offset: const Offset(0, 6),
-                  ),
-                ],
+    return RepaintBoundary(
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 600),
+        child: AnimatedBuilder(
+          animation: _borderGlowController,
+          builder: (context, child) {
+            return CustomPaint(
+              foregroundPainter: _SweepBorderPainter(
+                progress: _borderGlowController.value,
+                borderRadius: borderRadius + borderPad,
+                padding: borderPad,
+                glowColor: AppColors.primary,
               ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(borderRadius),
-                child: Image.asset(
-                  widget.package.imageIn,
-                  fit: BoxFit.contain,
-                  width: double.infinity,
-                  errorBuilder: (context, error, stackTrace) {
-                    return Container(
-                      height: 300,
-                      color: AppColors.primary.withValues(alpha: 0.1),
-                      child: const Icon(
-                        Icons.image,
-                        size: 80,
-                        color: AppColors.primary,
-                      ),
-                    );
-                  },
+              child: child,
+            );
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(borderPad),
+            child: Hero(
+              tag: widget.package.title,
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(borderRadius),
+                  boxShadow: [
+                    BoxShadow(
+                      color: AppColors.primary.withValues(alpha: 0.10),
+                      blurRadius: 30,
+                      spreadRadius: 2,
+                      offset: const Offset(0, 6),
+                    ),
+                  ],
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(borderRadius),
+                  child: Image.asset(
+                    widget.package.imageIn,
+                    fit: BoxFit.contain,
+                    width: double.infinity,
+                    errorBuilder: (context, error, stackTrace) {
+                      return Container(
+                        height: 300,
+                        color: AppColors.primary.withValues(alpha: 0.1),
+                        child: const Icon(
+                          Icons.image,
+                          size: 80,
+                          color: AppColors.primary,
+                        ),
+                      );
+                    },
+                  ),
                 ),
               ),
             ),

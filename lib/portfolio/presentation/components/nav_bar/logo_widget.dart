@@ -9,8 +9,8 @@ class LogoWidget extends StatelessWidget {
     return Container(
       width: 40,
       height: 40,
-      decoration: BoxDecoration(color: Colors.white, shape: .circle),
-      child: Center(
+      decoration: const BoxDecoration(color: Colors.white, shape: BoxShape.circle),
+      child: const Center(
         child: CircleAvatar(
           backgroundImage: AssetImage(AppImages.logo),
           radius: 70,

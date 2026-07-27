@@ -14,7 +14,7 @@ class Footer extends StatelessWidget {
   Future<void> _launchUrl(String url) async {
     final uri = Uri.parse(url);
     if (await canLaunchUrl(uri)) {
-      await launchUrl(uri, mode: .externalApplication);
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
     }
   }
 
@@ -41,7 +41,7 @@ class Footer extends StatelessWidget {
     final socialLinks = repository.getSocialLinks();
 
     return Container(
-      padding: const .symmetric(vertical: 40),
+      padding: const EdgeInsets.symmetric(vertical: 40),
       decoration: BoxDecoration(
         color: AppColors.cardBackgroundDark,
         border: Border(
@@ -56,11 +56,11 @@ class Footer extends StatelessWidget {
         children: [
           //
           Row(
-            mainAxisAlignment: .center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: socialLinks
                 .map(
                   (link) => Padding(
-                    padding: const .symmetric(horizontal: 16),
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: IconButton(
                       icon: FaIcon(
                         _getIconForPlatform(link.platform),

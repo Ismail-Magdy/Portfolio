@@ -21,16 +21,16 @@ class ProjectsSection extends StatelessWidget {
 
     return Container(
       constraints: const BoxConstraints(maxWidth: 1200),
-      padding: .symmetric(horizontal: isMobile ? 12.0 : 24.0, vertical: 80),
+      padding: EdgeInsets.symmetric(horizontal: isMobile ? 12.0 : 24.0, vertical: 80),
       child: Column(
-        crossAxisAlignment: .start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Text Project
           Text(
             AppStrings.projectsTitle,
             style: GoogleFonts.poppins(
               fontSize: 36,
-              fontWeight: .bold,
+              fontWeight: FontWeight.bold,
               color: AppColors.textDark,
             ),
           ),

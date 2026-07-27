@@ -13,15 +13,15 @@ class BuildContentWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: .start,
-      mainAxisAlignment: .center,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         // IAM Text
         Text(
           AppStrings.greeting,
           style: GoogleFonts.poppins(
             fontSize: 24,
-            fontWeight: .w400,
+            fontWeight: FontWeight.w400,
             color: AppColors.textDark.withValues(alpha: 0.8),
           ),
         ),
@@ -32,7 +32,7 @@ class BuildContentWidget extends StatelessWidget {
           AppStrings.name,
           style: GoogleFonts.poppins(
             fontSize: 48,
-            fontWeight: .bold,
+            fontWeight: FontWeight.bold,
             color: AppColors.textDark,
           ),
         ),
@@ -43,7 +43,7 @@ class BuildContentWidget extends StatelessWidget {
           AppStrings.title,
           style: GoogleFonts.poppins(
             fontSize: 32,
-            fontWeight: .w600,
+            fontWeight: FontWeight.w600,
             color: AppColors.primary,
           ),
         ),
@@ -68,11 +68,11 @@ class BuildContentWidget extends StatelessWidget {
               onPressed: _downloadCV,
               color: AppColors.primary,
               textColor: Colors.white,
-              padding: .symmetric(horizontal: 32, vertical: 16),
-              shape: RoundedRectangleBorder(borderRadius: .circular(8)),
+              padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
               child: Text(
                 AppStrings.downloadCV,
-                style: GoogleFonts.poppins(fontSize: 16, fontWeight: .w600),
+                style: GoogleFonts.poppins(fontSize: 16, fontWeight: FontWeight.w600),
               ),
             ),
             //
@@ -83,12 +83,12 @@ class BuildContentWidget extends StatelessWidget {
               style: OutlinedButton.styleFrom(
                 foregroundColor: AppColors.primary,
                 side: const BorderSide(color: AppColors.primary, width: 2),
-                padding: const .symmetric(horizontal: 32, vertical: 16),
-                shape: RoundedRectangleBorder(borderRadius: .circular(8)),
+                padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
               ),
               child: Text(
                 AppStrings.contact,
-                style: GoogleFonts.poppins(fontSize: 16, fontWeight: .w600),
+                style: GoogleFonts.poppins(fontSize: 16, fontWeight: FontWeight.w600),
               ),
             ),
             //
@@ -101,16 +101,16 @@ class BuildContentWidget extends StatelessWidget {
           children: [
             for (var link in socialLinks)
               Padding(
-                padding: const .only(right: 16),
+                padding: const EdgeInsets.only(right: 16),
                 child: InkWell(
                   onTap: () => _launchSocial(link.url),
-                  borderRadius: .circular(8),
+                  borderRadius: BorderRadius.circular(8),
                   child: Container(
                     width: 45,
                     height: 45,
                     decoration: BoxDecoration(
                       color: AppColors.cardBackgroundDark,
-                      borderRadius: .circular(8),
+                      borderRadius: BorderRadius.circular(8),
                       border: Border.all(
                         color: AppColors.primary.withValues(alpha: 0.3),
                         width: 1,
@@ -148,7 +148,7 @@ class BuildContentWidget extends StatelessWidget {
   Future<void> _contactWhatsApp() async {
     final url = Uri.parse("https://wa.me/201206607906");
     if (await canLaunchUrl(url)) {
-      await launchUrl(url, mode: .externalApplication);
+      await launchUrl(url, mode: LaunchMode.externalApplication);
     }
   }
 
@@ -156,7 +156,7 @@ class BuildContentWidget extends StatelessWidget {
   Future<void> _launchSocial(String url) async {
     final uri = Uri.parse(url);
     if (await canLaunchUrl(uri)) {
-      await launchUrl(uri, mode: .externalApplication);
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
     }
   }
 

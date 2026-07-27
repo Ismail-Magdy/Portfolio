@@ -135,7 +135,7 @@ class _HomePageState extends State<HomePage> {
             child: Column(
               children: [
                 // Hero Section
-                Container(key: aboutKey, child: HeroSection()),
+                Container(key: aboutKey, child: const HeroSection()),
                 //
                 // Skills Section
                 Container(key: skillsKey, child: const SkillsSection()),

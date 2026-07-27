@@ -173,22 +173,24 @@ class _LiquidGlassArrow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 36,
-      height: 36,
-      child: AnimatedBuilder(
-        animation: controller,
-        builder: (context, child) {
-          return CustomPaint(
-            painter: _LiquidGlassPainter(
-              progress: controller.value,
-              color: AppColors.primary,
-            ),
-            child: child,
-          );
-        },
-        child: const Center(
-          child: Icon(Icons.north_east, color: AppColors.primary, size: 18),
+    return RepaintBoundary(
+      child: SizedBox(
+        width: 36,
+        height: 36,
+        child: AnimatedBuilder(
+          animation: controller,
+          builder: (context, child) {
+            return CustomPaint(
+              painter: _LiquidGlassPainter(
+                progress: controller.value,
+                color: AppColors.primary,
+              ),
+              child: child,
+            );
+          },
+          child: const Center(
+            child: Icon(Icons.north_east, color: AppColors.primary, size: 18),
+          ),
         ),
       ),
     );

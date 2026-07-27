@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:ui';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ismailmagdy/core/constants/app_strings.dart';
 import 'package:ismailmagdy/core/theme/app_colors.dart';
@@ -78,19 +79,19 @@ class _SkillsSectionState extends State<SkillsSection>
         }
       },
       child: Padding(
-        padding: const .symmetric(horizontal: 80, vertical: 80.0),
+        padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 80.0),
         child: Center(
           child: ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 1200),
             child: Column(
-              crossAxisAlignment: .center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 // Section Title
                 Text(
                   AppStrings.skillsTitle,
                   style: GoogleFonts.poppins(
                     fontSize: 32,
-                    fontWeight: .bold,
+                    fontWeight: FontWeight.bold,
                     color: AppColors.textDark,
                   ),
                 ),
@@ -98,7 +99,7 @@ class _SkillsSectionState extends State<SkillsSection>
                 const SizedBox(height: 50),
                 // Skills Wrap
                 Wrap(
-                  alignment: .center,
+                  alignment: WrapAlignment.center,
                   spacing: 16,
                   runSpacing: 16,
                   children: allSkills.asMap().entries.map((entry) {
@@ -184,18 +185,18 @@ class _SkillChipState extends State<_SkillChip> {
           transform: Matrix4.identity()..scale(_isHovered ? 1.08 : 1.0),
           transformAlignment: Alignment.center,
           child: ClipRRect(
-            borderRadius: .circular(14),
+            borderRadius: BorderRadius.circular(14),
             child: BackdropFilter(
-              filter: .blur(sigmaX: 8, sigmaY: 8),
+              filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 250),
-                padding: const .symmetric(horizontal: 22, vertical: 14),
+                padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 14),
                 decoration: BoxDecoration(
                   color: _isHovered
                       ? AppColors.primary.withValues(alpha: 0.12)
                       : Colors.white.withValues(alpha: 0.05),
-                  borderRadius: .circular(14),
-                  border: .all(
+                  borderRadius: BorderRadius.circular(14),
+                  border: Border.all(
                     color: _isHovered
                         ? AppColors.primary.withValues(alpha: 0.6)
                         : AppColors.primary.withValues(alpha: 0.25),
@@ -212,7 +213,7 @@ class _SkillChipState extends State<_SkillChip> {
                       : [],
                 ),
                 child: Row(
-                  mainAxisSize: .min,
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     Icon(
                       widget.icon,
@@ -226,7 +227,7 @@ class _SkillChipState extends State<_SkillChip> {
                       widget.skill.name,
                       style: GoogleFonts.poppins(
                         fontSize: 14,
-                        fontWeight: .w500,
+                        fontWeight: FontWeight.w500,
                         color: _isHovered
                             ? AppColors.textDark
                             : AppColors.textDark.withValues(alpha: 0.85),
