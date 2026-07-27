@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -24,6 +25,7 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen>
   late Animation<double> _fadeAnimation;
   late Animation<Offset> _slideAnimation;
   late AnimationController _chipStaggerController;
+  late AnimationController _borderGlowController;
 
   @override
   void initState() {
@@ -47,19 +49,22 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen>
       parent: _fadeSlideController,
       curve: Curves.easeOut,
     );
-    _slideAnimation = Tween<Offset>(
-      begin: const Offset(0, 0.15),
-      end: Offset.zero,
-    ).animate(CurvedAnimation(
-      parent: _fadeSlideController,
-      curve: Curves.easeOut,
-    ));
+    _slideAnimation =
+        Tween<Offset>(begin: const Offset(0, 0.15), end: Offset.zero).animate(
+          CurvedAnimation(parent: _fadeSlideController, curve: Curves.easeOut),
+        );
 
     // Tech chips stagger
     _chipStaggerController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 1200),
     );
+
+    // Rotating border glow
+    _borderGlowController = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 4),
+    )..repeat();
 
     // Trigger entrance animations after build
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -73,6 +78,7 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen>
     _backArrowController.dispose();
     _fadeSlideController.dispose();
     _chipStaggerController.dispose();
+    _borderGlowController.dispose();
     super.dispose();
   }
 
@@ -211,9 +217,7 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen>
         verticalSpace(48),
 
         // 4. Two-column layout (desktop) or stacked (mobile)
-        isMobile
-            ? _buildMobileTwoSection()
-            : _buildDesktopTwoColumn(),
+        isMobile ? _buildMobileTwoSection() : _buildDesktopTwoColumn(),
         verticalSpace(48),
 
         // 5. Action buttons
@@ -222,40 +226,62 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen>
     );
   }
 
-  /// The wide project image with glow shadow
+  /// The wide project image with animated glowing border
   Widget _buildWideImage(bool isMobile) {
-    return Hero(
-      tag: widget.project.title,
-      child: Container(
-        constraints: const BoxConstraints(maxWidth: 900),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          boxShadow: [
-            BoxShadow(
-              color: AppColors.primary.withValues(alpha: 0.12),
-              blurRadius: 40,
-              spreadRadius: 4,
-              offset: const Offset(0, 8),
+    const double borderPad = 4.0;
+    const double borderRadius = 20.0;
+
+    return ConstrainedBox(
+      constraints: const BoxConstraints(maxWidth: 920),
+      child: AnimatedBuilder(
+        animation: _borderGlowController,
+        builder: (context, child) {
+          return CustomPaint(
+            foregroundPainter: _SweepBorderPainter(
+              progress: _borderGlowController.value,
+              borderRadius: borderRadius + borderPad,
+              padding: borderPad,
+              glowColor: AppColors.primary,
             ),
-          ],
-        ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(20),
-          child: Image.asset(
-            widget.project.imageIn,
-            fit: BoxFit.contain,
-            width: double.infinity,
-            errorBuilder: (context, error, stackTrace) {
-              return Container(
-                height: 300,
-                color: AppColors.primary.withValues(alpha: 0.1),
-                child: const Icon(
-                  Icons.image,
-                  size: 80,
-                  color: AppColors.primary,
+            child: child,
+          );
+        },
+        child: Padding(
+          padding: const EdgeInsets.all(borderPad),
+          child: Hero(
+            tag: widget.project.title,
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(borderRadius),
+                boxShadow: [
+                  BoxShadow(
+                    color: AppColors.primary.withValues(alpha: 0.10),
+                    blurRadius: 30,
+                    spreadRadius: 2,
+                    offset: const Offset(0, 6),
+                  ),
+                ],
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(borderRadius),
+                child: Image.asset(
+                  widget.project.imageIn,
+                  fit: BoxFit.contain,
+                  width: double.infinity,
+                  errorBuilder: (context, error, stackTrace) {
+                    return Container(
+                      height: 300,
+                      color: AppColors.primary.withValues(alpha: 0.1),
+                      child: const Icon(
+                        Icons.image,
+                        size: 80,
+                        color: AppColors.primary,
+                      ),
+                    );
+                  },
                 ),
-              );
-            },
+              ),
+            ),
           ),
         ),
       ),
@@ -268,16 +294,10 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen>
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         // Left — Description with fade-in slide-up
-        Expanded(
-          flex: 60,
-          child: _buildAnimatedDescription(),
-        ),
+        Expanded(flex: 60, child: _buildAnimatedDescription()),
         const SizedBox(width: 48),
         // Right — Tech stack with staggered chips
-        Expanded(
-          flex: 40,
-          child: _buildAnimatedTechStack(),
-        ),
+        Expanded(flex: 40, child: _buildAnimatedTechStack()),
       ],
     );
   }
@@ -377,8 +397,7 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen>
           children: List.generate(chips.length, (index) {
             // Stagger each chip's appearance
             final intervalStart = index / (chips.length + 1);
-            final intervalEnd =
-                (index + 1) / (chips.length + 1);
+            final intervalEnd = (index + 1) / (chips.length + 1);
             final chipAnimation = CurvedAnimation(
               parent: _chipStaggerController,
               curve: Interval(
@@ -440,66 +459,75 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen>
     final List<Widget> buttons = [];
 
     if (project.github != null) {
-      buttons.add(_buildActionButton(
-        icon: FontAwesomeIcons.github,
-        label: "GitHub",
-        url: project.github!,
-        isPrimary: false,
-      ));
+      buttons.add(
+        _buildActionButton(
+          icon: FontAwesomeIcons.github,
+          label: "GitHub",
+          url: project.github!,
+          isPrimary: false,
+        ),
+      );
     }
 
     if (project.linkedIn != null) {
-      buttons.add(_buildActionButton(
-        icon: FontAwesomeIcons.linkedin,
-        label: "LinkedIn",
-        url: project.linkedIn!,
-        isPrimary: true,
-      ));
+      buttons.add(
+        _buildActionButton(
+          icon: FontAwesomeIcons.linkedin,
+          label: "LinkedIn",
+          url: project.linkedIn!,
+          isPrimary: true,
+        ),
+      );
     }
 
     if (project.linkedInPartTwo != null) {
-      buttons.add(_buildActionButton(
-        icon: FontAwesomeIcons.linkedin,
-        label: "LinkedIn Pt.2",
-        url: project.linkedInPartTwo!,
-        isPrimary: true,
-      ));
+      buttons.add(
+        _buildActionButton(
+          icon: FontAwesomeIcons.linkedin,
+          label: "LinkedIn Pt.2",
+          url: project.linkedInPartTwo!,
+          isPrimary: true,
+        ),
+      );
     }
 
     if (project.instagram != null) {
-      buttons.add(_buildActionButton(
-        icon: FontAwesomeIcons.instagram,
-        label: "Instagram",
-        url: project.instagram!,
-        isPrimary: true,
-        gradientColors: [
-          const Color(0xFFF58529),
-          const Color(0xFFDD2A7B),
-          const Color(0xFF8134AF),
-        ],
-      ));
+      buttons.add(
+        _buildActionButton(
+          icon: FontAwesomeIcons.instagram,
+          label: "Instagram",
+          url: project.instagram!,
+          isPrimary: true,
+          gradientColors: [
+            const Color(0xFFF58529),
+            const Color(0xFFDD2A7B),
+            const Color(0xFF8134AF),
+          ],
+        ),
+      );
     }
 
     if (project.tiktok != null) {
-      buttons.add(_buildActionButton(
-        icon: FontAwesomeIcons.tiktok,
-        label: "TikTok",
-        url: project.tiktok!,
-        isPrimary: true,
-        gradientColors: [
-          const Color(0xFF00F2EA),
-          const Color(0xFFFF0050),
-        ],
-      ));
+      buttons.add(
+        _buildActionButton(
+          icon: FontAwesomeIcons.tiktok,
+          label: "TikTok",
+          url: project.tiktok!,
+          isPrimary: true,
+          gradientColors: [const Color(0xFF00F2EA), const Color(0xFFFF0050)],
+        ),
+      );
     }
 
     if (project.websiteLink != null) {
-      buttons.add(_buildActionButton(
-        icon: FontAwesomeIcons.globe,
-        label: "Website",
-        url: project.websiteLink!,
-        isPrimary: true,
-      ));
+      buttons.add(
+        _buildActionButton(
+          icon: FontAwesomeIcons.globe,
+          label: "Website",
+          url: project.websiteLink!,
+          isPrimary: true,
+        ),
+      );
     }
 
     if (buttons.isEmpty) return const SizedBox.shrink();
@@ -574,7 +602,9 @@ class _HoverActionButtonState extends State<_HoverActionButton> {
   Widget build(BuildContext context) {
     final hasGradient =
         widget.gradientColors != null && widget.gradientColors!.length >= 2;
-    final baseColor = hasGradient ? widget.gradientColors!.first : AppColors.primary;
+    final baseColor = hasGradient
+        ? widget.gradientColors!.first
+        : AppColors.primary;
 
     return MouseRegion(
       onEnter: (_) => setState(() => _isHovered = true),
@@ -592,18 +622,18 @@ class _HoverActionButtonState extends State<_HoverActionButton> {
           decoration: BoxDecoration(
             color: _isHovered
                 ? (widget.isPrimary
-                    ? baseColor.withValues(alpha: 0.15)
-                    : AppColors.textDark.withValues(alpha: 0.1))
+                      ? baseColor.withValues(alpha: 0.15)
+                      : AppColors.textDark.withValues(alpha: 0.1))
                 : Colors.transparent,
             borderRadius: BorderRadius.circular(24),
             border: Border.all(
               color: _isHovered
                   ? (widget.isPrimary
-                      ? baseColor.withValues(alpha: 0.6)
-                      : AppColors.textDark.withValues(alpha: 0.5))
+                        ? baseColor.withValues(alpha: 0.6)
+                        : AppColors.textDark.withValues(alpha: 0.5))
                   : (widget.isPrimary
-                      ? AppColors.primary.withValues(alpha: 0.35)
-                      : AppColors.textDark.withValues(alpha: 0.3)),
+                        ? AppColors.primary.withValues(alpha: 0.35)
+                        : AppColors.textDark.withValues(alpha: 0.3)),
               width: 1.5,
             ),
             boxShadow: _isHovered
@@ -643,4 +673,96 @@ class _HoverActionButtonState extends State<_HoverActionButton> {
       ),
     );
   }
+}
+
+/// Custom painter that draws a rotating sweep-gradient border
+/// hugging the rounded rectangle of the image. Creates a "scanner"
+/// glow effect that continuously rotates for a premium, high-tech feel.
+class _SweepBorderPainter extends CustomPainter {
+  final double progress;
+  final double borderRadius;
+  final double padding;
+  final Color glowColor;
+
+  _SweepBorderPainter({
+    required this.progress,
+    required this.borderRadius,
+    required this.padding,
+    required this.glowColor,
+  });
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final rect = Rect.fromLTWH(0, 0, size.width, size.height);
+    final rrect = RRect.fromRectAndRadius(rect, Radius.circular(borderRadius));
+    final angle = progress * 2 * pi;
+
+    // — 1) Rotating sweep gradient border (the main "scanner" effect)
+    final sweepShader = SweepGradient(
+      center: Alignment.center,
+      startAngle: angle,
+      endAngle: angle + 2 * pi,
+      colors: [
+        glowColor.withValues(alpha: 0.0),
+        glowColor.withValues(alpha: 0.0),
+        glowColor.withValues(alpha: 0.6),
+        glowColor.withValues(alpha: 0.9),
+        glowColor.withValues(alpha: 0.6),
+        glowColor.withValues(alpha: 0.0),
+        glowColor.withValues(alpha: 0.0),
+      ],
+      stops: const [0.0, 0.3, 0.42, 0.5, 0.58, 0.7, 1.0],
+      tileMode: TileMode.clamp,
+    ).createShader(rect);
+
+    final borderPaint = Paint()
+      ..shader = sweepShader
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 2.5;
+
+    canvas.drawRRect(rrect, borderPaint);
+
+    // — 2) Subtle outer glow behind the sweep
+    final glowPaint = Paint()
+      ..shader = sweepShader
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 8.0
+      ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 6);
+
+    final glowRRect = RRect.fromRectAndRadius(
+      rect.inflate(2),
+      Radius.circular(borderRadius + 2),
+    );
+    canvas.drawRRect(glowRRect, glowPaint);
+
+    // — 3) Faint static base border (always visible)
+    final basePaint = Paint()
+      ..color = glowColor.withValues(alpha: 0.12)
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1.0;
+
+    canvas.drawRRect(rrect, basePaint);
+
+    // — 4) Corner accent dots (high-tech detail)
+    final dotPaint = Paint()
+      ..color = glowColor.withValues(alpha: 0.4)
+      ..style = PaintingStyle.fill;
+
+    final dotRadius = 2.5;
+    final inset = borderRadius * 0.3;
+    final corners = [
+      Offset(inset, inset),
+      Offset(size.width - inset, inset),
+      Offset(inset, size.height - inset),
+      Offset(size.width - inset, size.height - inset),
+    ];
+
+    for (final corner in corners) {
+      canvas.drawCircle(corner, dotRadius, dotPaint);
+    }
+  }
+
+  @override
+  bool shouldRepaint(covariant _SweepBorderPainter oldDelegate) =>
+      progress != oldDelegate.progress;
 }
