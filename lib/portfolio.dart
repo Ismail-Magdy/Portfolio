@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ismailmagdy/features/portfolio/presentation/screens/home_page.dart';
+import 'package:ismailmagdy/portfolio/presentation/screens/home_page.dart';
 
 class Portfolio extends StatelessWidget {
   const Portfolio({super.key});

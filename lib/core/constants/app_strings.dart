@@ -25,8 +25,9 @@ class AppStrings {
 
   static const String mealMonkey = "meal monkey";
   static const String bookShop = "book shop";
-  static const String joby = "joby";
-  static const String portfolioWebsite = "portfolio website";
+  static const String jobyApp = "joby app";
+  static const String jobyWebsite = "joby website";
+  static const String portfolio = "portfolio";
 
   static const String gitHub = "GitHub";
   static const String liveDemo = "Live Demo";
