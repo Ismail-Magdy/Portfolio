@@ -21,4 +21,8 @@ class AppImages {
   // Portfolio
   static const String portfolioImageOut = "assets/images/portfolio.png";
   static const String portfolioImageIn = "assets/images/portfolio.png";
+
+  // Spotify
+  static const String spotifyImageOut = "assets/images/spotify-out.png";
+  static const String spotifyImageIn = "assets/images/spotify-in.png";
 }

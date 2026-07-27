@@ -14,6 +14,7 @@ class ProjectModel {
   final String? github;
   final String? tiktok;
   final String? websiteLink;
+  final String? figmaLink;
 
   ProjectModel({
     required this.id,
@@ -29,5 +30,6 @@ class ProjectModel {
     this.github,
     this.tiktok,
     this.websiteLink,
+    this.figmaLink,
   });
 }

@@ -62,6 +62,32 @@ class ProjectsRepository {
       //
       ProjectModel(
         id: "4",
+        title: "Spotify ",
+        imageOut: AppImages.spotifyImageOut,
+        imageIn: AppImages.spotifyImageIn,
+        shortDescription:
+            "A full-stack Spotify-inspired music streaming app built with Flutter & Firebase",
+        longDescription:
+            "A full-stack, cross-platform music streaming application inspired by Spotify, delivering a seamless audio entertainment experience. The app features secure Firebase Authentication, real-time music streaming with persistent playback, dynamic light and dark themes, and media browsing powered by Firebase Firestore and Cloud Storage. Built using Clean Architecture with a feature-first structure, Cubit state management, dependency injection, and functional error handling to ensure scalability, maintainability, and a smooth user experience",
+        techStack: [
+          "Flutter",
+          "Dart",
+          "Firebase Auth",
+          "Cloud Firestore",
+          "Cloud Storage",
+          "just_audio",
+          "Clean Architecture",
+          "Cubit",
+          "get_it",
+          "dartz",
+        ],
+        figmaLink:
+            "https://www.figma.com/design/2103XeJJzjY4lwqVOxsIIi/Spotify?node-id=0-1&t=2hZ30l3PKcADCNAc-1",
+        github: "https://github.com/Ismail-Magdy/spotify",
+      ),
+      //
+      ProjectModel(
+        id: "5",
         title: "Joby Website",
         imageOut: AppImages.jobySiteImageOut,
         imageIn: AppImages.jobySiteImageIn,
@@ -77,7 +103,7 @@ class ProjectsRepository {
       ),
       //
       ProjectModel(
-        id: "5",
+        id: "6",
         title: "Portfolio",
         imageOut: AppImages.portfolioImageOut,
         imageIn: AppImages.portfolioImageIn,

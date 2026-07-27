@@ -532,6 +532,17 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen>
       );
     }
 
+    if (project.figmaLink != null && project.figmaLink!.isNotEmpty) {
+      buttons.add(
+        _buildActionButton(
+          icon: FontAwesomeIcons.figma,
+          label: "Figma",
+          url: project.figmaLink!,
+          isPrimary: true,
+        ),
+      );
+    }
+
     if (buttons.isEmpty) return const SizedBox.shrink();
 
     return Column(
