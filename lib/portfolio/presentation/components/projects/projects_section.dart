@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ismailmagdy/core/helpers/spacing.dart';
 import 'package:ismailmagdy/core/theme/app_colors.dart';
 import 'package:ismailmagdy/core/constants/app_strings.dart';
 import 'package:ismailmagdy/portfolio/repositories/projects_repository.dart';
@@ -35,8 +34,6 @@ class ProjectsSection extends StatelessWidget {
               color: AppColors.textDark,
             ),
           ),
-          //
-          verticalSpace(8),
           //
           // All Projects
           GridView.builder(
