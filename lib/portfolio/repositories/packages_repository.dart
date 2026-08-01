@@ -17,7 +17,7 @@ class PackagesRepository {
           'Lightweight and easy to use',
           'Drop in replacement for standard BottomNavigationBar',
         ],
-        installation: 'flutter pub add glass_bottom_nav_bar',
+        installation: 'flutter pub add glass_bottom_navigation_bar',
         usage: '''Scaffold(
   extendBody: true,
   bottomNavigationBar: GlassBottomNavigationBar(
