@@ -44,6 +44,7 @@ class _NavbarState extends State<Navbar> {
     super.dispose();
   }
 
+  ///
   void _scrollToSection(GlobalKey key, BuildContext context) {
     final keyContext = key.currentContext;
     if (keyContext != null) {
@@ -80,15 +81,15 @@ class _NavbarState extends State<Navbar> {
     if (isMobile) {
       return SafeArea(
         child: Align(
-          alignment: Alignment.centerLeft,
+          alignment: .centerLeft,
           child: Container(
-            margin: const EdgeInsets.only(top: 20, left: 24),
+            margin: const .only(top: 20, left: 24),
             height: 64,
             width: 64,
             decoration: BoxDecoration(
               color: Colors.white.withValues(alpha: 0.05),
-              shape: BoxShape.circle,
-              border: Border.all(
+              shape: .circle,
+              border: .all(
                 color: Colors.white.withValues(alpha: 0.1),
                 width: 1,
               ),
@@ -107,31 +108,31 @@ class _NavbarState extends State<Navbar> {
     return SafeArea(
       // Desktop view with sliding pull-out navbar
       child: Align(
-        alignment: Alignment.centerLeft,
+        alignment: .centerLeft,
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 300),
           curve: Curves.easeInOut,
-          margin: const EdgeInsets.only(top: 20, left: 24, right: 24),
+          margin: const .only(top: 20, left: 24, right: 24),
           height: 64,
           width: screenWidth - 48,
           decoration: BoxDecoration(
             color: Colors.white.withValues(alpha: 0.05),
-            borderRadius: BorderRadius.circular(32),
-            border: Border.all(color: Colors.white.withValues(alpha: 0.1), width: 1),
+            borderRadius: .circular(32),
+            border: .all(color: Colors.white.withValues(alpha: 0.1), width: 1),
           ),
           // Liquid glass effect
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(32),
+            borderRadius: .circular(32),
             child: BackdropFilter(
               filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
               child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
+                scrollDirection: .horizontal,
                 physics: const NeverScrollableScrollPhysics(),
                 child: SizedBox(
                   width: screenWidth - 48,
                   height: 64,
                   child: Stack(
-                    alignment: Alignment.centerLeft,
+                    alignment: .centerLeft,
                     children: [
                       // Logo
                       Positioned(
@@ -143,7 +144,7 @@ class _NavbarState extends State<Navbar> {
                           child: Container(
                             width: 64,
                             height: 64,
-                            alignment: Alignment.center,
+                            alignment: .center,
                             child: const LogoWidget(),
                           ),
                         ),
@@ -153,7 +154,7 @@ class _NavbarState extends State<Navbar> {
                       Positioned(
                         right: 20,
                         child: Row(
-                          mainAxisSize: MainAxisSize.min,
+                          mainAxisSize: .min,
                           children: [
                             //
                             _buildNavItem(
@@ -186,6 +187,7 @@ class _NavbarState extends State<Navbar> {
                               AppStrings.packages,
                               widget.packagesKey,
                             ),
+                            //
                           ],
                         ),
                       ),
@@ -198,6 +200,7 @@ class _NavbarState extends State<Navbar> {
           ),
         ),
       ),
+      //
     );
   }
 
@@ -206,15 +209,15 @@ class _NavbarState extends State<Navbar> {
       builder: (context) => TextButton(
         onPressed: onTap ?? () => _scrollToSection(key!, context),
         style: TextButton.styleFrom(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          padding: const .symmetric(horizontal: 16, vertical: 8),
+          shape: RoundedRectangleBorder(borderRadius: .circular(20)),
           foregroundColor: Colors.white.withValues(alpha: 0.1),
         ),
         child: Text(
           label,
           style: GoogleFonts.poppins(
             fontSize: 14,
-            fontWeight: FontWeight.w500,
+            fontWeight: .w500,
             color: AppColors.backgroundLight,
           ),
         ),

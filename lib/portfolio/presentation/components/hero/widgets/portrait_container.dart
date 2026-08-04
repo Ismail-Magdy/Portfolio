@@ -68,8 +68,9 @@ class _PortraitContainerState extends State<PortraitContainer>
                     builder: (context, child) {
                       return Transform.rotate(
                         angle: _rotationController.value * 2 * pi,
+                        //
                         child: Container(
-                          width: imageSize + 6, // 3px border
+                          width: imageSize + 6,
                           height: imageSize + 6,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(24),
@@ -92,6 +93,7 @@ class _PortraitContainerState extends State<PortraitContainer>
                             ],
                           ),
                         ),
+                        //
                       );
                     },
                   ),
@@ -115,12 +117,10 @@ class _PortraitContainerState extends State<PortraitContainer>
                     ),
                     child: ClipRRect(
                       borderRadius: borderRadius,
-                      child: Image.asset(
-                        AppImages.profileImage,
-                        fit: BoxFit.cover,
-                      ),
+                      child: Image.asset(AppImages.profileImage, fit: .cover),
                     ),
                   ),
+                  //
                 ],
               ),
             ),

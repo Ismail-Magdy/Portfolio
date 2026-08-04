@@ -56,11 +56,11 @@ class Footer extends StatelessWidget {
         children: [
           //
           Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: .center,
             children: socialLinks
                 .map(
                   (link) => Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    padding: const .symmetric(horizontal: 16),
                     child: IconButton(
                       icon: FaIcon(
                         _getIconForPlatform(link.platform),

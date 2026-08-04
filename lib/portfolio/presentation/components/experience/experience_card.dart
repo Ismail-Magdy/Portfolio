@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ismailmagdy/core/helpers/spacing.dart';
 import 'package:ismailmagdy/core/theme/app_colors.dart';
-import 'package:ismailmagdy/portfolio/models/experience_model.dart';
+import 'package:ismailmagdy/portfolio/models/experience/experience_model.dart';
 
 class ExperienceCard extends StatelessWidget {
   const ExperienceCard({

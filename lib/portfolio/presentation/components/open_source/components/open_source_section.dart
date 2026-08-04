@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ismailmagdy/core/theme/app_colors.dart';
 import 'package:ismailmagdy/portfolio/repositories/packages_repository.dart';
-import 'package:ismailmagdy/portfolio/presentation/components/open_source/package_card.dart';
+import 'package:ismailmagdy/portfolio/presentation/components/open_source/components/package_card.dart';
 
 class OpenSourceSection extends StatefulWidget {
   const OpenSourceSection({super.key});

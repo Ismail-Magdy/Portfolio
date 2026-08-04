@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ismailmagdy/core/theme/app_colors.dart';
-import 'package:ismailmagdy/portfolio/presentation/components/projects/project_details_screen.dart';
-import '../../../models/project_model.dart';
+import 'package:ismailmagdy/portfolio/presentation/components/projects/components/project_details_screen.dart';
+import '../../../../models/projects/project_model.dart';
 
 class ProjectCard extends StatefulWidget {
   final ProjectModel project;
@@ -40,25 +40,23 @@ class _ProjectCardState extends State<ProjectCard>
       onExit: (_) => setState(() => _isHovered = false),
       cursor: SystemMouseCursors.click,
       child: GestureDetector(
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) =>
-                  ProjectDetailsScreen(project: widget.project),
-            ),
-          );
-        },
+        onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ProjectDetailsScreen(project: widget.project),
+          ),
+        ),
+
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 300),
           curve: Curves.easeOutCubic,
           transform: Matrix4.identity()
             ..scale(_isHovered ? 1.03 : 1.0, _isHovered ? 1.03 : 1.0),
-          transformAlignment: Alignment.center,
+          transformAlignment: .center,
           decoration: BoxDecoration(
             color: AppColors.backgroundDark,
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(
+            borderRadius: .circular(16),
+            border: .all(
               color: _isHovered
                   ? AppColors.primary.withValues(alpha: 0.4)
                   : Colors.white.withValues(alpha: 0.06),
@@ -82,24 +80,22 @@ class _ProjectCardState extends State<ProjectCard>
                   ],
           ),
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: .circular(16),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
+              crossAxisAlignment: .stretch,
               children: [
                 // Project Image
                 Expanded(
                   child: Hero(
                     tag: widget.project.title,
                     child: ClipRRect(
-                      borderRadius: const BorderRadius.vertical(
-                        top: Radius.circular(16),
-                      ),
+                      borderRadius: const .vertical(top: .circular(16)),
                       child: Image.asset(
                         widget.project.imageOut,
-                        width: double.infinity,
-                        height: double.infinity,
-                        fit: BoxFit.fill,
-                        alignment: Alignment.topCenter,
+                        width: .infinity,
+                        height: .infinity,
+                        fit: .fill,
+                        alignment: .topCenter,
                         errorBuilder: (context, error, stackTrace) {
                           return Container(
                             color: AppColors.primary.withValues(alpha: 0.1),
@@ -114,16 +110,14 @@ class _ProjectCardState extends State<ProjectCard>
                     ),
                   ),
                 ),
+                //
                 // Title + Liquid Glass Arrow
                 Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 14,
-                    vertical: 14,
-                  ),
+                  padding: const .symmetric(horizontal: 14, vertical: 14),
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
+                      begin: .topCenter,
+                      end: .bottomCenter,
                       colors: [
                         const Color(0xFF0D2137),
                         AppColors.backgroundDark,
@@ -138,11 +132,11 @@ class _ProjectCardState extends State<ProjectCard>
                           widget.project.title,
                           style: GoogleFonts.poppins(
                             fontSize: 17,
-                            fontWeight: FontWeight.w600,
+                            fontWeight: .w600,
                             color: AppColors.textDark,
                           ),
                           maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
+                          overflow: .ellipsis,
                         ),
                       ),
                       //
@@ -163,9 +157,6 @@ class _ProjectCardState extends State<ProjectCard>
   }
 }
 
-/// A "liquid glass" pulsing ripple effect around a north_east arrow icon.
-/// Renders 3 concentric rings that expand outward and fade, creating
-/// an Apple-like soft, continuous glowing glass effect.
 class _LiquidGlassArrow extends StatelessWidget {
   final AnimationController controller;
 
@@ -197,8 +188,6 @@ class _LiquidGlassArrow extends StatelessWidget {
   }
 }
 
-/// Custom painter that draws 3 staggered expanding/fading rings
-/// to create the liquid glass ripple effect.
 class _LiquidGlassPainter extends CustomPainter {
   final double progress;
   final Color color;

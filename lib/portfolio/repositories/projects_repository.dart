@@ -1,5 +1,5 @@
 import 'package:ismailmagdy/core/constants/app_images.dart';
-import 'package:ismailmagdy/portfolio/models/project_model.dart';
+import 'package:ismailmagdy/portfolio/models/projects/project_model.dart';
 
 class ProjectsRepository {
   List<ProjectModel> getProjects() {

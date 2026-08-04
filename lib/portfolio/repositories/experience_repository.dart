@@ -1,4 +1,4 @@
-import 'package:ismailmagdy/portfolio/models/experience_model.dart';
+import 'package:ismailmagdy/portfolio/models/experience/experience_model.dart';
 
 class ExperienceRepository {
   List<ExperienceModel> getExperiences() {
@@ -23,7 +23,6 @@ class ExperienceRepository {
           "Team Collaboration",
         ],
       ),
-
       //
       ExperienceModel(
         id: "2",
@@ -42,6 +41,7 @@ class ExperienceRepository {
           "REST APIs",
         ],
       ),
+      //
     ];
   }
 }

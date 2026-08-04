@@ -25,7 +25,7 @@ class HeroSection extends StatelessWidget {
       child: isMobile
           // Mobile
           ? Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
+              crossAxisAlignment: .center,
               children: [
                 // Image Mobile
                 const ProfileImageWidget(),
@@ -39,7 +39,7 @@ class HeroSection extends StatelessWidget {
           //
           // Not Mobile
           : Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
+              crossAxisAlignment: .center,
               children: [
                 //
                 Expanded(

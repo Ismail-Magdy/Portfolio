@@ -3,22 +3,22 @@ import 'package:ismailmagdy/portfolio/presentation/components/skills/skills_sect
 import '../components/nav_bar/navbar.dart';
 import '../components/nav_bar/mobile_bottom_navbar.dart';
 import '../components/hero/components/hero_section.dart';
-import '../components/projects/projects_section.dart';
+import '../components/projects/components/projects_section.dart';
 import '../components/experience/experience_section.dart';
-import '../components/open_source/open_source_section.dart';
+import '../components/open_source/components/open_source_section.dart';
 import '../components/footer/footer.dart';
-import '../components/background/animated_background.dart';
+import '../../../core/animations/background/animated_background.dart';
 
-/// The main HomePage of the portfolio.
+/// The main HomePage of the portfolio
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class PortfolioMainScreen extends StatefulWidget {
+  const PortfolioMainScreen({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<PortfolioMainScreen> createState() => _PortfolioMainScreenState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _PortfolioMainScreenState extends State<PortfolioMainScreen> {
   final ScrollController _scrollController = ScrollController();
   int _activeIndex = 0;
 

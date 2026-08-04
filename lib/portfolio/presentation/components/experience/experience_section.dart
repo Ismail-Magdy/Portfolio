@@ -5,7 +5,7 @@ import 'package:ismailmagdy/core/helpers/spacing.dart';
 import 'package:ismailmagdy/core/theme/app_colors.dart';
 import 'package:ismailmagdy/portfolio/repositories/experience_repository.dart';
 import 'package:ismailmagdy/portfolio/presentation/components/experience/experience_card.dart';
-import 'package:ismailmagdy/core/animations/staggered_fade_in.dart';
+import 'package:ismailmagdy/core/animations/experience/staggered_fade_in.dart';
 
 class ExperienceSection extends StatelessWidget {
   const ExperienceSection({super.key});

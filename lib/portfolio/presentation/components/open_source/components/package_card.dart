@@ -3,8 +3,11 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:ismailmagdy/portfolio/models/package_model.dart';
-import 'package:ismailmagdy/portfolio/presentation/components/open_source/package_details_screen.dart';
+import 'package:ismailmagdy/portfolio/models/packages/package_model.dart';
+import 'package:ismailmagdy/portfolio/models/packages/padge_data_model.dart';
+import 'package:ismailmagdy/portfolio/presentation/components/open_source/components/package_details_screen.dart';
+import 'package:ismailmagdy/portfolio/presentation/components/open_source/widgets/animated_gradient_border_painter.dart';
+import 'package:ismailmagdy/portfolio/presentation/components/open_source/widgets/neon_pill_button.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class PackageCard extends StatefulWidget {
@@ -24,7 +27,7 @@ class _PackageCardState extends State<PackageCard>
   late Animation<double> _hoverScaleAnimation;
   late Animation<double> _imageZoomAnimation;
 
-  // Card dark background color — used for the ShaderMask fade target
+  // Card dark background color & used for the ShaderMask fade target
   static const _cardDarkColor = Color(0xFF0B1120);
   static const _cardSurfaceColor = Color(0xFF111B2E);
 
@@ -87,15 +90,12 @@ class _PackageCardState extends State<PackageCard>
       onExit: (_) => _onHoverChanged(false),
       cursor: SystemMouseCursors.click,
       child: GestureDetector(
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) =>
-                  PackageDetailsScreen(package: widget.package),
-            ),
-          );
-        },
+        onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => PackageDetailsScreen(package: widget.package),
+          ),
+        ),
         child: AnimatedBuilder(
           animation: _hoverController,
           builder: (context, child) {
@@ -110,7 +110,7 @@ class _PackageCardState extends State<PackageCard>
     );
   }
 
-  //  HORIZONTAL CARD (Desktop / Tablet)
+  //  HORIZONTAL CARD (Desktop & Tablet)
   Widget _buildHorizontalCard() {
     const double cardHeight = 340;
     const double borderPad = 2.0;
@@ -123,7 +123,7 @@ class _PackageCardState extends State<PackageCard>
         builder: (context, child) {
           return CustomPaint(
             foregroundPainter: _isHovered
-                ? _AnimatedGradientBorderPainter(
+                ? AnimatedGradientBorderPainter(
                     progress: _borderGlowController.value,
                     borderRadius: borderRadius + borderPad,
                     padding: borderPad,
@@ -183,6 +183,7 @@ class _PackageCardState extends State<PackageCard>
                       fadeStart: .centerRight,
                     ),
                   ),
+                  //
                 ],
               ),
             ),
@@ -202,7 +203,7 @@ class _PackageCardState extends State<PackageCard>
       builder: (context, child) {
         return CustomPaint(
           foregroundPainter: _isHovered
-              ? _AnimatedGradientBorderPainter(
+              ? AnimatedGradientBorderPainter(
                   progress: _borderGlowController.value,
                   borderRadius: borderRadius + borderPad,
                   padding: borderPad,
@@ -329,7 +330,7 @@ class _PackageCardState extends State<PackageCard>
     );
   }
 
-  //  DESCRIPTION
+  // DESCRIPTION
   Widget _buildDescription() {
     return Text(
       widget.package.shortDescription,
@@ -341,16 +342,16 @@ class _PackageCardState extends State<PackageCard>
         letterSpacing: 0.1,
       ),
       maxLines: 3,
-      overflow: TextOverflow.ellipsis,
+      overflow: .ellipsis,
     );
   }
 
-  //  TECH BADGES
+  // TECH BADGES
   Widget _buildTechBadges() {
     final badges = [
-      _BadgeData(icon: Icons.code_rounded, label: 'Dart'),
-      _BadgeData(icon: Icons.widgets_rounded, label: 'UI Component'),
-      _BadgeData(icon: Icons.gavel_rounded, label: 'MIT'),
+      BadgeDataModel(icon: Icons.code_rounded, label: "Dart"),
+      BadgeDataModel(icon: Icons.widgets_rounded, label: "UI Component"),
+      BadgeDataModel(icon: Icons.gavel_rounded, label: "MIT"),
     ];
 
     return Wrap(
@@ -360,7 +361,7 @@ class _PackageCardState extends State<PackageCard>
     );
   }
 
-  Widget _buildGlassBadge(_BadgeData badge) {
+  Widget _buildGlassBadge(BadgeDataModel badge) {
     return Container(
       padding: const .symmetric(horizontal: 12, vertical: 6),
       decoration: BoxDecoration(
@@ -401,20 +402,20 @@ class _PackageCardState extends State<PackageCard>
     );
   }
 
-  // ─── ACTION BUTTONS
+  /// ACTION BUTTONS
   Widget _buildActionButtons() {
     return Row(
       children: [
-        _NeonPillButton(
+        NeonPillButton(
           icon: Icons.open_in_new_rounded,
-          label: 'pub.dev',
+          label: "pub.dev",
           isPrimary: true,
           onTap: () => _launchUrl(widget.package.pubDevUrl),
         ),
         const SizedBox(width: 10),
-        _NeonPillButton(
+        NeonPillButton(
           icon: FontAwesomeIcons.github,
-          label: 'GitHub',
+          label: "GitHub",
           isPrimary: false,
           onTap: () => _launchUrl(widget.package.githubUrl),
         ),
@@ -422,169 +423,4 @@ class _PackageCardState extends State<PackageCard>
     );
   }
 }
-
-// ═══════════════════════════════════════════════════════════════════════════
-// NEON PILL BUTTON
-// ═══════════════════════════════════════════════════════════════════════════
-class _NeonPillButton extends StatefulWidget {
-  final IconData icon;
-  final String label;
-  final bool isPrimary;
-  final VoidCallback onTap;
-
-  const _NeonPillButton({
-    required this.icon,
-    required this.label,
-    required this.isPrimary,
-    required this.onTap,
-  });
-
-  @override
-  State<_NeonPillButton> createState() => _NeonPillButtonState();
-}
-
-class _NeonPillButtonState extends State<_NeonPillButton> {
-  bool _isHovered = false;
-
-  @override
-  Widget build(BuildContext context) {
-    final Color accentColor = widget.isPrimary
-        ? Colors.cyanAccent
-        : const Color(0xFF818CF8);
-
-    return MouseRegion(
-      onEnter: (_) => setState(() => _isHovered = true),
-      onExit: (_) => setState(() => _isHovered = false),
-      cursor: SystemMouseCursors.click,
-      child: GestureDetector(
-        onTap: widget.onTap,
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 250),
-          curve: Curves.easeOutCubic,
-          padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
-          transform: Matrix4.identity()
-            ..scale(_isHovered ? 1.05 : 1.0, _isHovered ? 1.05 : 1.0),
-          transformAlignment: Alignment.center,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(100),
-            color: _isHovered
-                ? accentColor.withValues(alpha: 0.12)
-                : Colors.white.withValues(alpha: 0.03),
-            border: Border.all(
-              color: _isHovered
-                  ? accentColor.withValues(alpha: 0.6)
-                  : accentColor.withValues(alpha: 0.2),
-              width: 1,
-            ),
-            boxShadow: _isHovered
-                ? [
-                    BoxShadow(
-                      color: accentColor.withValues(alpha: 0.25),
-                      blurRadius: 16,
-                      spreadRadius: -4,
-                      offset: const Offset(0, 2),
-                    ),
-                  ]
-                : [],
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(
-                widget.icon,
-                size: 14,
-                color: _isHovered
-                    ? accentColor
-                    : accentColor.withValues(alpha: 0.7),
-              ),
-              const SizedBox(width: 8),
-              Text(
-                widget.label,
-                style: GoogleFonts.inter(
-                  fontSize: 12.5,
-                  fontWeight: FontWeight.w600,
-                  color: _isHovered
-                      ? accentColor
-                      : accentColor.withValues(alpha: 0.7),
-                  letterSpacing: 0.3,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-// ═══════════════════════════════════════════════════════════════════════════
-// ANIMATED GRADIENT BORDER PAINTER (Cyan ↔ Purple sweep)
-// ═══════════════════════════════════════════════════════════════════════════
-class _AnimatedGradientBorderPainter extends CustomPainter {
-  final double progress;
-  final double borderRadius;
-  final double padding;
-
-  _AnimatedGradientBorderPainter({
-    required this.progress,
-    required this.borderRadius,
-    required this.padding,
-  });
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final rect = Rect.fromLTWH(0, 0, size.width, size.height);
-    final rrect = RRect.fromRectAndRadius(rect, Radius.circular(borderRadius));
-    final angle = progress * 2 * pi;
-
-    // Sweep gradient: cyan → purple → cyan
-    final sweepShader = SweepGradient(
-      center: Alignment.center,
-      startAngle: angle,
-      endAngle: angle + 2 * pi,
-      colors: [
-        Colors.transparent,
-        Colors.cyanAccent.withValues(alpha: 0.0),
-        Colors.cyanAccent.withValues(alpha: 0.7),
-        const Color(0xFF818CF8).withValues(alpha: 0.9), // Indigo/purple
-        Colors.cyanAccent.withValues(alpha: 0.7),
-        Colors.cyanAccent.withValues(alpha: 0.0),
-        Colors.transparent,
-      ],
-      stops: const [0.0, 0.25, 0.38, 0.5, 0.62, 0.75, 1.0],
-      tileMode: TileMode.clamp,
-    ).createShader(rect);
-
-    // Main border stroke
-    final borderPaint = Paint()
-      ..shader = sweepShader
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 2.0;
-    canvas.drawRRect(rrect, borderPaint);
-
-    // Soft outer glow
-    final glowPaint = Paint()
-      ..shader = sweepShader
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 8.0
-      ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 8);
-    final glowRRect = RRect.fromRectAndRadius(
-      rect.inflate(3),
-      Radius.circular(borderRadius + 3),
-    );
-    canvas.drawRRect(glowRRect, glowPaint);
-  }
-
-  @override
-  bool shouldRepaint(covariant _AnimatedGradientBorderPainter oldDelegate) =>
-      progress != oldDelegate.progress;
-}
-
-// ═══════════════════════════════════════════════════════════════════════════
-// BADGE DATA MODEL
-// ═══════════════════════════════════════════════════════════════════════════
-class _BadgeData {
-  final IconData icon;
-  final String label;
-  const _BadgeData({required this.icon, required this.label});
-}
+// 589

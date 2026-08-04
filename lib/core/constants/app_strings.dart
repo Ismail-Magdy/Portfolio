@@ -21,7 +21,7 @@ class AppStrings {
   static const String projectsTitle = "Projects";
   static const String contactTitle = "Contact";
 
-  static const String copyright = "© 2026 Ismail Magdy. All rights reserved.";
+  static const String copyright = "© 2026 Ismail Magdy . All rights reserved";
 
   static const String mealMonkey = "meal monkey";
   static const String bookShop = "book shop";

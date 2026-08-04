@@ -1,23 +1,24 @@
-import 'package:ismailmagdy/portfolio/models/package_model.dart';
+import 'package:ismailmagdy/portfolio/models/packages/package_model.dart';
 
 class PackagesRepository {
   List<PackageModel> getPackages() {
     return [
+      // First Package
       PackageModel(
-        title: 'Glass Bottom Navigation Bar',
+        title: "Glass Bottom Navigation Bar",
         shortDescription:
-            'A Beautiful, Modern, and Highly Customizable Glassmorphism Bottom Navigation Bar for Flutter Applications',
-        imageOut: 'assets/images/glass_bottom_nav_bar.jpeg',
-        imageIn: 'assets/images/glass-in.png',
-        pubDevUrl: 'https://pub.dev/packages/glass_bottom_navigation_bar',
-        githubUrl: 'https://github.com/Ismail-Magdy/glass_bottom_nav_bar',
+            "A Beautiful, Modern, and Highly Customizable Glassmorphism Bottom Navigation Bar for Flutter Applications",
+        imageOut: "assets/images/glass_bottom_nav_bar.jpeg",
+        imageIn: "assets/images/glass-in.png",
+        pubDevUrl: "https://pub.dev/packages/glass_bottom_navigation_bar",
+        githubUrl: "https://github.com/Ismail-Magdy/glass_bottom_nav_bar",
         features: [
-          'Modern Glassmorphism effect',
-          'Highly customizable appearance',
-          'Lightweight and easy to use',
-          'Drop in replacement for standard BottomNavigationBar',
+          "Modern Glassmorphism effect",
+          "Highly customizable appearance",
+          "Lightweight and easy to use",
+          "Drop in replacement for standard BottomNavigationBar",
         ],
-        installation: 'flutter pub add glass_bottom_navigation_bar',
+        installation: "flutter pub add glass_bottom_navigation_bar",
         usage: '''Scaffold(
   extendBody: true,
   bottomNavigationBar: GlassBottomNavigationBar(
@@ -27,6 +28,7 @@ class PackagesRepository {
   ),
 );''',
       ),
+      //
     ];
   }
 }

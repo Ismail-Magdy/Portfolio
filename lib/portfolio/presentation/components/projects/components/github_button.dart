@@ -32,7 +32,7 @@ class _GithubButtonState extends State<GithubButton> {
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),
           curve: Curves.easeOutCubic,
-          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+          padding: const .symmetric(vertical: 10, horizontal: 16),
           transform: Matrix4.diagonal3Values(
             _isHovered ? 1.03 : 1.0,
             _isHovered ? 1.03 : 1.0,
@@ -41,8 +41,8 @@ class _GithubButtonState extends State<GithubButton> {
           transformAlignment: Alignment.center,
           decoration: BoxDecoration(
             color: _isHovered ? hoverBgColor : Colors.transparent,
-            borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: borderColor, width: 1.5),
+            borderRadius: .circular(20),
+            border: .all(color: borderColor, width: 1.5),
             boxShadow: _isHovered
                 ? [
                     BoxShadow(
@@ -54,8 +54,8 @@ class _GithubButtonState extends State<GithubButton> {
                 : [],
           ),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: .center,
+            mainAxisSize: .min,
             children: [
               FaIcon(FontAwesomeIcons.github, size: 16, color: borderColor),
               horizontalSpace(8),
@@ -63,7 +63,7 @@ class _GithubButtonState extends State<GithubButton> {
                 AppStrings.gitHub,
                 style: GoogleFonts.poppins(
                   fontSize: 14,
-                  fontWeight: FontWeight.w600,
+                  fontWeight: .w600,
                   color: borderColor,
                 ),
               ),

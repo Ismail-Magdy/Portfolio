@@ -7,7 +7,7 @@ class ProjectModel {
   final String longDescription;
   final List<String> techStack;
 
-  // Social / action links (nullable — buttons only render when non-null)
+  // Social & action links (nullable & buttons only render when non null)
   final String? linkedIn;
   final String? linkedInPartTwo;
   final String? instagram;
