@@ -16,19 +16,15 @@ class _OpenSourceSectionState extends State<OpenSourceSection> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final bool isMobile = screenWidth < 600;
-    final bool isTablet = screenWidth >= 600 && screenWidth < 1024;
 
     final repository = PackagesRepository();
     final packages = repository.getPackages();
 
     return Container(
       constraints: const BoxConstraints(maxWidth: 1200),
-      padding: EdgeInsets.symmetric(
-        horizontal: isMobile ? 12.0 : 24.0,
-        vertical: 80,
-      ),
+      padding: .symmetric(horizontal: isMobile ? 12.0 : 24.0, vertical: 80),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: .start,
         children: [
           // Section Title
           Text(
@@ -40,25 +36,11 @@ class _OpenSourceSectionState extends State<OpenSourceSection> {
             ),
           ),
           //
-          // Grid View of Packages
-          GridView.builder(
+          ListView.separated(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: isMobile
-                  ? 1
-                  : isTablet
-                      ? 2
-                      : 3,
-              crossAxisSpacing: 24,
-              mainAxisSpacing: 24,
-              childAspectRatio: isMobile
-                  ? 0.8
-                  : isTablet
-                      ? 0.75
-                      : 0.85,
-            ),
             itemCount: packages.length,
+            separatorBuilder: (context, index) => const SizedBox(height: 32),
             itemBuilder: (context, index) {
               return PackageCard(package: packages[index]);
             },

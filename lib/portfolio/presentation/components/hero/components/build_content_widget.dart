@@ -13,8 +13,8 @@ class BuildContentWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: .start,
+      mainAxisAlignment: .center,
       children: [
         // IAM Text
         Text(
@@ -68,11 +68,11 @@ class BuildContentWidget extends StatelessWidget {
               onPressed: _downloadCV,
               color: AppColors.primary,
               textColor: Colors.white,
-              padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+              padding: const .symmetric(horizontal: 32, vertical: 16),
+              shape: RoundedRectangleBorder(borderRadius: .circular(8)),
               child: Text(
                 AppStrings.downloadCV,
-                style: GoogleFonts.poppins(fontSize: 16, fontWeight: FontWeight.w600),
+                style: GoogleFonts.poppins(fontSize: 16, fontWeight: .w600),
               ),
             ),
             //
@@ -83,12 +83,20 @@ class BuildContentWidget extends StatelessWidget {
               style: OutlinedButton.styleFrom(
                 foregroundColor: AppColors.primary,
                 side: const BorderSide(color: AppColors.primary, width: 2),
-                padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 32,
+                  vertical: 16,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
               ),
               child: Text(
                 AppStrings.contact,
-                style: GoogleFonts.poppins(fontSize: 16, fontWeight: FontWeight.w600),
+                style: GoogleFonts.poppins(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
             //
@@ -101,17 +109,17 @@ class BuildContentWidget extends StatelessWidget {
           children: [
             for (var link in socialLinks)
               Padding(
-                padding: const EdgeInsets.only(right: 16),
+                padding: const .only(right: 16),
                 child: InkWell(
                   onTap: () => _launchSocial(link.url),
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: .circular(8),
                   child: Container(
                     width: 45,
                     height: 45,
                     decoration: BoxDecoration(
                       color: AppColors.cardBackgroundDark,
-                      borderRadius: BorderRadius.circular(8),
-                      border: Border.all(
+                      borderRadius: .circular(8),
+                      border: .all(
                         color: AppColors.primary.withValues(alpha: 0.3),
                         width: 1,
                       ),
@@ -137,7 +145,7 @@ class BuildContentWidget extends StatelessWidget {
   Future<void> _downloadCV() async {
     //
     final Uri cvUrl = Uri.parse(
-      "https://drive.google.com/file/d/14fqxUzi24H-C4mcFgNl40k0TKMK3nTjL/view?usp=sharing",
+      "https://drive.google.com/file/d/1osj_MnhsvdQw2aXMFUZ9p1PmsHEqgmCR/view?usp=sharing",
     );
     if (await canLaunchUrl(cvUrl)) {
       await launchUrl(cvUrl, webOnlyWindowName: "_blank");
