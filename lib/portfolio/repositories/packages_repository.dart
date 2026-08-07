@@ -29,6 +29,41 @@ class PackagesRepository {
 );''',
       ),
       //
+      // Second Package
+      PackageModel(
+        title: "Global Search Bar",
+        shortDescription:
+            "A powerful, highly customizable, and generic search bar for Flutter with built-in debouncing, search history, and text highlighting.",
+        imageOut: "assets/images/search.png",
+        imageIn: "assets/images/search.png",
+        pubDevUrl: "https://pub.dev/packages/global_search_bar",
+        githubUrl: "https://github.com/Ismail-Magdy/global_search_bar",
+        features: [
+          "Network & Local Search Support",
+          "Built-in API Debouncer",
+          "Automatic Search Text Highlighting",
+          "Local Search History Management",
+          "Headless UI for 100% customization freedom",
+          "Zero external dependencies",
+        ],
+        installation: "flutter pub add global_search_bar",
+        usage: '''GlobalSearchBar<Movie>(
+  debounceDuration: const Duration(milliseconds: 600),
+  searchCallback: (query) async {
+    return await api.searchMovies(query);
+  },
+  onLoading: (isLoading) { 
+    // Handle loading state
+  },
+  onResults: (results) { 
+    // Handle results
+  },
+  onError: (error) {
+    // Handle error state
+  },
+);''',
+      ),
+      //
     ];
   }
 }
