@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ismailmagdy/portfolio/presentation/screens/portfolio_main_screen.dart';
+import 'package:ismailmagdy/portfolio/presentation/screens/splash_screen.dart';
 
 class Portfolio extends StatelessWidget {
   const Portfolio({super.key});
@@ -8,7 +8,7 @@ class Portfolio extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const PortfolioMainScreen(),
+      home: const SplashScreen(),
     );
   }
 }
