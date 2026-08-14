@@ -4,7 +4,7 @@ import 'package:ismailmagdy/core/theme/app_colors.dart';
 import 'package:ismailmagdy/core/animations/splash/fade_route.dart';
 import 'package:ismailmagdy/portfolio/presentation/screens/portfolio_main_screen.dart';
 
-/// A premium, minimalist animated splash screen.
+/// A premium, minimalist animated splash screen
 ///
 /// Animation timeline (total ~3.5s):
 ///   Phase 1  (0.0 – 0.35): Horizontal accent line expands from center
@@ -12,7 +12,7 @@ import 'package:ismailmagdy/portfolio/presentation/screens/portfolio_main_screen
 ///   Phase 3  (0.50 – 0.75): Subtitle "ISMAIL MAGDY" fades in below
 ///   Phase 4  (0.70 – 0.85): Accent line contracts back to zero
 ///   Phase 5  (0.80 – 1.00): Everything scales down + fades out (cinematic exit)
-///   Then navigates to HomeScreen via FadeRoute.
+///   Then navigates to HomeScreen via FadeRoute
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -24,27 +24,27 @@ class _SplashScreenState extends State<SplashScreen>
     with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
 
-  // ── Phase 1: Accent line expand ──
+  // (1) Accent line expand
   late final Animation<double> _lineExpand;
 
-  // ── Phase 2: Letter animations ("i" and "M") ──
+  // (2) Letter animations ("i" and "M")
   late final Animation<double> _letterIOpacity;
   late final Animation<Offset> _letterISlide;
   late final Animation<double> _letterMOpacity;
   late final Animation<Offset> _letterMSlide;
 
-  // ── Phase 3: Subtitle fade ──
+  // (3) Subtitle fade
   late final Animation<double> _subtitleOpacity;
 
-  // ── Phase 4: Accent line contract ──
+  // (4) Accent line contract
   late final Animation<double> _lineContract;
 
-  // ── Phase 5: Exit scale + fade ──
+  // (5) Exit scale + fade 
   late final Animation<double> _exitScale;
   late final Animation<double> _exitOpacity;
 
-  // Accent color — a subtle cyan matching the portfolio's primary
-  static const Color _accent = AppColors.primary; // 0xFF00ADB5
+  // Accent color & a subtle cyan matching the portfolio's primary
+  static const Color _accent = AppColors.primary;
 
   @override
   void initState() {
@@ -55,9 +55,9 @@ class _SplashScreenState extends State<SplashScreen>
       duration: const Duration(milliseconds: 3500),
     );
 
-    // ── Build interval animations ──
+    // Build interval animations 
 
-    // Phase 1: line expands 0.0→0.35
+    // (1) line expands 0.0 → 0.35
     _lineExpand = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(
         parent: _controller,
@@ -65,7 +65,7 @@ class _SplashScreenState extends State<SplashScreen>
       ),
     );
 
-    // Phase 2a: "i" appears 0.15→0.45
+    // (2)(a): "i" appears 0.15 → 0.45
     _letterIOpacity = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(
         parent: _controller,
@@ -82,7 +82,7 @@ class _SplashScreenState extends State<SplashScreen>
       ),
     );
 
-    // Phase 2b: "M" appears 0.25→0.55
+    // (2)(b): "M" appears 0.25 → 0.55
     _letterMOpacity = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(
         parent: _controller,
@@ -99,7 +99,7 @@ class _SplashScreenState extends State<SplashScreen>
       ),
     );
 
-    // Phase 3: subtitle fades in 0.50→0.75
+    // (3) subtitle fades in 0.50 → 0.75
     _subtitleOpacity = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(
         parent: _controller,
@@ -107,7 +107,7 @@ class _SplashScreenState extends State<SplashScreen>
       ),
     );
 
-    // Phase 4: line contracts 0.70→0.85
+    // (4) line contracts 0.70 → 0.85
     _lineContract = Tween<double>(begin: 1.0, end: 0.0).animate(
       CurvedAnimation(
         parent: _controller,
@@ -115,7 +115,7 @@ class _SplashScreenState extends State<SplashScreen>
       ),
     );
 
-    // Phase 5: exit 0.80→1.00
+    // (5) exit 0.80 → 1.00
     _exitScale = Tween<double>(begin: 1.0, end: 0.85).animate(
       CurvedAnimation(
         parent: _controller,
@@ -176,31 +176,32 @@ class _SplashScreenState extends State<SplashScreen>
               scale: _exitScale,
               child: Center(
                 child: Column(
-                  mainAxisSize: MainAxisSize.min,
+                  mainAxisSize: .min,
                   children: [
-                    // ── Logo: "iM" ──
+                    // Logo: "iM"
                     Row(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.baseline,
+                      mainAxisSize: .min,
+                      crossAxisAlignment: .baseline,
                       textBaseline: TextBaseline.alphabetic,
                       children: [
-                        // Letter "i" — slides in from left
+                        // Letter "i" & slides in from left
                         SlideTransition(
                           position: _letterISlide,
                           child: FadeTransition(
                             opacity: _letterIOpacity,
                             child: Text(
-                              'i',
+                              "i",
                               style: GoogleFonts.playfairDisplay(
                                 fontSize: logoFontSize,
-                                fontWeight: FontWeight.w700,
+                                fontWeight: .w700,
                                 color: Colors.white,
                                 height: 1.0,
                               ),
                             ),
                           ),
                         ),
-                        // Letter "M" — slides in from right
+                        //
+                        // Letter "M" & slides in from right
                         SlideTransition(
                           position: _letterMSlide,
                           child: FadeTransition(
@@ -209,19 +210,20 @@ class _SplashScreenState extends State<SplashScreen>
                               'M',
                               style: GoogleFonts.playfairDisplay(
                                 fontSize: logoFontSize,
-                                fontWeight: FontWeight.w700,
+                                fontWeight: .w700,
                                 color: _accent,
                                 height: 1.0,
                               ),
                             ),
                           ),
                         ),
+                        //
                       ],
                     ),
-
+//
                     const SizedBox(height: 16),
-
-                    // ── Accent line ──
+//
+                    // Accent line
                     Container(
                       width: lineMaxWidth * lineProgress,
                       height: 2,
@@ -233,25 +235,26 @@ class _SplashScreenState extends State<SplashScreen>
                             _accent.withValues(alpha: 0.0),
                           ],
                         ),
-                        borderRadius: BorderRadius.circular(1),
+                        borderRadius: .circular(1),
                       ),
                     ),
-
+//
                     const SizedBox(height: 20),
-
-                    // ── Subtitle: "ISMAIL MAGDY" ──
+//
+                    // Subtitle: "ISMAIL MAGDY"
                     FadeTransition(
                       opacity: _subtitleOpacity,
                       child: Text(
-                        'ISMAIL MAGDY',
+                        "ISMAIL MAGDY",
                         style: GoogleFonts.outfit(
                           fontSize: subtitleFontSize,
-                          fontWeight: FontWeight.w300,
+                          fontWeight: .w300,
                           letterSpacing: 8,
                           color: Colors.white.withValues(alpha: 0.6),
                         ),
                       ),
                     ),
+                    //
                   ],
                 ),
               ),

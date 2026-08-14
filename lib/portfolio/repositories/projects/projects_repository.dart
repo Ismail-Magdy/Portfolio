@@ -116,6 +116,19 @@ class ProjectsRepository {
         github: "https://github.com/Ismail-Magdy/Portfolio",
       ),
       //
+      ProjectModel(
+        id: "7",
+        title: "Sytar",
+        imageOut: AppImages.sytarImageOut,
+        imageIn: AppImages.sytarImageOut,
+        shortDescription:
+            "A mobile application to assist university students in managing academic tracks, marks, and exam dates",
+        longDescription:
+            "A mobile application to assist university students in managing academic tracks, marks, and exam dates",
+        techStack: ["Flutter", "Dart"],
+        isComingSoon: true,
+      ),
+      //
     ];
   }
 }

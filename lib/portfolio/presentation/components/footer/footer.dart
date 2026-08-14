@@ -4,7 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ismailmagdy/core/helpers/spacing.dart';
 import 'package:ismailmagdy/core/theme/app_colors.dart';
 import 'package:ismailmagdy/core/constants/app_strings.dart';
-import 'package:ismailmagdy/portfolio/repositories/social_links_repository.dart';
+import 'package:ismailmagdy/portfolio/repositories/social/social_links_repository.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Footer extends StatelessWidget {

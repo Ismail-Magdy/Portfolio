@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ismailmagdy/core/theme/app_colors.dart';
 import 'package:ismailmagdy/core/constants/app_strings.dart';
-import 'package:ismailmagdy/portfolio/repositories/projects_repository.dart';
+import 'package:ismailmagdy/portfolio/repositories/projects/projects_repository.dart';
 import 'project_card.dart';
 
 class ProjectsSection extends StatelessWidget {
@@ -12,7 +12,6 @@ class ProjectsSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
 
-    //  final bool isDesktop = screenWidth >= 1024;
     final bool isTablet = screenWidth >= 600 && screenWidth < 1024;
     final bool isMobile = screenWidth < 600;
 
@@ -21,16 +20,16 @@ class ProjectsSection extends StatelessWidget {
 
     return Container(
       constraints: const BoxConstraints(maxWidth: 1200),
-      padding: EdgeInsets.symmetric(horizontal: isMobile ? 12.0 : 24.0, vertical: 80),
+      padding: .symmetric(horizontal: isMobile ? 12.0 : 24.0, vertical: 80),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: .start,
         children: [
           // Text Project
           Text(
             AppStrings.projectsTitle,
             style: GoogleFonts.poppins(
               fontSize: 36,
-              fontWeight: FontWeight.bold,
+              fontWeight: .bold,
               color: AppColors.textDark,
             ),
           ),

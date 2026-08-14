@@ -1,3 +1,4 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ismailmagdy/core/theme/app_colors.dart';
@@ -38,31 +39,38 @@ class _ProjectCardState extends State<ProjectCard>
     return MouseRegion(
       onEnter: (_) => setState(() => _isHovered = true),
       onExit: (_) => setState(() => _isHovered = false),
-      cursor: SystemMouseCursors.click,
+      cursor: widget.project.isComingSoon
+          ? SystemMouseCursors.basic
+          : SystemMouseCursors.click,
       child: GestureDetector(
-        onTap: () => Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => ProjectDetailsScreen(project: widget.project),
-          ),
-        ),
-
+        onTap: widget.project.isComingSoon
+            ? null
+            : () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      ProjectDetailsScreen(project: widget.project),
+                ),
+              ),
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 300),
           curve: Curves.easeOutCubic,
           transform: Matrix4.identity()
-            ..scale(_isHovered ? 1.03 : 1.0, _isHovered ? 1.03 : 1.0),
-          transformAlignment: .center,
+            ..scale(
+              _isHovered && !widget.project.isComingSoon ? 1.03 : 1.0,
+              _isHovered && !widget.project.isComingSoon ? 1.03 : 1.0,
+            ),
+          transformAlignment: Alignment.center,
           decoration: BoxDecoration(
             color: AppColors.backgroundDark,
-            borderRadius: .circular(16),
-            border: .all(
-              color: _isHovered
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(
+              color: _isHovered && !widget.project.isComingSoon
                   ? AppColors.primary.withValues(alpha: 0.4)
                   : Colors.white.withValues(alpha: 0.06),
               width: 1.5,
             ),
-            boxShadow: _isHovered
+            boxShadow: _isHovered && !widget.project.isComingSoon
                 ? [
                     BoxShadow(
                       color: AppColors.primary.withValues(alpha: 0.15),
@@ -80,9 +88,9 @@ class _ProjectCardState extends State<ProjectCard>
                   ],
           ),
           child: ClipRRect(
-            borderRadius: .circular(16),
+            borderRadius: BorderRadius.circular(16),
             child: Column(
-              crossAxisAlignment: .stretch,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 // Project Image
                 Expanded(
@@ -90,27 +98,101 @@ class _ProjectCardState extends State<ProjectCard>
                     tag: widget.project.title,
                     child: ClipRRect(
                       borderRadius: const .vertical(top: .circular(16)),
-                      child: Image.asset(
-                        widget.project.imageOut,
-                        width: .infinity,
-                        height: .infinity,
-                        fit: .fill,
-                        alignment: .topCenter,
-                        errorBuilder: (context, error, stackTrace) {
-                          return Container(
-                            color: AppColors.primary.withValues(alpha: 0.1),
-                            child: const Icon(
-                              Icons.image,
-                              size: 50,
-                              color: AppColors.primary,
+                      child: Stack(
+                        fit: .expand,
+                        children: [
+                          Opacity(
+                            opacity: widget.project.isComingSoon ? 0.3 : 1.0,
+                            child: Image.asset(
+                              widget.project.imageOut,
+                              width: .infinity,
+                              height: .infinity,
+                              fit: .fill,
+                              alignment: .topCenter,
+                              errorBuilder: (context, error, stackTrace) {
+                                return Container(
+                                  color: AppColors.primary.withValues(
+                                    alpha: 0.1,
+                                  ),
+                                  child: const Icon(
+                                    Icons.image,
+                                    size: 50,
+                                    color: AppColors.primary,
+                                  ),
+                                );
+                              },
                             ),
-                          );
-                        },
+                          ),
+                          if (widget.project.isComingSoon)
+                            Positioned(
+                              top: 16,
+                              right: 16,
+                              child: AnimatedBuilder(
+                                animation: _rippleController,
+                                builder: (context, child) {
+                                  // Pulsing opacity between 0.6 and 1.0
+                                  final pulse =
+                                      0.6 +
+                                      (0.4 *
+                                          (0.5 +
+                                              0.5 *
+                                                  Curves.easeInOut.transform(
+                                                    (_rippleController.value <=
+                                                            0.5
+                                                        ? _rippleController
+                                                                  .value *
+                                                              2
+                                                        : (1 -
+                                                                  _rippleController
+                                                                      .value) *
+                                                              2),
+                                                  )));
+
+                                  return Opacity(opacity: pulse, child: child);
+                                },
+                                child: ClipRRect(
+                                  borderRadius: .circular(4),
+                                  child: BackdropFilter(
+                                    filter: ImageFilter.blur(
+                                      sigmaX: 8,
+                                      sigmaY: 8,
+                                    ),
+                                    child: Container(
+                                      padding: const .symmetric(
+                                        horizontal: 10,
+                                        vertical: 6,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        color: Colors.black.withValues(
+                                          alpha: 0.4,
+                                        ),
+                                        borderRadius: .circular(10),
+                                        border: .all(
+                                          color: Colors.white.withValues(
+                                            alpha: 0.1,
+                                          ),
+                                          width: 0.5,
+                                        ),
+                                      ),
+                                      child: Text(
+                                        "COMING SOON",
+                                        style: GoogleFonts.poppins(
+                                          fontSize: 10,
+                                          fontWeight: .w600,
+                                          letterSpacing: 2.0,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                        ],
                       ),
                     ),
                   ),
                 ),
-                //
                 // Title + Liquid Glass Arrow
                 Container(
                   padding: const .symmetric(horizontal: 14, vertical: 14),
@@ -126,7 +208,6 @@ class _ProjectCardState extends State<ProjectCard>
                   ),
                   child: Row(
                     children: [
-                      //
                       Expanded(
                         child: Text(
                           widget.project.title,
@@ -139,15 +220,13 @@ class _ProjectCardState extends State<ProjectCard>
                           overflow: .ellipsis,
                         ),
                       ),
-                      //
                       const SizedBox(width: 8),
-                      // Liquid glass animated arrow
-                      _LiquidGlassArrow(controller: _rippleController),
-                      //
+                      // Liquid glass animated arrow (hide if coming soon)
+                      if (!widget.project.isComingSoon)
+                        _LiquidGlassArrow(controller: _rippleController),
                     ],
                   ),
                 ),
-                //
               ],
             ),
           ),

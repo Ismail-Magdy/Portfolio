@@ -6,6 +6,7 @@ class ProjectModel {
   final String shortDescription;
   final String longDescription;
   final List<String> techStack;
+  final bool isComingSoon;
 
   // Social & action links (nullable & buttons only render when non null)
   final String? linkedIn;
@@ -24,6 +25,7 @@ class ProjectModel {
     required this.shortDescription,
     required this.longDescription,
     required this.techStack,
+    this.isComingSoon = false,
     this.linkedIn,
     this.linkedInPartTwo,
     this.instagram,

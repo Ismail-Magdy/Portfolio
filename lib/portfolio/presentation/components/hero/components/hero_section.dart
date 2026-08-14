@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ismailmagdy/core/helpers/spacing.dart';
-import 'package:ismailmagdy/portfolio/repositories/social_links_repository.dart';
 import 'package:ismailmagdy/portfolio/presentation/components/hero/components/build_content_widget.dart';
 import 'package:ismailmagdy/portfolio/presentation/components/hero/widgets/profile_image_widget.dart';
+import 'package:ismailmagdy/portfolio/repositories/social/social_links_repository.dart';
 
 class HeroSection extends StatelessWidget {
   const HeroSection({super.key});

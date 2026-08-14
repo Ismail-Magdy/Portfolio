@@ -25,4 +25,7 @@ class AppImages {
   // Spotify
   static const String spotifyImageOut = "assets/images/spotify-out.png";
   static const String spotifyImageIn = "assets/images/spotify-in.png";
+
+  // Sytar
+  static const String sytarImageOut = "assets/images/sytar_out.png";
 }

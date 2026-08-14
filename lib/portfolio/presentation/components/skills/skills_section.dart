@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:ismailmagdy/core/constants/app_strings.dart';
 import 'package:ismailmagdy/core/theme/app_colors.dart';
 import 'package:ismailmagdy/portfolio/presentation/components/skills/skill_chip.dart';
-import 'package:ismailmagdy/portfolio/repositories/skills_repository.dart';
+import 'package:ismailmagdy/portfolio/repositories/skills/skills_repository.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 class SkillsSection extends StatefulWidget {

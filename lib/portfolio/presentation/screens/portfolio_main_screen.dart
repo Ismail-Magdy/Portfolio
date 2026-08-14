@@ -9,7 +9,7 @@ import '../components/open_source/components/open_source_section.dart';
 import '../components/footer/footer.dart';
 import '../../../core/animations/background/animated_background.dart';
 
-/// The main HomePage of the portfolio
+/// The main portfolio Screen
 
 class PortfolioMainScreen extends StatefulWidget {
   const PortfolioMainScreen({super.key});
@@ -154,7 +154,9 @@ class _PortfolioMainScreenState extends State<PortfolioMainScreen> {
                 //
               ],
             ),
+          
           ),
+          //
         ],
       ),
       //
