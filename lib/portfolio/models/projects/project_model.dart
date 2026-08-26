@@ -1,3 +1,15 @@
+class TeamMember {
+  final String name;
+  final String role;
+  final String imagePath;
+
+  const TeamMember({
+    required this.name,
+    required this.role,
+    required this.imagePath,
+  });
+}
+
 class ProjectModel {
   final String id;
   final String title;
@@ -17,6 +29,9 @@ class ProjectModel {
   final String? websiteLink;
   final String? figmaLink;
 
+  // Team members (nullable)
+  final List<TeamMember>? teamMembers;
+
   ProjectModel({
     required this.id,
     required this.title,
@@ -33,5 +48,6 @@ class ProjectModel {
     this.tiktok,
     this.websiteLink,
     this.figmaLink,
+    this.teamMembers,
   });
 }
