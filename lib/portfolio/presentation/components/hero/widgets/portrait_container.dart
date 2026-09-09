@@ -34,7 +34,7 @@ class _PortraitContainerState extends State<PortraitContainer>
   @override
   Widget build(BuildContext context) {
     const double containerSize = 520.0;
-    const double imageSize = containerSize * 0.70; // square image size
+    const double imageSize = containerSize * 0.70;
     final borderRadius = BorderRadius.circular(20);
 
     return SizedBox(
@@ -58,9 +58,9 @@ class _PortraitContainerState extends State<PortraitContainer>
                 ..rotateX(_isHovered ? 0.05 : 0)
                 ..rotateY(_isHovered ? -0.05 : 0)
                 ..scale(_isHovered ? 1.05 : 1.0),
-              transformAlignment: FractionalOffset.center,
+              transformAlignment: .center,
               child: Stack(
-                alignment: Alignment.center,
+                alignment: .center,
                 children: [
                   // Rotating glowing border behind the image
                   AnimatedBuilder(

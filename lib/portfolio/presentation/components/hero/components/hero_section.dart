@@ -16,7 +16,7 @@ class HeroSection extends StatelessWidget {
 
     return Container(
       constraints: const BoxConstraints(maxWidth: 1200),
-      padding: EdgeInsets.only(
+      padding: .only(
         left: isMobile ? 40 : 80,
         right: isMobile ? 40 : 80,
         top: 180,

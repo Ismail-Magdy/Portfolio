@@ -15,9 +15,8 @@ class AppStrings {
   static const String downloadCV = "Download CV";
   static const String contact = "Contact";
 
-
   /// Headers
-static const String socialMedia = "Social Media";
+  static const String socialMedia = "Social Media";
   static const String skillsTitle = "Skills";
   static const String projectsTitle = "Projects";
   static const String contactTitle = "Contact";
@@ -28,23 +27,19 @@ static const String socialMedia = "Social Media";
   static const String twitter = "twitter";
   static const String instagram = "instagram";
 
-
-/// Projects
+  /// Projects
   static const String mealMonkey = "meal monkey";
   static const String bookShop = "book shop";
   static const String jobyApp = "joby app";
   static const String jobyWebsite = "joby website";
   static const String portfolio = "portfolio";
 
-
-
   /// Experience
   static const String professionalExperience = "Professional Experience";
   static const String myProfessionalJourneyInMobileDevelopment =
       "My professional journey in mobile development";
 
-
-/// Contacts
+  /// Contacts
   static const String email = "Email";
   static const String myEmail = "ismailmagdy920@gmail.com";
   static const String phone = "Phone";
@@ -52,12 +47,10 @@ static const String socialMedia = "Social Media";
   static const String whatsApp = "WhatsApp";
   static const String whatsAppNumber = "+20 120 660 7906";
 
-  
   /// Footer
   static const String copyright = "© 2026 Ismail Magdy . All rights reserved";
 
-
   /// Another Strings
-    static const String gitHub = "GitHub";
+  static const String gitHub = "GitHub";
   static const String liveDemo = "Live Demo";
 }

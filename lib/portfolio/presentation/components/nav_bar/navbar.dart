@@ -177,15 +177,13 @@ class _NavbarState extends State<Navbar> {
                             const SizedBox(width: 20),
                             //
                             _buildNavItem(
-                              AppStrings.experience,
-                              widget.experienceKey,
-                            ),
-                            //
-                            const SizedBox(width: 20),
-                            //
-                            _buildNavItem(
                               AppStrings.packages,
                               widget.packagesKey,
+                            ),
+                            //
+                            _buildNavItem(
+                              AppStrings.experience,
+                              widget.experienceKey,
                             ),
                             //
                           ],

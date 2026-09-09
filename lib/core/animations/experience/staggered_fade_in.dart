@@ -59,7 +59,7 @@ class _StaggeredFadeInState extends State<StaggeredFadeIn>
     // Only trigger animation once when 15% is visible
     if (!_isVisible && info.visibleFraction > 0.15) {
       _isVisible = true;
-      // Stagger start time based on index, e.g., index 0 = 0ms, index 1 = 150ms...
+      // Stagger start time based on index, e.g., index 0 = 0ms, index 1 = 150ms
       Future.delayed(widget.baseDelay * widget.index, () {
         if (mounted) {
           _controller.forward();

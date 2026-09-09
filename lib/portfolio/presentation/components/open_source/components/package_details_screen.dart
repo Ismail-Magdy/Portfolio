@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -6,6 +5,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ismailmagdy/core/helpers/spacing.dart';
 import 'package:ismailmagdy/core/theme/app_colors.dart';
 import 'package:ismailmagdy/portfolio/models/packages/package_model.dart';
+import 'package:ismailmagdy/portfolio/presentation/components/projects/widgets/projects_hover_action_button.dart';
+import 'package:ismailmagdy/portfolio/presentation/components/projects/widgets/projects_sweep_border_painter.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../../../core/animations/background/animated_background.dart';
 
@@ -180,7 +181,7 @@ class _PackageDetailsScreenState extends State<PackageDetailsScreen>
 
   Widget _buildVerticalLayout(bool isMobile) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
+      crossAxisAlignment: .center,
       children: [
         //
         verticalSpace(24),
@@ -224,7 +225,7 @@ class _PackageDetailsScreenState extends State<PackageDetailsScreen>
           animation: _borderGlowController,
           builder: (context, child) {
             return CustomPaint(
-              foregroundPainter: _SweepBorderPainter(
+              foregroundPainter: SweepBorderPainter(
                 progress: _borderGlowController.value,
                 borderRadius: borderRadius + borderPad,
                 padding: borderPad,
@@ -525,7 +526,7 @@ class _PackageDetailsScreenState extends State<PackageDetailsScreen>
     required String url,
     bool isPrimary = false,
   }) {
-    return _HoverActionButton(
+    return HoverActionButton(
       icon: icon,
       label: label,
       url: url,
@@ -533,184 +534,4 @@ class _PackageDetailsScreenState extends State<PackageDetailsScreen>
       onTap: () => _launchUrl(url),
     );
   }
-}
-
-class _HoverActionButton extends StatefulWidget {
-  final IconData icon;
-  final String label;
-  final String url;
-  final bool isPrimary;
-  final VoidCallback onTap;
-
-  const _HoverActionButton({
-    required this.icon,
-    required this.label,
-    required this.url,
-    required this.isPrimary,
-    required this.onTap,
-  });
-
-  @override
-  State<_HoverActionButton> createState() => _HoverActionButtonState();
-}
-
-class _HoverActionButtonState extends State<_HoverActionButton> {
-  bool _isHovered = false;
-
-  @override
-  Widget build(BuildContext context) {
-    final baseColor = AppColors.primary;
-
-    return MouseRegion(
-      onEnter: (_) => setState(() => _isHovered = true),
-      onExit: (_) => setState(() => _isHovered = false),
-      cursor: SystemMouseCursors.click,
-      child: GestureDetector(
-        onTap: widget.onTap,
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 250),
-          curve: Curves.easeOutCubic,
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-          transform: Matrix4.identity()
-            ..scale(_isHovered ? 1.05 : 1.0, _isHovered ? 1.05 : 1.0),
-          transformAlignment: Alignment.center,
-          decoration: BoxDecoration(
-            color: _isHovered
-                ? (widget.isPrimary
-                      ? baseColor.withValues(alpha: 0.15)
-                      : AppColors.textDark.withValues(alpha: 0.1))
-                : Colors.transparent,
-            borderRadius: BorderRadius.circular(24),
-            border: Border.all(
-              color: _isHovered
-                  ? (widget.isPrimary
-                        ? baseColor.withValues(alpha: 0.6)
-                        : AppColors.textDark.withValues(alpha: 0.5))
-                  : (widget.isPrimary
-                        ? AppColors.primary.withValues(alpha: 0.35)
-                        : AppColors.textDark.withValues(alpha: 0.3)),
-              width: 1.5,
-            ),
-            boxShadow: _isHovered
-                ? [
-                    BoxShadow(
-                      color: baseColor.withValues(alpha: 0.2),
-                      blurRadius: 12,
-                      offset: const Offset(0, 4),
-                    ),
-                  ]
-                : [],
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(
-                widget.icon,
-                size: 16,
-                color: widget.isPrimary
-                    ? AppColors.primary
-                    : AppColors.textDark,
-              ),
-              const SizedBox(width: 10),
-              Text(
-                widget.label,
-                style: GoogleFonts.poppins(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  color: widget.isPrimary
-                      ? AppColors.primary
-                      : AppColors.textDark,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _SweepBorderPainter extends CustomPainter {
-  final double progress;
-  final double borderRadius;
-  final double padding;
-  final Color glowColor;
-
-  _SweepBorderPainter({
-    required this.progress,
-    required this.borderRadius,
-    required this.padding,
-    required this.glowColor,
-  });
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final rect = Rect.fromLTWH(0, 0, size.width, size.height);
-    final rrect = RRect.fromRectAndRadius(rect, Radius.circular(borderRadius));
-    final angle = progress * 2 * pi;
-
-    final sweepShader = SweepGradient(
-      center: Alignment.center,
-      startAngle: angle,
-      endAngle: angle + 2 * pi,
-      colors: [
-        glowColor.withValues(alpha: 0.0),
-        glowColor.withValues(alpha: 0.0),
-        glowColor.withValues(alpha: 0.6),
-        glowColor.withValues(alpha: 0.9),
-        glowColor.withValues(alpha: 0.6),
-        glowColor.withValues(alpha: 0.0),
-        glowColor.withValues(alpha: 0.0),
-      ],
-      stops: const [0.0, 0.3, 0.42, 0.5, 0.58, 0.7, 1.0],
-      tileMode: TileMode.clamp,
-    ).createShader(rect);
-
-    final borderPaint = Paint()
-      ..shader = sweepShader
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 2.5;
-
-    canvas.drawRRect(rrect, borderPaint);
-
-    final glowPaint = Paint()
-      ..shader = sweepShader
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 8.0
-      ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 6);
-
-    final glowRRect = RRect.fromRectAndRadius(
-      rect.inflate(2),
-      Radius.circular(borderRadius + 2),
-    );
-    canvas.drawRRect(glowRRect, glowPaint);
-
-    final basePaint = Paint()
-      ..color = glowColor.withValues(alpha: 0.12)
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 1.0;
-
-    canvas.drawRRect(rrect, basePaint);
-
-    final dotPaint = Paint()
-      ..color = glowColor.withValues(alpha: 0.4)
-      ..style = PaintingStyle.fill;
-
-    final dotRadius = 2.5;
-    final inset = borderRadius * 0.3;
-    final corners = [
-      Offset(inset, inset),
-      Offset(size.width - inset, inset),
-      Offset(inset, size.height - inset),
-      Offset(size.width - inset, size.height - inset),
-    ];
-
-    for (final corner in corners) {
-      canvas.drawCircle(corner, dotRadius, dotPaint);
-    }
-  }
-
-  @override
-  bool shouldRepaint(covariant _SweepBorderPainter oldDelegate) =>
-      progress != oldDelegate.progress;
 }

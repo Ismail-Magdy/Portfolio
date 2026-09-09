@@ -143,18 +143,17 @@ class _PortfolioMainScreenState extends State<PortfolioMainScreen> {
                 // Projects Section
                 Container(key: projectsKey, child: const ProjectsSection()),
                 //
-                // Experience Section
-                Container(key: experienceKey, child: const ExperienceSection()),
-                //
                 // Open Source & Packages Section
                 Container(key: packagesKey, child: const OpenSourceSection()),
+                //
+                // Experience Section
+                Container(key: experienceKey, child: const ExperienceSection()),
                 //
                 // Footer Section
                 const Footer(),
                 //
               ],
             ),
-          
           ),
           //
         ],

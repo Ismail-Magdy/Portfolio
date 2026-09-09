@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ismailmagdy/core/theme/app_colors.dart';
 import 'package:ismailmagdy/portfolio/presentation/components/projects/components/project_details_screen.dart';
+import 'package:ismailmagdy/portfolio/presentation/components/projects/widgets/liquid_glass_arrow.dart';
 import '../../../../models/projects/project_model.dart';
 
 class ProjectCard extends StatefulWidget {
@@ -223,7 +224,7 @@ class _ProjectCardState extends State<ProjectCard>
                       const SizedBox(width: 8),
                       // Liquid glass animated arrow (hide if coming soon)
                       if (!widget.project.isComingSoon)
-                        _LiquidGlassArrow(controller: _rippleController),
+                        LiquidGlassArrow(controller: _rippleController),
                     ],
                   ),
                 ),
@@ -234,82 +235,4 @@ class _ProjectCardState extends State<ProjectCard>
       ),
     );
   }
-}
-
-class _LiquidGlassArrow extends StatelessWidget {
-  final AnimationController controller;
-
-  const _LiquidGlassArrow({required this.controller});
-
-  @override
-  Widget build(BuildContext context) {
-    return RepaintBoundary(
-      child: SizedBox(
-        width: 36,
-        height: 36,
-        child: AnimatedBuilder(
-          animation: controller,
-          builder: (context, child) {
-            return CustomPaint(
-              painter: _LiquidGlassPainter(
-                progress: controller.value,
-                color: AppColors.primary,
-              ),
-              child: child,
-            );
-          },
-          child: const Center(
-            child: Icon(Icons.north_east, color: AppColors.primary, size: 18),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _LiquidGlassPainter extends CustomPainter {
-  final double progress;
-  final Color color;
-
-  _LiquidGlassPainter({required this.progress, required this.color});
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final center = Offset(size.width / 2, size.height / 2);
-    final maxRadius = size.width / 2;
-
-    // Draw 3 staggered rings
-    for (int i = 0; i < 3; i++) {
-      final ringProgress = (progress + i * 0.33) % 1.0;
-
-      // Ease the progress for smoother feel
-      final easedProgress = Curves.easeOut.transform(ringProgress);
-
-      final radius = maxRadius * 0.4 + (maxRadius * 0.6 * easedProgress);
-
-      // Fade out as the ring expands
-      final opacity = (1.0 - easedProgress) * 0.35;
-
-      if (opacity > 0.01) {
-        // Glass-like gradient stroke
-        final paint = Paint()
-          ..color = color.withValues(alpha: opacity)
-          ..style = PaintingStyle.stroke
-          ..strokeWidth = 1.5 * (1.0 - easedProgress * 0.5);
-
-        canvas.drawCircle(center, radius, paint);
-
-        // Inner glow fill (very subtle)
-        final glowPaint = Paint()
-          ..color = color.withValues(alpha: opacity * 0.15)
-          ..style = PaintingStyle.fill;
-
-        canvas.drawCircle(center, radius, glowPaint);
-      }
-    }
-  }
-
-  @override
-  bool shouldRepaint(covariant _LiquidGlassPainter oldDelegate) =>
-      progress != oldDelegate.progress;
 }

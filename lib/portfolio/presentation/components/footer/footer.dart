@@ -41,7 +41,7 @@ class Footer extends StatelessWidget {
     final socialLinks = repository.getSocialLinks();
 
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 40),
+      padding: const .symmetric(vertical: 40),
       decoration: BoxDecoration(
         color: AppColors.cardBackgroundDark,
         border: Border(

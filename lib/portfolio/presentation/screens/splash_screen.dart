@@ -39,7 +39,7 @@ class _SplashScreenState extends State<SplashScreen>
   // (4) Accent line contract
   late final Animation<double> _lineContract;
 
-  // (5) Exit scale + fade 
+  // (5) Exit scale + fade
   late final Animation<double> _exitScale;
   late final Animation<double> _exitOpacity;
 
@@ -55,7 +55,7 @@ class _SplashScreenState extends State<SplashScreen>
       duration: const Duration(milliseconds: 3500),
     );
 
-    // Build interval animations 
+    // Build interval animations
 
     // (1) line expands 0.0 → 0.35
     _lineExpand = Tween<double>(begin: 0.0, end: 1.0).animate(
@@ -72,15 +72,13 @@ class _SplashScreenState extends State<SplashScreen>
         curve: const Interval(0.15, 0.45, curve: Curves.easeOut),
       ),
     );
-    _letterISlide = Tween<Offset>(
-      begin: const Offset(-0.6, 0.0),
-      end: Offset.zero,
-    ).animate(
-      CurvedAnimation(
-        parent: _controller,
-        curve: const Interval(0.15, 0.45, curve: Curves.easeOutCubic),
-      ),
-    );
+    _letterISlide =
+        Tween<Offset>(begin: const Offset(-0.6, 0.0), end: Offset.zero).animate(
+          CurvedAnimation(
+            parent: _controller,
+            curve: const Interval(0.15, 0.45, curve: Curves.easeOutCubic),
+          ),
+        );
 
     // (2)(b): "M" appears 0.25 → 0.55
     _letterMOpacity = Tween<double>(begin: 0.0, end: 1.0).animate(
@@ -89,15 +87,13 @@ class _SplashScreenState extends State<SplashScreen>
         curve: const Interval(0.25, 0.55, curve: Curves.easeOut),
       ),
     );
-    _letterMSlide = Tween<Offset>(
-      begin: const Offset(0.6, 0.0),
-      end: Offset.zero,
-    ).animate(
-      CurvedAnimation(
-        parent: _controller,
-        curve: const Interval(0.25, 0.55, curve: Curves.easeOutCubic),
-      ),
-    );
+    _letterMSlide =
+        Tween<Offset>(begin: const Offset(0.6, 0.0), end: Offset.zero).animate(
+          CurvedAnimation(
+            parent: _controller,
+            curve: const Interval(0.25, 0.55, curve: Curves.easeOutCubic),
+          ),
+        );
 
     // (3) subtitle fades in 0.50 → 0.75
     _subtitleOpacity = Tween<double>(begin: 0.0, end: 1.0).animate(
@@ -140,9 +136,9 @@ class _SplashScreenState extends State<SplashScreen>
 
   void _navigateToHome() {
     if (!mounted) return;
-    Navigator.of(context).pushReplacement(
-      FadeRoute(page: const PortfolioMainScreen()),
-    );
+    Navigator.of(
+      context,
+    ).pushReplacement(FadeRoute(page: const PortfolioMainScreen()));
   }
 
   @override
@@ -220,9 +216,9 @@ class _SplashScreenState extends State<SplashScreen>
                         //
                       ],
                     ),
-//
+                    //
                     const SizedBox(height: 16),
-//
+                    //
                     // Accent line
                     Container(
                       width: lineMaxWidth * lineProgress,
@@ -238,9 +234,9 @@ class _SplashScreenState extends State<SplashScreen>
                         borderRadius: .circular(1),
                       ),
                     ),
-//
+                    //
                     const SizedBox(height: 20),
-//
+                    //
                     // Subtitle: "ISMAIL MAGDY"
                     FadeTransition(
                       opacity: _subtitleOpacity,
