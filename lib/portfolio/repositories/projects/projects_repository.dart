@@ -5,6 +5,7 @@ class ProjectsRepository {
   List<ProjectModel> getProjects() {
     return [
       //
+      // Rentora
       ProjectModel(
         id: "0",
         title: "Rentora",
@@ -12,7 +13,7 @@ class ProjectsRepository {
         imageIn: "assets/images/projects/rentora.jpeg",
         shortDescription: "Peer-to-Peer (P2P) rental marketplace platform",
         longDescription:
-            "Rentora is a robust P2P rental platform built with a Lite Clean Architecture (Feature-First). It features a secure AI-integrated verification system, real-time chat, interactive maps with GeoQueries, and advanced booking lifecycles. The app is powered by Firebase services (Auth, Firestore, Messaging) and utilizes BLoC/Cubit for state management and GetIt for dependency injection",
+            "Rentora is a robust P2P rental platform built with a Lite Clean Architecture (Feature-First). It features a secure AI integrated verification system, real time chat, interactive maps with GeoQueries, and advanced booking lifecycles. The app is powered by Firebase services (Auth, Firestore, Messaging) and utilizes BLoC&Cubit for state management and GetIt for dependency injection",
         techStack: [
           "Flutter",
           "Dart",
@@ -25,10 +26,11 @@ class ProjectsRepository {
           "flutter_map",
         ],
         github: "https://github.com/Ismail-Magdy/rentora",
+        linkedIn: "https://lnkd.in/p/dMTsXaMF",
         teamMembers: [
           TeamMember(
             name: "Ismail Magdy",
-            role: "Team Leader / Flutter Developer",
+            role: "Team Leader & Flutter Developer",
             imagePath: "assets/images/rentora/ismail.jpeg",
           ),
           TeamMember(
@@ -55,6 +57,7 @@ class ProjectsRepository {
         isComingSoon: false,
       ),
       //
+      // Joby App
       ProjectModel(
         id: "1",
         title: "Joby App",
@@ -79,6 +82,7 @@ class ProjectsRepository {
         github: "https://github.com/Ismail-Magdy/Joby-ReadMe",
       ),
       //
+      // Meal Monkey
       ProjectModel(
         id: "2",
         title: "Meal Monkey",
@@ -87,29 +91,46 @@ class ProjectsRepository {
         shortDescription:
             "A complete food ordering & delivery app built with Flutter",
         longDescription:
-            "Food & Delivery Mobile App built with Flutter. A complete food ordering and delivery application with user authentication, menu browsing, cart management, and order tracking. The app features a clean, modern UI with smooth animations and follows clean architecture principles for maintainability and scalability",
-        techStack: ["Flutter", "Dart", "Clean Architecture", "REST API"],
+            "A pixel perfect food delivery mobile app UI built entirely with Flutter and Dart. This frontend only project simulates a complete user journey across 20+ screens, including onboarding, restaurant browsing, checkout flows, and an interactive Google Maps integration. It showcases a scalable feature-first architecture, custom reusable components, and state management using BLoC&Cubit, without relying on a live backend.",
+        techStack: [
+          "Flutter",
+          "Dart",
+          "BLoC&Cubit",
+          "Google Maps SDK",
+          "Feature Based Architecture",
+        ],
         linkedIn:
             "https://www.linkedin.com/posts/ismailmagdy021_meal-monkey-food-delivery-mobile-app-activity-7382159246274117632-OgEV",
         instagram: "https://www.instagram.com/p/DPmilNtjf-W/",
         github: "https://github.com/Ismail-Magdy/Meal-Monkey",
       ),
       //
+      // Book Shop
       ProjectModel(
         id: "3",
         title: "Book Shop",
         imageOut: AppImages.bookShopImageOut,
         imageIn: AppImages.bookShopImageIn,
-        shortDescription: "An e-commerce app for browsing and purchasing books",
+        shortDescription:
+            "A polished, feature rich mobile bookstore UI built with Flutter and Dart",
+
         longDescription:
-            "Book Shop App for buying books. An e-commerce application for browsing and purchasing books with user-friendly interface and shopping cart functionality. Features include book categories, search, detailed book pages, and a seamless checkout experience powered by Firebase",
-        techStack: ["Flutter", "Dart", "State Management", "Firebase"],
+            "A frontend only mobile bookstore interface built entirely with Flutter. This project focuses on complex UI composition, smooth animations, and responsive design across multiple screens. It implements a feature based architecture, a custom draggable floating navigation bar, interactive carousels, and Firebase Authentication scaffolding, created specifically to showcase advanced frontend development skills.",
+
+        techStack: [
+          "Flutter",
+          "Dart",
+          "Firebase Auth",
+          "Feature Based Architecture",
+          "UI Animations",
+        ],
         linkedIn:
             "https://www.linkedin.com/posts/ismailmagdy021_book-store-a-simple-application-for-buying-activity-7395995024372477952-MGdS",
         instagram: "https://www.instagram.com/reel/DRI7ImcgnR6/",
         github: "https://github.com/Ismail-Magdy/Book_Shop",
       ),
       //
+      // Joby Website
       ProjectModel(
         id: "4",
         title: "Joby Website",
@@ -126,6 +147,7 @@ class ProjectsRepository {
         github: "https://github.com/Ismail-Magdy/joby-site",
       ),
       //
+      // Portfolio
       ProjectModel(
         id: "5",
         title: "Portfolio",
@@ -140,6 +162,7 @@ class ProjectsRepository {
         github: "https://github.com/Ismail-Magdy/Portfolio",
       ),
       //
+      // Spotify
       ProjectModel(
         id: "6",
         title: "Spotify ",
@@ -167,6 +190,7 @@ class ProjectsRepository {
         isComingSoon: true,
       ),
       //
+      // Sytar
       ProjectModel(
         id: "7",
         title: "Sytar",
@@ -179,6 +203,7 @@ class ProjectsRepository {
         techStack: ["Flutter", "Dart"],
         isComingSoon: true,
       ),
+      //
     ];
   }
 }

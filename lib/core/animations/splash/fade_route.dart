@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-/// A custom page route that transitions using a smooth fade effect.
-/// Used for the cinematic Splash → Home transition.
 class FadeRoute<T> extends PageRouteBuilder<T> {
   final Widget page;
 

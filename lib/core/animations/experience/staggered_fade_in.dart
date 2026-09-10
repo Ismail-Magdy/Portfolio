@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
-/// A wrapper widget that fades in and slides up when it becomes visible on screen.
-///
-/// WHY: Used for the Professional Experience section timeline, to provide a structured
-/// "staggered entrance" effect precisely as the user scrolls it into view.
 class StaggeredFadeIn extends StatefulWidget {
   final Widget child;
   final int index;

@@ -2,7 +2,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:ismailmagdy/core/theme/app_colors.dart';
 
-/// A single star particle with position, velocity, size, and opacity.
 class _Star {
   double x;
   double y;

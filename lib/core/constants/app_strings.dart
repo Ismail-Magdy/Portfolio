@@ -52,5 +52,4 @@ class AppStrings {
 
   /// Another Strings
   static const String gitHub = "GitHub";
-  static const String liveDemo = "Live Demo";
 }
