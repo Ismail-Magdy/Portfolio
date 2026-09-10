@@ -36,6 +36,7 @@ class ProjectsSection extends StatelessWidget {
           //
           // All Projects
           GridView.builder(
+            padding: .only(top: 40),
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

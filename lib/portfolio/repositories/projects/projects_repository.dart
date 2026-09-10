@@ -9,8 +9,8 @@ class ProjectsRepository {
       ProjectModel(
         id: "0",
         title: "Rentora",
-        imageOut: "assets/images/projects/rentora.jpeg",
-        imageIn: "assets/images/projects/rentora.jpeg",
+        imageOut: "assets/images/projects/rentora.webp",
+        imageIn: "assets/images/projects/rentora.webp",
         shortDescription: "Peer-to-Peer (P2P) rental marketplace platform",
         longDescription:
             "Rentora is a robust P2P rental platform built with a Lite Clean Architecture (Feature-First). It features a secure AI integrated verification system, real time chat, interactive maps with GeoQueries, and advanced booking lifecycles. The app is powered by Firebase services (Auth, Firestore, Messaging) and utilizes BLoC&Cubit for state management and GetIt for dependency injection",

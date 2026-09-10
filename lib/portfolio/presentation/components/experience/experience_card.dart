@@ -24,8 +24,8 @@ class ExperienceCard extends StatelessWidget {
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
-            color: AppColors.primary.withValues(alpha: 0.1),
-            blurRadius: 40,
+            color: AppColors.primary.withValues(alpha: 0.05),
+            blurRadius: 10,
           ),
         ],
       ),
@@ -63,7 +63,7 @@ class ExperienceCard extends StatelessWidget {
           // Experience Card
           Expanded(
             child: Card(
-              elevation: 2,
+              elevation: 1,
               color: AppColors.cardBackgroundDark,
               shape: RoundedRectangleBorder(borderRadius: .circular(12)),
               child: Padding(

@@ -37,6 +37,7 @@ class _OpenSourceSectionState extends State<OpenSourceSection> {
           ),
           //
           ListView.separated(
+            padding: .only(top: 40),
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             itemCount: packages.length,
