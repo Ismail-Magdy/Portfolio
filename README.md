@@ -1,5 +1,7 @@
 # Ismail Magdy || Personal Portfolio
 
+<img width="1536" height="1024" alt="portfolio" src="https://github.com/user-attachments/assets/6fcb5872-a6f6-46b9-ba05-bf28516aed03" />
+
 <p align="center">
   <img src="https://img.shields.io/badge/Flutter-Web-02569B?style=for-the-badge&logo=flutter&logoColor=white" alt="Flutter Web"/>
   <img src="https://img.shields.io/badge/Dart-0175C2?style=for-the-badge&logo=dart&logoColor=white" alt="Dart"/>
