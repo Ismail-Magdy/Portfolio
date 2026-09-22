@@ -496,7 +496,7 @@ class _PackageDetailsScreenState extends State<PackageDetailsScreen>
 
     buttons.add(
       _buildActionButton(
-        icon: Icons.open_in_new,
+        icon: FontAwesomeIcons.arrowUpRightFromSquare,
         label: "View on Pub.dev",
         url: widget.package.pubDevUrl,
         isPrimary: true,
@@ -521,7 +521,7 @@ class _PackageDetailsScreenState extends State<PackageDetailsScreen>
   }
 
   Widget _buildActionButton({
-    required IconData icon,
+    required FaIconData icon,
     required String label,
     required String url,
     bool isPrimary = false,

@@ -124,7 +124,7 @@ class BuildContentWidget extends StatelessWidget {
                         width: 1,
                       ),
                     ),
-                    child: Icon(
+                    child: FaIcon(
                       _getIconForPlatform(link.platform),
                       color: AppColors.primary,
                       size: 20,
@@ -169,7 +169,7 @@ class BuildContentWidget extends StatelessWidget {
   }
 
   // Get Icon
-  IconData _getIconForPlatform(String platform) {
+  FaIconData _getIconForPlatform(String platform) {
     switch (platform.toLowerCase()) {
       case "linkedin":
         return FontAwesomeIcons.linkedin;

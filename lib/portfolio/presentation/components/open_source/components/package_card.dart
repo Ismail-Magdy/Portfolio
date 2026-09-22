@@ -406,7 +406,7 @@ class _PackageCardState extends State<PackageCard>
     return Row(
       children: [
         NeonPillButton(
-          icon: Icons.open_in_new_rounded,
+          icon: FontAwesomeIcons.arrowUpRightFromSquare,
           label: "pub.dev",
           isPrimary: true,
           onTap: () => _launchUrl(widget.package.pubDevUrl),

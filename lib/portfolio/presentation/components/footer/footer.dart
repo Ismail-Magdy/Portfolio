@@ -19,7 +19,7 @@ class Footer extends StatelessWidget {
   }
 
   ///
-  IconData _getIconForPlatform(String platform) {
+  FaIconData _getIconForPlatform(String platform) {
     switch (platform.toLowerCase()) {
       case AppStrings.linkedin:
         return FontAwesomeIcons.linkedin;

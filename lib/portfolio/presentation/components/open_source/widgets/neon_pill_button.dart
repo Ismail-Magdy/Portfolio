@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class NeonPillButton extends StatefulWidget {
-  final IconData icon;
+  final FaIconData icon;
   final String label;
   final bool isPrimary;
   final VoidCallback onTap;
@@ -66,7 +67,7 @@ class NeonPillButtonState extends State<NeonPillButton> {
           child: Row(
             mainAxisSize: .min,
             children: [
-              Icon(
+              FaIcon(
                 widget.icon,
                 size: 14,
                 color: _isHovered

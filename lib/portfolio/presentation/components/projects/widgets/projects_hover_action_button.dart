@@ -5,7 +5,7 @@ import 'package:ismailmagdy/core/theme/app_colors.dart';
 
 /// Extracted stateful hover button for clean hover state management.
 class HoverActionButton extends StatefulWidget {
-  final IconData icon;
+  final FaIconData icon;
   final String label;
   final String url;
   final bool isPrimary;

@@ -786,7 +786,7 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen>
 
   /// A single stylish action button
   Widget _buildActionButton({
-    required IconData icon,
+    required FaIconData icon,
     required String label,
     required String url,
     bool isPrimary = false,
