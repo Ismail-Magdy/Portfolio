@@ -124,10 +124,12 @@ class BuildContentWidget extends StatelessWidget {
                         width: 1,
                       ),
                     ),
-                    child: FaIcon(
-                      _getIconForPlatform(link.platform),
-                      color: AppColors.primary,
-                      size: 20,
+                    child: Center(
+                      child: FaIcon(
+                        _getIconForPlatform(link.platform),
+                        color: AppColors.primary,
+                        size: 20,
+                      ),
                     ),
                   ),
                 ),
