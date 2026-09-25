@@ -9,7 +9,7 @@ class AppStrings {
   /// Hero || About
   static const String greeting = "Hi, I am";
   static const String name = "Ismail Magdy";
-  static const String title = "Mechatronics Engineer | Flutter Developer";
+  static const String title = "Flutter Developer | DevOps Engineer";
   static const String aboutDescription =
       "I'm a Flutter Developer | Mobile App Developer | Cross Platform Developer with strong experience in building high performance applications for Android and iOS from a single codebase using Flutter & Dart.\n\nI specialize in writing clean, maintainable code following OOP and SOLID principles, and I use modern State Management solutions such as Bloc, Provider, and Cubit to ensure scalability and stability.\n\nKey Skills & Expertise:\n• Flutter Mobile Development (Android & iOS)\n• REST API Integration\n• Firebase (Authentication, Firestore, Push Notifications)\n• Clean Architecture & MVVM\n• UI/UX Implementation with modern design patterns\n• Agile Development and teamwork collaboration\n\nMy goal is to build innovative, high-quality mobile applications that solve real-world problems, with a strong focus on performance, usability, and on-time delivery.";
   static const String downloadCV = "Download CV";
