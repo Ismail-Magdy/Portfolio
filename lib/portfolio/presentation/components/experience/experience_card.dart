@@ -5,154 +5,133 @@ import 'package:ismailmagdy/core/theme/app_colors.dart';
 import 'package:ismailmagdy/portfolio/models/experience/experience_model.dart';
 
 class ExperienceCard extends StatelessWidget {
-  const ExperienceCard({
-    super.key,
-    required this.experience,
-    required this.index,
-    required this.total,
-    required this.isMobile,
-  });
+  const ExperienceCard({super.key, required this.experience});
   final ExperienceModel experience;
-  final int index;
-  final int total;
-  final bool isMobile;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const .only(bottom: 40),
       decoration: BoxDecoration(
+        color: AppColors.cardBackgroundDark,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(
+          color: AppColors.primary.withValues(alpha: 0.15),
+          width: 1,
+        ),
         boxShadow: [
           BoxShadow(
-            color: AppColors.primary.withValues(alpha: 0.05),
-            blurRadius: 10,
+            color: Colors.black.withValues(alpha: 0.2),
+            blurRadius: 20,
+            offset: const Offset(0, 8),
+          ),
+          BoxShadow(
+            color: AppColors.primary.withValues(alpha: 0.03),
+            blurRadius: 40,
+            spreadRadius: 2,
           ),
         ],
       ),
-      child: Row(
-        crossAxisAlignment: .start,
-        children: [
-          // Timeline indicator
-          Column(
-            children: [
-              //
-              Container(
-                width: 16,
-                height: 16,
-                decoration: BoxDecoration(
-                  color: AppColors.primary,
-                  shape: .circle,
-                  border: .all(color: AppColors.backgroundDark, width: 3),
+      child: Padding(
+        padding: const EdgeInsets.all(28),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            //
+            // Period badge
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+              decoration: BoxDecoration(
+                color: AppColors.primary.withValues(alpha: 0.1),
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(
+                  color: AppColors.primary.withValues(alpha: 0.3),
+                  width: 1,
                 ),
               ),
-              //
-              if (index < total - 1)
-                //
-                Container(
-                  width: 2,
-                  height: isMobile ? 200 : 150,
-                  color: AppColors.primary.withValues(alpha: 0.3),
-                  margin: const .symmetric(vertical: 8),
-                ),
-              //
-            ],
-          ),
-          //
-          horizontalSpace(24),
-          //
-          // Experience Card
-          Expanded(
-            child: Card(
-              elevation: 1,
-              color: AppColors.cardBackgroundDark,
-              shape: RoundedRectangleBorder(borderRadius: .circular(12)),
-              child: Padding(
-                padding: const .all(24),
-                child: Column(
-                  crossAxisAlignment: .start,
-                  children: [
-                    //
-                    Text(
-                      experience.period,
-                      style: GoogleFonts.poppins(
-                        fontSize: 14,
-                        color: AppColors.textDark.withValues(alpha: 0.6),
-                      ),
-                    ),
-                    //
-                    verticalSpace(8),
-                    //
-                    Text(
-                      experience.title,
-                      style: GoogleFonts.poppins(
-                        fontSize: 22,
-                        fontWeight: .bold,
-                        color: AppColors.textDark,
-                      ),
-                    ),
-                    //
-                    verticalSpace(4),
-                    //
-                    Text(
-                      experience.company,
-                      style: GoogleFonts.poppins(
-                        fontSize: 18,
-                        fontWeight: .w500,
-                        color: AppColors.textDark,
-                      ),
-                    ),
-                    //
-                    verticalSpace(16),
-                    //
-                    Text(
-                      experience.description,
-                      style: GoogleFonts.poppins(
-                        fontSize: 15,
-                        height: 1.6,
-                        color: AppColors.textDark.withValues(alpha: 0.8),
-                      ),
-                    ),
-                    //
-                    verticalSpace(20),
-                    //
-                    Wrap(
-                      spacing: 12,
-                      runSpacing: 12,
-                      children: experience.technologies
-                          .map(
-                            (tech) => Container(
-                              padding: const .symmetric(
-                                horizontal: 16,
-                                vertical: 8,
-                              ),
-                              decoration: BoxDecoration(
-                                color: AppColors.primary.withValues(alpha: 0.2),
-                                borderRadius: .circular(20),
-                                border: .all(
-                                  color: AppColors.primary,
-                                  width: 1.5,
-                                ),
-                              ),
-                              child: Text(
-                                tech,
-                                style: GoogleFonts.poppins(
-                                  fontSize: 13,
-                                  color: AppColors.primary,
-                                  fontWeight: .w500,
-                                ),
-                              ),
-                            ),
-                          )
-                          .toList(),
-                    ),
-                    //
-                  ],
+              child: Text(
+                experience.period,
+                style: GoogleFonts.poppins(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w500,
+                  color: AppColors.primary,
                 ),
               ),
             ),
-          ),
-          //
-        ],
+            //
+            verticalSpace(16),
+            //
+            // Title
+            Text(
+              experience.title,
+              style: GoogleFonts.poppins(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: AppColors.textDark,
+                height: 1.3,
+              ),
+            ),
+            //
+            verticalSpace(6),
+            //
+            // Company
+            Text(
+              experience.company,
+              style: GoogleFonts.poppins(
+                fontSize: 15,
+                fontWeight: FontWeight.w500,
+                color: AppColors.primary.withValues(alpha: 0.8),
+                height: 1.4,
+              ),
+            ),
+            //
+            verticalSpace(16),
+            //
+            // Description
+            Text(
+              experience.description,
+              style: GoogleFonts.poppins(
+                fontSize: 14,
+                height: 1.7,
+                color: AppColors.textDark.withValues(alpha: 0.75),
+              ),
+            ),
+            //
+            verticalSpace(20),
+            //
+            // Technologies
+            Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: experience.technologies
+                  .map(
+                    (tech) => Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 6,
+                      ),
+                      decoration: BoxDecoration(
+                        color: AppColors.primary.withValues(alpha: 0.08),
+                        borderRadius: BorderRadius.circular(8),
+                        border: Border.all(
+                          color: AppColors.primary.withValues(alpha: 0.2),
+                          width: 1,
+                        ),
+                      ),
+                      child: Text(
+                        tech,
+                        style: GoogleFonts.poppins(
+                          fontSize: 12,
+                          color: AppColors.primary.withValues(alpha: 0.9),
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  )
+                  .toList(),
+            ),
+            //
+          ],
+        ),
       ),
     );
   }
