@@ -10,7 +10,7 @@ class ExperienceRepository {
         company: "MEGA Event - IEEE BUB & IEEE Benha University Student Branch",
         period: "Aug 2026 - Sep 2026",
         description:
-            "Led the software development team for the Smart Car Controller System showcased at the MEGA Event. Architected and developed a real time mobile application using Flutter and Firebase to wirelessly control an ESP32-based robotic car. Responsible for system architecture, achieving zero latency data synchronization, mentoring team members on Dart and OOP concepts, and delivering the main technical presentation.",
+            "Led The Software Development Team for The Smart Car Controller System Showcased at The MEGA Event. Architected and Developed a Real Time Mobile Application Using Flutter and Firebase To Wirelessly Control an ESP32-Based Robotic Car. Responsible For System Architecture, Achieving Zero Latency Data Synchronization, Mentoring Team Members on Dart and OOP concepts, and delivering the main technical presentation.",
         technologies: [
           "Dart",
           "Flutter",
@@ -30,7 +30,7 @@ class ExperienceRepository {
         company: "National Telecommunication Institute (NTI)",
         period: "Dec 2025 - Mar 2026",
         description:
-            "As a Mobile Application Development Trainee at NTI, I am enhancing my skills in Flutter and Dart, focusing on building cross-platform mobile applications. This role involves learning best practices in app development, user interface design, and integrating backend services. The training prepares me for real-world challenges in mobile software engineering.",
+            "As a Mobile Application Development Trainee at NTI, I am Enhancing My Skills in Flutter and Dart, Focusing on Building Cross Platform Mobile Applications. This Role Involves Learning Best Practices in App Development, User Interface Design, and Integrating Backend Services. The Training Prepares Me for Real World Challenges in Mobile Software Engineering.",
         technologies: [
           "Dart",
           "Flutter",
@@ -52,7 +52,7 @@ class ExperienceRepository {
         company: "IEEE BUB & IEEE Benha University Student Branch",
         period: "Oct 2025 - Oct 2026",
         description:
-            "As a trainee at IEEE BUB, I completed an in depth Flutter & Dart training program focused on cross platform development. This comprehensive program covered mobile app architecture, state management, API integration, and best practices in Flutter development.",
+            "As a Trainee at IEEE BUB, I Completed An In Depth Flutter & Dart Training Program Focused on Cross Platform Development. This Comprehensive Program Covered Mobile App Architecture, State Management, API Integration, and Best Practices in Flutter Development.",
         technologies: [
           "Flutter",
           "Dart",
