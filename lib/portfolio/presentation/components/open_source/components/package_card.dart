@@ -1,12 +1,10 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:ismailmagdy/core/theme/app_colors.dart';
 import 'package:ismailmagdy/portfolio/models/packages/package_model.dart';
 import 'package:ismailmagdy/portfolio/models/packages/padge_data_model.dart';
 import 'package:ismailmagdy/portfolio/presentation/components/open_source/components/package_details_screen.dart';
-import 'package:ismailmagdy/portfolio/presentation/components/open_source/widgets/animated_gradient_border_painter.dart';
-import 'package:ismailmagdy/portfolio/presentation/components/open_source/widgets/neon_pill_button.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class PackageCard extends StatefulWidget {
@@ -21,31 +19,16 @@ class PackageCard extends StatefulWidget {
 class _PackageCardState extends State<PackageCard>
     with TickerProviderStateMixin {
   bool _isHovered = false;
-  late AnimationController _borderGlowController;
   late AnimationController _hoverController;
-  late Animation<double> _hoverScaleAnimation;
   late Animation<double> _imageZoomAnimation;
-
-  // Card dark background color & used for the ShaderMask fade target
-  static const _cardDarkColor = Color(0xFF0B1120);
-  static const _cardSurfaceColor = Color(0xFF111B2E);
 
   @override
   void initState() {
     super.initState();
 
-    _borderGlowController = AnimationController(
-      vsync: this,
-      duration: const Duration(seconds: 3),
-    );
-
     _hoverController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 400),
-    );
-
-    _hoverScaleAnimation = Tween<double>(begin: 1.0, end: 1.035).animate(
-      CurvedAnimation(parent: _hoverController, curve: Curves.easeOutCubic),
     );
 
     _imageZoomAnimation = Tween<double>(begin: 1.0, end: 1.08).animate(
@@ -55,7 +38,6 @@ class _PackageCardState extends State<PackageCard>
 
   @override
   void dispose() {
-    _borderGlowController.dispose();
     _hoverController.dispose();
     super.dispose();
   }
@@ -64,18 +46,15 @@ class _PackageCardState extends State<PackageCard>
     setState(() => _isHovered = hovered);
     if (hovered) {
       _hoverController.forward();
-      _borderGlowController.repeat();
     } else {
       _hoverController.reverse();
-      _borderGlowController.stop();
-      _borderGlowController.reset();
     }
   }
 
   Future<void> _launchUrl(String url) async {
     final uri = Uri.parse(url);
     if (await canLaunchUrl(uri)) {
-      await launchUrl(uri, mode: .externalApplication);
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
     }
   }
 
@@ -95,15 +74,42 @@ class _PackageCardState extends State<PackageCard>
             builder: (context) => PackageDetailsScreen(package: widget.package),
           ),
         ),
-        child: AnimatedBuilder(
-          animation: _hoverController,
-          builder: (context, child) {
-            return Transform.scale(
-              scale: _hoverScaleAnimation.value,
-              child: child,
-            );
-          },
-          child: isMobile ? _buildVerticalCard() : _buildHorizontalCard(),
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeOutCubic,
+          transform: Matrix4.identity()
+            ..scale(_isHovered ? 1.02 : 1.0, _isHovered ? 1.02 : 1.0),
+          transformAlignment: Alignment.center,
+          decoration: BoxDecoration(
+            color: AppColors.backgroundDark,
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(
+              color: _isHovered
+                  ? AppColors.primary.withValues(alpha: 0.4)
+                  : Colors.white.withValues(alpha: 0.06),
+              width: 1.5,
+            ),
+            boxShadow: _isHovered
+                ? [
+                    BoxShadow(
+                      color: AppColors.primary.withValues(alpha: 0.15),
+                      blurRadius: 24,
+                      spreadRadius: 2,
+                      offset: const Offset(0, 8),
+                    ),
+                  ]
+                : [
+                    BoxShadow(
+                      color: Colors.black.withValues(alpha: 0.2),
+                      blurRadius: 8,
+                      offset: const Offset(0, 4),
+                    ),
+                  ],
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(16),
+            child: isMobile ? _buildVerticalCard() : _buildHorizontalCard(),
+          ),
         ),
       ),
     );
@@ -111,158 +117,73 @@ class _PackageCardState extends State<PackageCard>
 
   //  HORIZONTAL CARD (Desktop & Tablet)
   Widget _buildHorizontalCard() {
-    const double cardHeight = 340;
-    const double borderPad = 2.0;
-    const double borderRadius = 24.0;
-
     return SizedBox(
-      height: cardHeight,
-      child: AnimatedBuilder(
-        animation: _borderGlowController,
-        builder: (context, child) {
-          return CustomPaint(
-            foregroundPainter: _isHovered
-                ? AnimatedGradientBorderPainter(
-                    progress: _borderGlowController.value,
-                    borderRadius: borderRadius + borderPad,
-                    padding: borderPad,
-                  )
-                : null,
-            child: child,
-          );
-        },
-        child: Container(
-          margin: const .all(borderPad),
-          decoration: BoxDecoration(
-            borderRadius: .circular(borderRadius),
-            gradient: const LinearGradient(
-              begin: .topLeft,
-              end: .bottomRight,
-              colors: [_cardSurfaceColor, _cardDarkColor],
-            ),
-            border: .all(color: Colors.white.withValues(alpha: 0.06), width: 1),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withValues(alpha: 0.5),
-                blurRadius: 30,
-                offset: const Offset(0, 12),
-              ),
-            ],
-          ),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(borderRadius),
-            child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 1, sigmaY: 1),
-              child: Row(
+      height: 340,
+      child: Row(
+        children: [
+          //  Left: Text Content
+          Expanded(
+            flex: 55,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(32, 28, 16, 28),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  //  Left: Text Content
-                  Expanded(
-                    flex: 55,
-                    child: Padding(
-                      padding: const .fromLTRB(32, 28, 16, 28),
-                      child: Column(
-                        crossAxisAlignment: .start,
-                        children: [
-                          _buildTitle(),
-                          const SizedBox(height: 12),
-                          _buildDescription(),
-                          const SizedBox(height: 20),
-                          _buildTechBadges(),
-                          const Spacer(),
-                          _buildActionButtons(),
-                        ],
-                      ),
-                    ),
-                  ),
-                  //  Right: ShaderMask Image
-                  Expanded(
-                    flex: 45,
-                    child: _buildShaderMaskImage(
-                      fadeDirection: .centerLeft,
-                      fadeStart: .centerRight,
-                    ),
-                  ),
-                  //
+                  _buildTitle(),
+                  const SizedBox(height: 12),
+                  _buildDescription(),
+                  const SizedBox(height: 20),
+                  _buildTechBadges(),
+                  const Spacer(),
+                  _buildActionButtons(),
                 ],
               ),
             ),
           ),
-        ),
+          //  Right: ShaderMask Image
+          Expanded(
+            flex: 45,
+            child: _buildShaderMaskImage(
+              fadeDirection: Alignment.centerLeft,
+              fadeStart: Alignment.centerRight,
+            ),
+          ),
+        ],
       ),
     );
   }
 
   // VERTICAL CARD (Mobile)
   Widget _buildVerticalCard() {
-    const double borderPad = 2.0;
-    const double borderRadius = 24.0;
-
-    return AnimatedBuilder(
-      animation: _borderGlowController,
-      builder: (context, child) {
-        return CustomPaint(
-          foregroundPainter: _isHovered
-              ? AnimatedGradientBorderPainter(
-                  progress: _borderGlowController.value,
-                  borderRadius: borderRadius + borderPad,
-                  padding: borderPad,
-                )
-              : null,
-          child: child,
-        );
-      },
-      child: Container(
-        margin: const .all(borderPad),
-        decoration: BoxDecoration(
-          borderRadius: .circular(borderRadius),
-          gradient: const LinearGradient(
-            begin: .topCenter,
-            end: .bottomCenter,
-            colors: [_cardSurfaceColor, _cardDarkColor],
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // Top: ShaderMask Image
+        SizedBox(
+          height: 220,
+          width: double.infinity,
+          child: _buildShaderMaskImage(
+            fadeDirection: Alignment.bottomCenter,
+            fadeStart: Alignment.topCenter,
           ),
-          border: .all(color: Colors.white.withValues(alpha: 0.06), width: 1),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withValues(alpha: 0.5),
-              blurRadius: 30,
-              offset: const Offset(0, 12),
-            ),
-          ],
         ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(borderRadius),
+        //  Bottom: Text Content
+        Padding(
+          padding: const EdgeInsets.fromLTRB(24, 0, 24, 24),
           child: Column(
-            crossAxisAlignment: .start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Top: ShaderMask Image (60%)
-              SizedBox(
-                height: 220,
-                width: .infinity,
-                child: _buildShaderMaskImage(
-                  fadeDirection: .bottomCenter,
-                  fadeStart: .topCenter,
-                ),
-              ),
-              //  Bottom: Text Content
-              Padding(
-                padding: const .fromLTRB(24, 0, 24, 24),
-                child: Column(
-                  crossAxisAlignment: .start,
-                  children: [
-                    _buildTitle(),
-                    const SizedBox(height: 10),
-                    _buildDescription(),
-                    const SizedBox(height: 16),
-                    _buildTechBadges(),
-                    const SizedBox(height: 20),
-                    _buildActionButtons(),
-                  ],
-                ),
-              ),
+              _buildTitle(),
+              const SizedBox(height: 10),
+              _buildDescription(),
+              const SizedBox(height: 16),
+              _buildTechBadges(),
+              const SizedBox(height: 20),
+              _buildActionButtons(),
             ],
           ),
         ),
-      ),
+      ],
     );
   }
 
@@ -290,20 +211,20 @@ class _PackageCardState extends State<PackageCard>
             stops: const [0.0, 0.3, 0.7, 1.0],
           ).createShader(bounds);
         },
-        blendMode: .dstIn,
+        blendMode: BlendMode.dstIn,
         child: Image.asset(
           widget.package.imageOut,
-          fit: .cover,
-          width: .infinity,
-          height: .infinity,
+          fit: BoxFit.cover,
+          width: double.infinity,
+          height: double.infinity,
           errorBuilder: (context, error, stackTrace) {
             return Container(
-              color: _cardDarkColor,
+              color: AppColors.backgroundDark,
               child: Center(
                 child: Icon(
                   Icons.inventory_2_rounded,
                   size: 60,
-                  color: Colors.cyanAccent.withValues(alpha: 0.3),
+                  color: AppColors.primary.withValues(alpha: 0.3),
                 ),
               ),
             );
@@ -319,13 +240,13 @@ class _PackageCardState extends State<PackageCard>
       widget.package.title,
       style: GoogleFonts.plusJakartaSans(
         fontSize: 22,
-        fontWeight: .w800,
+        fontWeight: FontWeight.w800,
         color: Colors.white,
         letterSpacing: -0.5,
         height: 1.2,
       ),
       maxLines: 2,
-      overflow: .ellipsis,
+      overflow: TextOverflow.ellipsis,
     );
   }
 
@@ -335,13 +256,13 @@ class _PackageCardState extends State<PackageCard>
       widget.package.shortDescription,
       style: GoogleFonts.inter(
         fontSize: 13,
-        fontWeight: .w400,
+        fontWeight: FontWeight.w400,
         color: const Color(0xFF94A3B8),
         height: 1.6,
         letterSpacing: 0.1,
       ),
       maxLines: 3,
-      overflow: .ellipsis,
+      overflow: TextOverflow.ellipsis,
     );
   }
 
@@ -356,42 +277,35 @@ class _PackageCardState extends State<PackageCard>
     return Wrap(
       spacing: 8,
       runSpacing: 8,
-      children: badges.map((badge) => _buildGlassBadge(badge)).toList(),
+      children: badges.map((badge) => _buildMinimalBadge(badge)).toList(),
     );
   }
 
-  Widget _buildGlassBadge(BadgeDataModel badge) {
+  Widget _buildMinimalBadge(BadgeDataModel badge) {
     return Container(
-      padding: const .symmetric(horizontal: 12, vertical: 6),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       decoration: BoxDecoration(
-        borderRadius: .circular(100),
-        color: Colors.white.withValues(alpha: 0.04),
-        border: .all(
-          color: Colors.cyanAccent.withValues(alpha: 0.18),
+        borderRadius: BorderRadius.circular(100),
+        color: AppColors.primary.withValues(alpha: 0.06),
+        border: Border.all(
+          color: AppColors.primary.withValues(alpha: 0.15),
           width: 1,
         ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.cyanAccent.withValues(alpha: 0.06),
-            blurRadius: 12,
-            spreadRadius: -2,
-          ),
-        ],
       ),
       child: Row(
-        mainAxisSize: .min,
+        mainAxisSize: MainAxisSize.min,
         children: [
           Icon(
             badge.icon,
             size: 13,
-            color: Colors.cyanAccent.withValues(alpha: 0.85),
+            color: AppColors.primary.withValues(alpha: 0.7),
           ),
           const SizedBox(width: 6),
           Text(
             badge.label,
             style: GoogleFonts.inter(
               fontSize: 11,
-              fontWeight: .w500,
+              fontWeight: FontWeight.w500,
               color: const Color(0xFFCBD5E1),
               letterSpacing: 0.3,
             ),
@@ -405,14 +319,14 @@ class _PackageCardState extends State<PackageCard>
   Widget _buildActionButtons() {
     return Row(
       children: [
-        NeonPillButton(
+        _MinimalActionButton(
           icon: FontAwesomeIcons.arrowUpRightFromSquare,
           label: "pub.dev",
           isPrimary: true,
           onTap: () => _launchUrl(widget.package.pubDevUrl),
         ),
         const SizedBox(width: 10),
-        NeonPillButton(
+        _MinimalActionButton(
           icon: FontAwesomeIcons.github,
           label: "GitHub",
           isPrimary: false,
@@ -422,4 +336,81 @@ class _PackageCardState extends State<PackageCard>
     );
   }
 }
-// 589
+
+class _MinimalActionButton extends StatefulWidget {
+  final FaIconData icon;
+  final String label;
+  final bool isPrimary;
+  final VoidCallback onTap;
+
+  const _MinimalActionButton({
+    required this.icon,
+    required this.label,
+    required this.isPrimary,
+    required this.onTap,
+  });
+
+  @override
+  State<_MinimalActionButton> createState() => _MinimalActionButtonState();
+}
+
+class _MinimalActionButtonState extends State<_MinimalActionButton> {
+  bool _isHovered = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final Color accentColor = widget.isPrimary
+        ? AppColors.primary
+        : Colors.white.withValues(alpha: 0.7);
+
+    return MouseRegion(
+      onEnter: (_) => setState(() => _isHovered = true),
+      onExit: (_) => setState(() => _isHovered = false),
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        onTap: widget.onTap,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 250),
+          curve: Curves.easeOutCubic,
+          padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(100),
+            color: _isHovered
+                ? accentColor.withValues(alpha: 0.08)
+                : Colors.transparent,
+            border: Border.all(
+              color: _isHovered
+                  ? accentColor.withValues(alpha: 0.5)
+                  : Colors.white.withValues(alpha: 0.12),
+              width: 1,
+            ),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              FaIcon(
+                widget.icon,
+                size: 14,
+                color: _isHovered
+                    ? accentColor
+                    : accentColor.withValues(alpha: 0.6),
+              ),
+              const SizedBox(width: 8),
+              Text(
+                widget.label,
+                style: GoogleFonts.inter(
+                  fontSize: 12.5,
+                  fontWeight: FontWeight.w600,
+                  color: _isHovered
+                      ? accentColor
+                      : accentColor.withValues(alpha: 0.6),
+                  letterSpacing: 0.3,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
