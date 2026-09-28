@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:ismailmagdy/core/theme/app_colors.dart';
+import 'package:ismailmagdy/core/theme/blueprint_provider.dart';
 import 'package:ismailmagdy/portfolio/presentation/components/open_source/components/package_card.dart';
 import 'package:ismailmagdy/portfolio/repositories/packages/packages_repository.dart';
 
@@ -27,13 +29,25 @@ class _OpenSourceSectionState extends State<OpenSourceSection> {
         crossAxisAlignment: .start,
         children: [
           // Section Title
-          Text(
-            "Open Source & Packages",
-            style: GoogleFonts.poppins(
-              fontSize: 36,
-              fontWeight: .bold,
-              color: AppColors.textDark,
-            ),
+          Builder(
+            builder: (context) {
+              final isBlueprint = context.watch<BlueprintProvider>().isBlueprintMode;
+              return Text(
+                "Open Source & Packages",
+                style: isBlueprint
+                    ? GoogleFonts.firaCode(
+                        fontSize: 32,
+                        fontWeight: .bold,
+                        color: AppColors.textDark,
+                        letterSpacing: 0.5,
+                      )
+                    : GoogleFonts.poppins(
+                        fontSize: 36,
+                        fontWeight: .bold,
+                        color: AppColors.textDark,
+                      ),
+              );
+            },
           ),
           //
           ListView.separated(

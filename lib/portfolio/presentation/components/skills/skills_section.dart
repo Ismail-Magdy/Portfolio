@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:ismailmagdy/core/constants/app_strings.dart';
 import 'package:ismailmagdy/core/theme/app_colors.dart';
+import 'package:ismailmagdy/core/theme/blueprint_provider.dart';
 import 'package:ismailmagdy/portfolio/presentation/components/skills/skill_chip.dart';
 import 'package:ismailmagdy/portfolio/repositories/skills/skills_repository.dart';
 import 'package:visibility_detector/visibility_detector.dart';
@@ -187,14 +189,26 @@ class _SkillsSectionState extends State<SkillsSection>
           // Category label
           Padding(
             padding: const EdgeInsets.only(bottom: 16),
-            child: Text(
-              category,
-              style: GoogleFonts.poppins(
-                fontSize: 14,
-                fontWeight: FontWeight.w600,
-                color: AppColors.textDark.withValues(alpha: 0.45),
-                letterSpacing: 1.5,
-              ),
+            child: Builder(
+              builder: (context) {
+                final isBlueprint = context.watch<BlueprintProvider>().isBlueprintMode;
+                return Text(
+                  category,
+                  style: isBlueprint
+                      ? GoogleFonts.firaCode(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                          color: AppColors.primary.withValues(alpha: 0.6),
+                          letterSpacing: 2.0,
+                        )
+                      : GoogleFonts.poppins(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: AppColors.textDark.withValues(alpha: 0.45),
+                          letterSpacing: 1.5,
+                        ),
+                );
+              },
             ),
           ),
           //

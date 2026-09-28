@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:ismailmagdy/core/constants/app_strings.dart';
 import 'package:ismailmagdy/core/helpers/spacing.dart';
 import 'package:ismailmagdy/core/theme/app_colors.dart';
+import 'package:ismailmagdy/core/theme/blueprint_provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class BuildContentWidget extends StatelessWidget {
@@ -12,6 +14,8 @@ class BuildContentWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isBlueprint = context.watch<BlueprintProvider>().isBlueprintMode;
+
     return Column(
       crossAxisAlignment: .start,
       mainAxisAlignment: .center,
@@ -19,44 +23,72 @@ class BuildContentWidget extends StatelessWidget {
         // IAM Text
         Text(
           AppStrings.greeting,
-          style: GoogleFonts.poppins(
-            fontSize: 24,
-            fontWeight: FontWeight.w400,
-            color: AppColors.textDark.withValues(alpha: 0.8),
-          ),
+          style: isBlueprint
+              ? GoogleFonts.firaCode(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w400,
+                  color: AppColors.primary.withValues(alpha: 0.7),
+                  letterSpacing: 1.0,
+                )
+              : GoogleFonts.poppins(
+                  fontSize: 24,
+                  fontWeight: FontWeight.w400,
+                  color: AppColors.textDark.withValues(alpha: 0.8),
+                ),
         ),
         //
         verticalSpace(8),
         // Name
         Text(
           AppStrings.name,
-          style: GoogleFonts.poppins(
-            fontSize: 48,
-            fontWeight: FontWeight.bold,
-            color: AppColors.textDark,
-          ),
+          style: isBlueprint
+              ? GoogleFonts.firaCode(
+                  fontSize: 42,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.textDark,
+                  letterSpacing: -1.0,
+                )
+              : GoogleFonts.poppins(
+                  fontSize: 48,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.textDark,
+                ),
         ),
         //
         verticalSpace(16),
         // Title
         Text(
           AppStrings.title,
-          style: GoogleFonts.poppins(
-            fontSize: 32,
-            fontWeight: FontWeight.w600,
-            color: AppColors.primary,
-          ),
+          style: isBlueprint
+              ? GoogleFonts.firaCode(
+                  fontSize: 28,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.primary,
+                  letterSpacing: 0.5,
+                )
+              : GoogleFonts.poppins(
+                  fontSize: 32,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.primary,
+                ),
         ),
         //
         verticalSpace(24),
         // Description
         Text(
           AppStrings.aboutDescription.split('\n\n')[0],
-          style: GoogleFonts.poppins(
-            fontSize: 16,
-            height: 1.6,
-            color: AppColors.textDark.withValues(alpha: 0.8),
-          ),
+          style: isBlueprint
+              ? GoogleFonts.firaCode(
+                  fontSize: 14,
+                  height: 1.7,
+                  color: AppColors.textDark.withValues(alpha: 0.7),
+                  letterSpacing: 0.2,
+                )
+              : GoogleFonts.poppins(
+                  fontSize: 16,
+                  height: 1.6,
+                  color: AppColors.textDark.withValues(alpha: 0.8),
+                ),
         ),
         //
         verticalSpace(32),
@@ -72,7 +104,9 @@ class BuildContentWidget extends StatelessWidget {
               shape: RoundedRectangleBorder(borderRadius: .circular(8)),
               child: Text(
                 AppStrings.downloadCV,
-                style: GoogleFonts.poppins(fontSize: 16, fontWeight: .w600),
+                style: isBlueprint
+                    ? GoogleFonts.firaCode(fontSize: 14, fontWeight: .w600, letterSpacing: 0.5)
+                    : GoogleFonts.poppins(fontSize: 16, fontWeight: .w600),
               ),
             ),
             //
@@ -93,10 +127,16 @@ class BuildContentWidget extends StatelessWidget {
               ),
               child: Text(
                 AppStrings.contact,
-                style: GoogleFonts.poppins(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                ),
+                style: isBlueprint
+                    ? GoogleFonts.firaCode(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: 0.5,
+                      )
+                    : GoogleFonts.poppins(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
               ),
             ),
             //
@@ -117,10 +157,12 @@ class BuildContentWidget extends StatelessWidget {
                     width: 45,
                     height: 45,
                     decoration: BoxDecoration(
-                      color: AppColors.cardBackgroundDark,
-                      borderRadius: .circular(8),
+                      color: isBlueprint ? Colors.transparent : AppColors.cardBackgroundDark,
+                      borderRadius: .circular(isBlueprint ? 0 : 8),
                       border: .all(
-                        color: AppColors.primary.withValues(alpha: 0.3),
+                        color: isBlueprint
+                            ? AppColors.primary.withValues(alpha: 0.4)
+                            : AppColors.primary.withValues(alpha: 0.3),
                         width: 1,
                       ),
                     ),

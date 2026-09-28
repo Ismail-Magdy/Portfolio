@@ -3,6 +3,7 @@ class PackageModel {
   final String shortDescription;
   final String imageOut;
   final String imageIn;
+  final String imagePath;
   final String pubDevUrl;
   final String githubUrl;
   final List<String> features;
@@ -14,6 +15,7 @@ class PackageModel {
     required this.shortDescription,
     required this.imageOut,
     required this.imageIn,
+    required this.imagePath,
     required this.pubDevUrl,
     required this.githubUrl,
     required this.features,

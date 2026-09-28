@@ -1,6 +1,9 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:ismailmagdy/core/theme/app_colors.dart';
+import 'package:ismailmagdy/core/theme/blueprint_provider.dart';
+import 'package:ismailmagdy/core/animations/background/blueprint_grid_overlay.dart';
 
 class _Star {
   double x;
@@ -91,21 +94,42 @@ class _AnimatedBackgroundState extends State<AnimatedBackground>
 
   @override
   Widget build(BuildContext context) {
+    final isBlueprint = context.watch<BlueprintProvider>().isBlueprintMode;
+
     return LayoutBuilder(
       builder: (context, constraints) {
         final size = Size(constraints.maxWidth, constraints.maxHeight);
         _initStars(size);
-        return AnimatedBuilder(
-          animation: _controller,
-          builder: (context, child) {
-            return CustomPaint(
-              size: size,
-              painter: _StarfieldPainter(
-                stars: _stars,
-                backgroundColor: AppColors.backgroundDark,
+        return Stack(
+          children: [
+            // Default starfield background — fades out in blueprint mode
+            AnimatedOpacity(
+              opacity: isBlueprint ? 0.0 : 1.0,
+              duration: const Duration(milliseconds: 500),
+              curve: Curves.easeInOut,
+              child: AnimatedBuilder(
+                animation: _controller,
+                builder: (context, child) {
+                  return CustomPaint(
+                    size: size,
+                    painter: _StarfieldPainter(
+                      stars: _stars,
+                      backgroundColor: AppColors.backgroundDark,
+                    ),
+                  );
+                },
               ),
-            );
-          },
+            ),
+            // Blueprint grid — fades in when blueprint mode is active
+            AnimatedOpacity(
+              opacity: isBlueprint ? 1.0 : 0.0,
+              duration: const Duration(milliseconds: 500),
+              curve: Curves.easeInOut,
+              child: isBlueprint
+                  ? const BlueprintGridOverlay()
+                  : const SizedBox.shrink(),
+            ),
+          ],
         );
       },
     );
@@ -137,3 +161,4 @@ class _StarfieldPainter extends CustomPainter {
   @override
   bool shouldRepaint(covariant _StarfieldPainter oldDelegate) => true;
 }
+

@@ -1,7 +1,9 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:ismailmagdy/core/theme/app_colors.dart';
+import 'package:ismailmagdy/core/theme/blueprint_provider.dart';
 import 'package:ismailmagdy/portfolio/presentation/components/projects/components/project_details_screen.dart';
 import 'package:ismailmagdy/portfolio/presentation/components/projects/widgets/liquid_glass_arrow.dart';
 import '../../../../models/projects/project_model.dart';
@@ -37,6 +39,8 @@ class _ProjectCardState extends State<ProjectCard>
 
   @override
   Widget build(BuildContext context) {
+    final isBlueprint = context.watch<BlueprintProvider>().isBlueprintMode;
+
     return MouseRegion(
       onEnter: (_) => setState(() => _isHovered = true),
       onExit: (_) => setState(() => _isHovered = false),
@@ -63,33 +67,41 @@ class _ProjectCardState extends State<ProjectCard>
             ),
           transformAlignment: Alignment.center,
           decoration: BoxDecoration(
-            color: AppColors.backgroundDark,
-            borderRadius: BorderRadius.circular(16),
+            color: isBlueprint
+                ? Colors.transparent
+                : AppColors.backgroundDark,
+            borderRadius: BorderRadius.circular(isBlueprint ? 0 : 16),
             border: Border.all(
-              color: _isHovered && !widget.project.isComingSoon
-                  ? AppColors.primary.withValues(alpha: 0.4)
-                  : Colors.white.withValues(alpha: 0.06),
-              width: 1.5,
+              color: isBlueprint
+                  ? (_isHovered && !widget.project.isComingSoon
+                      ? AppColors.primary.withValues(alpha: 0.7)
+                      : AppColors.primary.withValues(alpha: 0.35))
+                  : (_isHovered && !widget.project.isComingSoon
+                      ? AppColors.primary.withValues(alpha: 0.4)
+                      : Colors.white.withValues(alpha: 0.06)),
+              width: isBlueprint ? 1.0 : 1.5,
             ),
-            boxShadow: _isHovered && !widget.project.isComingSoon
-                ? [
-                    BoxShadow(
-                      color: AppColors.primary.withValues(alpha: 0.15),
-                      blurRadius: 24,
-                      spreadRadius: 2,
-                      offset: const Offset(0, 8),
-                    ),
-                  ]
-                : [
-                    BoxShadow(
-                      color: Colors.black.withValues(alpha: 0.2),
-                      blurRadius: 8,
-                      offset: const Offset(0, 4),
-                    ),
-                  ],
+            boxShadow: isBlueprint
+                ? null
+                : (_isHovered && !widget.project.isComingSoon
+                    ? [
+                        BoxShadow(
+                          color: AppColors.primary.withValues(alpha: 0.15),
+                          blurRadius: 24,
+                          spreadRadius: 2,
+                          offset: const Offset(0, 8),
+                        ),
+                      ]
+                    : [
+                        BoxShadow(
+                          color: Colors.black.withValues(alpha: 0.2),
+                          blurRadius: 8,
+                          offset: const Offset(0, 4),
+                        ),
+                      ]),
           ),
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(isBlueprint ? 0 : 16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -98,30 +110,41 @@ class _ProjectCardState extends State<ProjectCard>
                   child: Hero(
                     tag: widget.project.title,
                     child: ClipRRect(
-                      borderRadius: const .vertical(top: .circular(16)),
+                      borderRadius: .vertical(top: Radius.circular(isBlueprint ? 0 : 16)),
                       child: Stack(
                         fit: .expand,
                         children: [
                           Opacity(
                             opacity: widget.project.isComingSoon ? 0.3 : 1.0,
-                            child: Image.asset(
-                              widget.project.imageOut,
-                              width: .infinity,
-                              height: .infinity,
-                              fit: .fill,
-                              alignment: .topCenter,
-                              errorBuilder: (context, error, stackTrace) {
-                                return Container(
-                                  color: AppColors.primary.withValues(
-                                    alpha: 0.1,
-                                  ),
-                                  child: const Icon(
-                                    Icons.image,
-                                    size: 50,
-                                    color: AppColors.primary,
-                                  ),
-                                );
-                              },
+                            child: ColorFiltered(
+                              colorFilter: isBlueprint
+                                  ? ColorFilter.mode(
+                                      AppColors.primary.withValues(alpha: 0.6),
+                                      BlendMode.color,
+                                    )
+                                  : const ColorFilter.mode(
+                                      Colors.transparent,
+                                      BlendMode.dst,
+                                    ),
+                              child: Image.asset(
+                                widget.project.imageOut,
+                                width: .infinity,
+                                height: .infinity,
+                                fit: .fill,
+                                alignment: .topCenter,
+                                errorBuilder: (context, error, stackTrace) {
+                                  return Container(
+                                    color: AppColors.primary.withValues(
+                                      alpha: 0.1,
+                                    ),
+                                    child: const Icon(
+                                      Icons.image,
+                                      size: 50,
+                                      color: AppColors.primary,
+                                    ),
+                                  );
+                                },
+                              ),
                             ),
                           ),
                           if (widget.project.isComingSoon)
@@ -196,29 +219,47 @@ class _ProjectCardState extends State<ProjectCard>
                 ),
                 // Title + Liquid Glass Arrow
                 Container(
-                  padding: const .symmetric(horizontal: 14, vertical: 14),
+                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
                   decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: .topCenter,
-                      end: .bottomCenter,
-                      colors: [
-                        const Color(0xFF0D2137),
-                        AppColors.backgroundDark,
-                      ],
-                    ),
+                    gradient: isBlueprint
+                        ? null
+                        : LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            colors: [
+                              const Color(0xFF0D2137),
+                              AppColors.backgroundDark,
+                            ],
+                          ),
+                    color: isBlueprint ? Colors.transparent : null,
+                    border: isBlueprint
+                        ? Border(
+                            top: BorderSide(
+                              color: AppColors.primary.withValues(alpha: 0.25),
+                              width: 1,
+                            ),
+                          )
+                        : null,
                   ),
                   child: Row(
                     children: [
                       Expanded(
                         child: Text(
                           widget.project.title,
-                          style: GoogleFonts.poppins(
-                            fontSize: 17,
-                            fontWeight: .w600,
-                            color: AppColors.textDark,
-                          ),
+                          style: isBlueprint
+                              ? GoogleFonts.firaCode(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w600,
+                                  color: AppColors.primary,
+                                  letterSpacing: 0.5,
+                                )
+                              : GoogleFonts.poppins(
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.w600,
+                                  color: AppColors.textDark,
+                                ),
                           maxLines: 1,
-                          overflow: .ellipsis,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
                       const SizedBox(width: 8),

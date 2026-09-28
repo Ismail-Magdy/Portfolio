@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:ismailmagdy/core/helpers/spacing.dart';
 import 'package:ismailmagdy/core/theme/app_colors.dart';
+import 'package:ismailmagdy/core/theme/blueprint_provider.dart';
 import 'package:ismailmagdy/core/constants/app_strings.dart';
 import 'package:ismailmagdy/portfolio/repositories/social/social_links_repository.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -39,15 +41,19 @@ class Footer extends StatelessWidget {
   Widget build(BuildContext context) {
     final repository = SocialLinksRepository();
     final socialLinks = repository.getSocialLinks();
+    final isBlueprint = context.watch<BlueprintProvider>().isBlueprintMode;
 
-    return Container(
-      padding: const .symmetric(vertical: 40),
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeOutCubic,
+      padding: const EdgeInsets.symmetric(vertical: 40),
       decoration: BoxDecoration(
-        color: AppColors.cardBackgroundDark,
+        color: isBlueprint ? Colors.transparent : AppColors.cardBackgroundDark,
         border: Border(
           top: BorderSide(
-            color: AppColors.textDark.withValues(alpha: 0.1),
-
+            color: isBlueprint
+                ? AppColors.primary.withValues(alpha: 0.3)
+                : AppColors.textDark.withValues(alpha: 0.1),
             width: 1,
           ),
         ),
@@ -79,10 +85,16 @@ class Footer extends StatelessWidget {
           //
           Text(
             AppStrings.copyright,
-            style: GoogleFonts.poppins(
-              fontSize: 14,
-              color: AppColors.textDark.withValues(alpha: 0.6),
-            ),
+            style: isBlueprint
+                ? GoogleFonts.firaCode(
+                    fontSize: 12,
+                    color: AppColors.primary.withValues(alpha: 0.5),
+                    letterSpacing: 0.5,
+                  )
+                : GoogleFonts.poppins(
+                    fontSize: 14,
+                    color: AppColors.textDark.withValues(alpha: 0.6),
+                  ),
           ),
           //
         ],

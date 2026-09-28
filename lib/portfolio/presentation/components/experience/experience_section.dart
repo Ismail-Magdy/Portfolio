@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:ismailmagdy/core/constants/app_strings.dart';
 import 'package:ismailmagdy/core/helpers/spacing.dart';
 import 'package:ismailmagdy/core/theme/app_colors.dart';
+import 'package:ismailmagdy/core/theme/blueprint_provider.dart';
 import 'package:ismailmagdy/portfolio/presentation/components/experience/experience_card.dart';
 import 'package:ismailmagdy/portfolio/repositories/experience/experience_repository.dart';
 import 'package:visibility_detector/visibility_detector.dart';
@@ -29,25 +31,45 @@ class ExperienceSection extends StatelessWidget {
         children: [
           //
           // Section Header
-          Text(
-            AppStrings.professionalExperience,
-            textAlign: TextAlign.center,
-            style: GoogleFonts.poppins(
-              fontSize: isMobile ? 28 : 36,
-              fontWeight: FontWeight.bold,
-              color: AppColors.textDark,
-            ),
-          ),
-          //
-          verticalSpace(8),
-          //
-          Text(
-            AppStrings.myProfessionalJourneyInMobileDevelopment,
-            textAlign: TextAlign.center,
-            style: GoogleFonts.poppins(
-              fontSize: isMobile ? 15 : 18,
-              color: AppColors.textDark.withValues(alpha: 0.7),
-            ),
+          Builder(
+            builder: (context) {
+              final isBlueprint = context.watch<BlueprintProvider>().isBlueprintMode;
+              return Column(
+                children: [
+                  Text(
+                    AppStrings.professionalExperience,
+                    textAlign: TextAlign.center,
+                    style: isBlueprint
+                        ? GoogleFonts.firaCode(
+                            fontSize: isMobile ? 24 : 32,
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.textDark,
+                            letterSpacing: 0.5,
+                          )
+                        : GoogleFonts.poppins(
+                            fontSize: isMobile ? 28 : 36,
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.textDark,
+                          ),
+                  ),
+                  verticalSpace(8),
+                  Text(
+                    AppStrings.myProfessionalJourneyInMobileDevelopment,
+                    textAlign: TextAlign.center,
+                    style: isBlueprint
+                        ? GoogleFonts.firaCode(
+                            fontSize: isMobile ? 13 : 15,
+                            color: AppColors.primary.withValues(alpha: 0.6),
+                            letterSpacing: 0.3,
+                          )
+                        : GoogleFonts.poppins(
+                            fontSize: isMobile ? 15 : 18,
+                            color: AppColors.textDark.withValues(alpha: 0.7),
+                          ),
+                  ),
+                ],
+              );
+            },
           ),
           //
           verticalSpace(60),

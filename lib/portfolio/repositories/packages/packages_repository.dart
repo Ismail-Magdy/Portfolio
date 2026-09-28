@@ -10,6 +10,7 @@ class PackagesRepository {
             "A Beautiful, Modern, and Highly Customizable Glassmorphism Bottom Navigation Bar for Flutter Applications",
         imageOut: "assets/images/glass_bottom_nav_bar.jpeg",
         imageIn: "assets/images/glass-in.png",
+        imagePath: "assets/images/logo.png",
         pubDevUrl: "https://pub.dev/packages/glass_bottom_navigation_bar",
         githubUrl: "https://github.com/Ismail-Magdy/glass_bottom_nav_bar",
         features: [
@@ -36,6 +37,7 @@ class PackagesRepository {
             "A powerful, highly customizable, and generic search bar for Flutter with built-in debouncing, search history, and text highlighting.",
         imageOut: "assets/images/search.png",
         imageIn: "assets/images/search.png",
+        imagePath: "assets/images/logo.png",
         pubDevUrl: "https://pub.dev/packages/global_search_bar",
         githubUrl: "https://github.com/Ismail-Magdy/global_search_bar",
         features: [

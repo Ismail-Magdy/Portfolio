@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'dart:ui';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:ismailmagdy/core/theme/app_colors.dart';
+import 'package:ismailmagdy/core/theme/blueprint_provider.dart';
 import 'package:ismailmagdy/core/constants/app_strings.dart';
 import 'logo_widget.dart';
+import 'blueprint_toggle_button.dart';
 
 class Navbar extends StatefulWidget implements PreferredSizeWidget {
   final GlobalKey aboutKey;
@@ -80,26 +83,31 @@ class _NavbarState extends State<Navbar> {
     // Mobile view with circular logo button
     if (isMobile) {
       return SafeArea(
-        child: Align(
-          alignment: .centerLeft,
-          child: Container(
-            margin: const .only(top: 20, left: 24),
-            height: 64,
-            width: 64,
-            decoration: BoxDecoration(
-              color: Colors.white.withValues(alpha: 0.05),
-              shape: .circle,
-              border: .all(
-                color: Colors.white.withValues(alpha: 0.1),
-                width: 1,
+        child: Padding(
+          padding: const EdgeInsets.only(top: 20, left: 24, right: 24),
+          child: Row(
+            children: [
+              Container(
+                height: 64,
+                width: 64,
+                decoration: BoxDecoration(
+                  color: Colors.white.withValues(alpha: 0.05),
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: Colors.white.withValues(alpha: 0.1),
+                    width: 1,
+                  ),
+                ),
+                child: ClipOval(
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                    child: const Center(child: LogoWidget()),
+                  ),
+                ),
               ),
-            ),
-            child: ClipOval(
-              child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                child: const Center(child: LogoWidget()),
-              ),
-            ),
+              const Spacer(),
+              const BlueprintToggleButton(),
+            ],
           ),
         ),
       );
@@ -186,6 +194,10 @@ class _NavbarState extends State<Navbar> {
                               widget.experienceKey,
                             ),
                             //
+                            const SizedBox(width: 16),
+                            //
+                            const BlueprintToggleButton(),
+                            //
                           ],
                         ),
                       ),
@@ -204,22 +216,32 @@ class _NavbarState extends State<Navbar> {
 
   Widget _buildNavItem(String label, GlobalKey? key, {VoidCallback? onTap}) {
     return Builder(
-      builder: (context) => TextButton(
-        onPressed: onTap ?? () => _scrollToSection(key!, context),
-        style: TextButton.styleFrom(
-          padding: const .symmetric(horizontal: 16, vertical: 8),
-          shape: RoundedRectangleBorder(borderRadius: .circular(20)),
-          foregroundColor: Colors.white.withValues(alpha: 0.1),
-        ),
-        child: Text(
-          label,
-          style: GoogleFonts.poppins(
-            fontSize: 14,
-            fontWeight: .w500,
-            color: AppColors.backgroundLight,
+      builder: (context) {
+        final isBlueprint = context.watch<BlueprintProvider>().isBlueprintMode;
+        return TextButton(
+          onPressed: onTap ?? () => _scrollToSection(key!, context),
+          style: TextButton.styleFrom(
+            padding: const .symmetric(horizontal: 16, vertical: 8),
+            shape: RoundedRectangleBorder(borderRadius: .circular(isBlueprint ? 0 : 20)),
+            foregroundColor: Colors.white.withValues(alpha: 0.1),
           ),
-        ),
-      ),
+          child: Text(
+            label,
+            style: isBlueprint
+                ? GoogleFonts.firaCode(
+                    fontSize: 13,
+                    fontWeight: .w500,
+                    color: AppColors.primary.withValues(alpha: 0.8),
+                    letterSpacing: 0.5,
+                  )
+                : GoogleFonts.poppins(
+                    fontSize: 14,
+                    fontWeight: .w500,
+                    color: AppColors.backgroundLight,
+                  ),
+          ),
+        );
+      },
     );
   }
 }
