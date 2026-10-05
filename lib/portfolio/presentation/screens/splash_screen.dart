@@ -136,9 +136,8 @@ class _SplashScreenState extends State<SplashScreen>
 
   void _navigateToHome() {
     if (!mounted) return;
-    Navigator.of(
-      context,
-    ).pushReplacement(FadeRoute(page: const PortfolioMainScreen()));
+    Navigator.of(context)
+        .pushReplacement(FadeRoute(page: const PortfolioMainScreen()));
   }
 
   @override
@@ -160,10 +159,6 @@ class _SplashScreenState extends State<SplashScreen>
       body: AnimatedBuilder(
         animation: _controller,
         builder: (context, _) {
-          // Combine line expand and contract phases:
-          // During expand phase (0.0–0.35), lineExpand goes 0→1, lineContract stays 1.
-          // During contract phase (0.70–0.85), lineContract goes 1→0.
-          // Effective width = lineExpand * lineContract
           final double lineProgress = _lineExpand.value * _lineContract.value;
 
           return FadeTransition(
@@ -178,7 +173,7 @@ class _SplashScreenState extends State<SplashScreen>
                     Row(
                       mainAxisSize: .min,
                       crossAxisAlignment: .baseline,
-                      textBaseline: TextBaseline.alphabetic,
+                      textBaseline: .alphabetic,
                       children: [
                         // Letter "i" & slides in from left
                         SlideTransition(
@@ -203,7 +198,7 @@ class _SplashScreenState extends State<SplashScreen>
                           child: FadeTransition(
                             opacity: _letterMOpacity,
                             child: Text(
-                              'M',
+                              "M",
                               style: GoogleFonts.playfairDisplay(
                                 fontSize: logoFontSize,
                                 fontWeight: .w700,
