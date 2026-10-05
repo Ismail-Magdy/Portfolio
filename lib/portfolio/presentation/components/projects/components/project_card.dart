@@ -1,9 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'package:ismailmagdy/core/theme/app_colors.dart';
-import 'package:ismailmagdy/core/theme/blueprint_provider.dart';
 import 'package:ismailmagdy/portfolio/presentation/components/projects/components/project_details_screen.dart';
 import 'package:ismailmagdy/portfolio/presentation/components/projects/widgets/liquid_glass_arrow.dart';
 import '../../../../models/projects/project_model.dart';
@@ -39,7 +37,6 @@ class _ProjectCardState extends State<ProjectCard>
 
   @override
   Widget build(BuildContext context) {
-    final isBlueprint = context.watch<BlueprintProvider>().isBlueprintMode;
 
     return MouseRegion(
       onEnter: (_) => setState(() => _isHovered = true),
@@ -67,23 +64,15 @@ class _ProjectCardState extends State<ProjectCard>
             ),
           transformAlignment: Alignment.center,
           decoration: BoxDecoration(
-            color: isBlueprint
-                ? Colors.transparent
-                : AppColors.backgroundDark,
-            borderRadius: BorderRadius.circular(isBlueprint ? 0 : 16),
+            color: AppColors.backgroundDark,
+            borderRadius: BorderRadius.circular(16),
             border: Border.all(
-              color: isBlueprint
-                  ? (_isHovered && !widget.project.isComingSoon
-                      ? AppColors.primary.withValues(alpha: 0.7)
-                      : AppColors.primary.withValues(alpha: 0.35))
-                  : (_isHovered && !widget.project.isComingSoon
-                      ? AppColors.primary.withValues(alpha: 0.4)
-                      : Colors.white.withValues(alpha: 0.06)),
-              width: isBlueprint ? 1.0 : 1.5,
+              color: _isHovered && !widget.project.isComingSoon
+                  ? AppColors.primary.withValues(alpha: 0.4)
+                  : Colors.white.withValues(alpha: 0.06),
+              width: 1.5,
             ),
-            boxShadow: isBlueprint
-                ? null
-                : (_isHovered && !widget.project.isComingSoon
+            boxShadow: _isHovered && !widget.project.isComingSoon
                     ? [
                         BoxShadow(
                           color: AppColors.primary.withValues(alpha: 0.15),
@@ -99,9 +88,8 @@ class _ProjectCardState extends State<ProjectCard>
                           offset: const Offset(0, 4),
                         ),
                       ]),
-          ),
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(isBlueprint ? 0 : 16),
+            borderRadius: BorderRadius.circular(16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -110,22 +98,17 @@ class _ProjectCardState extends State<ProjectCard>
                   child: Hero(
                     tag: widget.project.title,
                     child: ClipRRect(
-                      borderRadius: .vertical(top: Radius.circular(isBlueprint ? 0 : 16)),
+                      borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
                       child: Stack(
                         fit: .expand,
                         children: [
                           Opacity(
                             opacity: widget.project.isComingSoon ? 0.3 : 1.0,
                             child: ColorFiltered(
-                              colorFilter: isBlueprint
-                                  ? ColorFilter.mode(
-                                      AppColors.primary.withValues(alpha: 0.6),
-                                      BlendMode.color,
-                                    )
-                                  : const ColorFilter.mode(
-                                      Colors.transparent,
-                                      BlendMode.dst,
-                                    ),
+                              colorFilter: const ColorFilter.mode(
+                                Colors.transparent,
+                                BlendMode.dst,
+                              ),
                               child: Image.asset(
                                 widget.project.imageOut,
                                 width: .infinity,
@@ -221,43 +204,25 @@ class _ProjectCardState extends State<ProjectCard>
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
                   decoration: BoxDecoration(
-                    gradient: isBlueprint
-                        ? null
-                        : LinearGradient(
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                            colors: [
-                              const Color(0xFF0D2137),
-                              AppColors.backgroundDark,
-                            ],
-                          ),
-                    color: isBlueprint ? Colors.transparent : null,
-                    border: isBlueprint
-                        ? Border(
-                            top: BorderSide(
-                              color: AppColors.primary.withValues(alpha: 0.25),
-                              width: 1,
-                            ),
-                          )
-                        : null,
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        const Color(0xFF0D2137),
+                        AppColors.backgroundDark,
+                      ],
+                    ),
                   ),
                   child: Row(
                     children: [
                       Expanded(
                         child: Text(
                           widget.project.title,
-                          style: isBlueprint
-                              ? GoogleFonts.firaCode(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w600,
-                                  color: AppColors.primary,
-                                  letterSpacing: 0.5,
-                                )
-                              : GoogleFonts.poppins(
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.w600,
-                                  color: AppColors.textDark,
-                                ),
+                          style: GoogleFonts.poppins(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w600,
+                            color: AppColors.textDark,
+                          ),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),

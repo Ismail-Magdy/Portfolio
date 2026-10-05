@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:provider/provider.dart';
 import 'package:ismailmagdy/core/theme/app_colors.dart';
-import 'package:ismailmagdy/core/theme/blueprint_provider.dart';
 import 'package:ismailmagdy/portfolio/models/packages/package_model.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -28,7 +26,6 @@ class _PackageCardState extends State<PackageCard> {
 
   @override
   Widget build(BuildContext context) {
-    final isBlueprint = context.watch<BlueprintProvider>().isBlueprintMode;
 
     return MouseRegion(
       onEnter: (_) => setState(() => _isHovered = true),
@@ -38,18 +35,12 @@ class _PackageCardState extends State<PackageCard> {
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeOutCubic,
         decoration: BoxDecoration(
-          color: isBlueprint
-              ? Colors.transparent
-              : AppColors.cardBackgroundDark,
-          borderRadius: BorderRadius.circular(isBlueprint ? 0 : 12),
+          color: AppColors.cardBackgroundDark,
+          borderRadius: BorderRadius.circular(12),
           border: Border.all(
-            color: isBlueprint
-                ? (_isHovered
-                    ? AppColors.primary.withValues(alpha: 0.6)
-                    : AppColors.primary.withValues(alpha: 0.3))
-                : (_isHovered
-                    ? Colors.white.withValues(alpha: 0.12)
-                    : Colors.white.withValues(alpha: 0.06)),
+            color: _isHovered
+                ? Colors.white.withValues(alpha: 0.12)
+                : Colors.white.withValues(alpha: 0.06),
             width: 1,
           ),
         ),
@@ -64,46 +55,33 @@ class _PackageCardState extends State<PackageCard> {
                 // Title
                 Text(
                   widget.package.title,
-                  style: isBlueprint
-                      ? GoogleFonts.firaCode(
-                          fontSize: isMobile ? 15 : 17,
-                          fontWeight: FontWeight.w700,
-                          color: AppColors.primary,
-                          letterSpacing: 0.3,
-                        )
-                      : GoogleFonts.poppins(
-                          fontSize: isMobile ? 18 : 20,
-                          fontWeight: FontWeight.w700,
-                          color: Colors.white,
-                          letterSpacing: -0.3,
-                        ),
+                  style: GoogleFonts.poppins(
+                    fontSize: isMobile ? 18 : 20,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.white,
+                    letterSpacing: -0.3,
+                  ),
                 ),
                 const SizedBox(height: 8),
                 // Description
                 Text(
                   widget.package.shortDescription,
-                  style: isBlueprint
-                      ? GoogleFonts.firaCode(
-                          fontSize: 11,
-                          color: AppColors.textDark.withValues(alpha: 0.55),
-                          height: 1.6,
-                        )
-                      : GoogleFonts.poppins(
-                          fontSize: 13,
-                          color: const Color(0xFF94A3B8),
-                          height: 1.6,
-                        ),
+                  style: GoogleFonts.poppins(
+                    fontSize: 13,
+                    color: const Color(0xFF94A3B8),
+                    height: 1.6,
+                  ),
                 ),
                 const SizedBox(height: 16),
                 // Tags
-                _buildTechBadges(isBlueprint),
+                _buildTechBadges(false),
                 const SizedBox(height: 24),
                 // Action Buttons
-                _buildActionButtons(isBlueprint),
+                _buildActionButtons(false),
               ],
             );
             
-            final imageWidget = _buildCircularImage(isBlueprint, imageSize, widget.package.imagePath);
+            final imageWidget = _buildCircularImage(false, imageSize, widget.package.imagePath);
             
             if (isMobile && constraints.maxWidth < 400) {
               // Stack on very small screens
@@ -155,14 +133,10 @@ class _PackageCardState extends State<PackageCard> {
         return Container(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
           decoration: BoxDecoration(
-            color: isBlueprint
-                ? Colors.transparent
-                : Colors.white.withValues(alpha: 0.03),
-            borderRadius: BorderRadius.circular(isBlueprint ? 0 : 6),
+            color: Colors.white.withValues(alpha: 0.03),
+            borderRadius: BorderRadius.circular(6),
             border: Border.all(
-              color: isBlueprint
-                  ? AppColors.primary.withValues(alpha: 0.2)
-                  : Colors.white.withValues(alpha: 0.06),
+              color: Colors.white.withValues(alpha: 0.06),
               width: 1,
             ),
           ),
@@ -172,25 +146,16 @@ class _PackageCardState extends State<PackageCard> {
               Icon(
                 badge.$1,
                 size: 12,
-                color: isBlueprint
-                    ? AppColors.primary.withValues(alpha: 0.6)
-                    : Colors.white.withValues(alpha: 0.4),
+                color: Colors.white.withValues(alpha: 0.4),
               ),
               const SizedBox(width: 6),
               Text(
                 badge.$2,
-                style: isBlueprint
-                    ? GoogleFonts.firaCode(
-                        fontSize: 10,
-                        fontWeight: FontWeight.w500,
-                        color: AppColors.primary.withValues(alpha: 0.6),
-                        letterSpacing: 0.5,
-                      )
-                    : GoogleFonts.poppins(
-                        fontSize: 11,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.white.withValues(alpha: 0.4),
-                      ),
+                style: GoogleFonts.poppins(
+                  fontSize: 11,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.white.withValues(alpha: 0.4),
+                ),
               ),
             ],
           ),
@@ -234,25 +199,14 @@ class _PackageCardState extends State<PackageCard> {
       ),
     );
 
-    final themedImage = isBlueprint
-        ? ColorFiltered(
-            colorFilter: const ColorFilter.mode(
-              AppColors.primary,
-              BlendMode.modulate,
-            ),
-            child: image,
-          )
-        : image;
+    final themedImage = image;
 
     return Container(
       width: size,
       height: size,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: isBlueprint ? Colors.transparent : Colors.white.withValues(alpha: 0.05),
-        border: isBlueprint
-            ? Border.all(color: AppColors.primary, width: 1)
-            : null,
+        color: Colors.white.withValues(alpha: 0.05),
       ),
       child: ClipOval(
         child: themedImage,
@@ -296,24 +250,18 @@ class _PackageActionButtonState extends State<_PackageActionButton> {
           duration: const Duration(milliseconds: 200),
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
           decoration: BoxDecoration(
-            color: widget.isBlueprint
-                ? Colors.transparent
-                : (_isHovered && widget.isPrimary
-                      ? AppColors.primary.withValues(alpha: 0.08)
-                      : Colors.transparent),
-            borderRadius: BorderRadius.circular(widget.isBlueprint ? 0 : 8),
+            color: _isHovered && widget.isPrimary
+                ? AppColors.primary.withValues(alpha: 0.08)
+                : Colors.transparent,
+            borderRadius: BorderRadius.circular(8),
             border: Border.all(
-              color: widget.isBlueprint
-                  ? (_isHovered
-                        ? AppColors.primary.withValues(alpha: 0.6)
-                        : AppColors.primary.withValues(alpha: 0.3))
-                  : (_isHovered
-                        ? (widget.isPrimary
-                              ? AppColors.primary.withValues(alpha: 0.4)
-                              : Colors.white.withValues(alpha: 0.2))
-                        : (widget.isPrimary
-                              ? AppColors.primary.withValues(alpha: 0.2)
-                              : Colors.white.withValues(alpha: 0.08))),
+              color: _isHovered
+                  ? (widget.isPrimary
+                      ? AppColors.primary.withValues(alpha: 0.4)
+                      : Colors.white.withValues(alpha: 0.2))
+                  : (widget.isPrimary
+                      ? AppColors.primary.withValues(alpha: 0.2)
+                      : Colors.white.withValues(alpha: 0.08)),
               width: 1,
             ),
           ),
@@ -323,29 +271,20 @@ class _PackageActionButtonState extends State<_PackageActionButton> {
               FaIcon(
                 widget.icon,
                 size: 13,
-                color: widget.isBlueprint
+                color: widget.isPrimary
                     ? AppColors.primary
-                    : (widget.isPrimary
-                          ? AppColors.primary
-                          : Colors.white.withValues(alpha: 0.5)),
+                    : Colors.white.withValues(alpha: 0.5),
               ),
               const SizedBox(width: 8),
               Text(
                 widget.label,
-                style: widget.isBlueprint
-                    ? GoogleFonts.firaCode(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w500,
-                        color: AppColors.primary,
-                        letterSpacing: 0.3,
-                      )
-                    : GoogleFonts.poppins(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w600,
-                        color: widget.isPrimary
-                            ? AppColors.primary
-                            : Colors.white.withValues(alpha: 0.5),
-                      ),
+                style: GoogleFonts.poppins(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                  color: widget.isPrimary
+                      ? AppColors.primary
+                      : Colors.white.withValues(alpha: 0.5),
+                ),
               ),
             ],
           ),

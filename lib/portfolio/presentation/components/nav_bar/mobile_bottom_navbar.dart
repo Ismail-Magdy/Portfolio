@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:ui';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'package:ismailmagdy/core/theme/app_colors.dart';
-import 'package:ismailmagdy/core/theme/blueprint_provider.dart';
 import 'package:ismailmagdy/core/constants/app_strings.dart';
 
 class MobileBottomNavbar extends StatelessWidget {
@@ -45,40 +43,26 @@ class MobileBottomNavbar extends StatelessWidget {
     final isActive = activeIndex == index;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 4.0),
-      child: Builder(
-        builder: (context) {
-          final isBlueprint = context.watch<BlueprintProvider>().isBlueprintMode;
-          return TextButton(
-            onPressed: onTap ?? () => _scrollToSection(key!, index),
-            style: TextButton.styleFrom(
-              padding: const .symmetric(horizontal: 16, vertical: 8),
-              shape: RoundedRectangleBorder(borderRadius: .circular(isBlueprint ? 0 : 20)),
-              backgroundColor: isActive
-                  ? Colors.white.withValues(alpha: 0.15)
-                  : Colors.transparent,
-              foregroundColor: Colors.white.withValues(alpha: 0.1),
-            ),
-            child: Text(
-              label,
-              style: isBlueprint
-                  ? GoogleFonts.firaCode(
-                      fontSize: 12,
-                      fontWeight: isActive ? .w600 : .w500,
-                      color: isActive
-                          ? AppColors.primary
-                          : AppColors.primary.withValues(alpha: 0.6),
-                      letterSpacing: 0.3,
-                    )
-                  : GoogleFonts.poppins(
-                      fontSize: 14,
-                      fontWeight: isActive ? .w600 : .w500,
-                      color: isActive
-                          ? AppColors.backgroundLight
-                          : AppColors.backgroundLight.withValues(alpha: 0.7),
-                    ),
-            ),
-          );
-        },
+      child: TextButton(
+        onPressed: onTap ?? () => _scrollToSection(key!, index),
+        style: TextButton.styleFrom(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          backgroundColor: isActive
+              ? Colors.white.withValues(alpha: 0.15)
+              : Colors.transparent,
+          foregroundColor: Colors.white.withValues(alpha: 0.1),
+        ),
+        child: Text(
+          label,
+          style: GoogleFonts.poppins(
+            fontSize: 14,
+            fontWeight: isActive ? FontWeight.w600 : FontWeight.w500,
+            color: isActive
+                ? AppColors.backgroundLight
+                : AppColors.backgroundLight.withValues(alpha: 0.7),
+          ),
+        ),
       ),
     );
   }

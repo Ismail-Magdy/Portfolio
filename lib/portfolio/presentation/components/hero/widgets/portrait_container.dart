@@ -1,9 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:ismailmagdy/core/constants/app_images.dart';
 import 'package:ismailmagdy/core/theme/app_colors.dart';
-import 'package:ismailmagdy/core/theme/blueprint_provider.dart';
 import 'package:ismailmagdy/portfolio/presentation/components/hero/widgets/portrait_background.dart';
 
 class PortraitContainer extends StatefulWidget {
@@ -35,7 +33,6 @@ class _PortraitContainerState extends State<PortraitContainer>
 
   @override
   Widget build(BuildContext context) {
-    final isBlueprint = context.watch<BlueprintProvider>().isBlueprintMode;
     const double containerSize = 520.0;
     const double imageSize = containerSize * 0.70;
     final borderRadius = BorderRadius.circular(20);
@@ -120,17 +117,9 @@ class _PortraitContainerState extends State<PortraitContainer>
                     ),
                     child: ClipRRect(
                       borderRadius: borderRadius,
-                      child: ColorFiltered(
-                        colorFilter: isBlueprint
-                            ? ColorFilter.mode(
-                                AppColors.primary.withValues(alpha: 0.6),
-                                BlendMode.color,
-                              )
-                            : const ColorFilter.mode(
-                                Colors.transparent,
-                                BlendMode.dst,
-                              ),
-                        child: Image.asset(AppImages.profileImage, fit: .cover),
+                      child: Image.asset(
+                        AppImages.profileImage,
+                        fit: BoxFit.cover,
                       ),
                     ),
                   ),

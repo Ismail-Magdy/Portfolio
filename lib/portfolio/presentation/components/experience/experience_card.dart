@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'package:ismailmagdy/core/helpers/spacing.dart';
 import 'package:ismailmagdy/core/theme/app_colors.dart';
-import 'package:ismailmagdy/core/theme/blueprint_provider.dart';
 import 'package:ismailmagdy/portfolio/models/experience/experience_model.dart';
 
 class ExperienceCard extends StatelessWidget {
@@ -12,34 +10,28 @@ class ExperienceCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isBlueprint = context.watch<BlueprintProvider>().isBlueprintMode;
-
     return AnimatedContainer(
       duration: const Duration(milliseconds: 300),
       curve: Curves.easeOutCubic,
       decoration: BoxDecoration(
-        color: isBlueprint ? Colors.transparent : AppColors.cardBackgroundDark,
-        borderRadius: BorderRadius.circular(isBlueprint ? 0 : 16),
+        color: AppColors.cardBackgroundDark,
+        borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: isBlueprint
-              ? AppColors.primary.withValues(alpha: 0.35)
-              : AppColors.primary.withValues(alpha: 0.15),
+          color: AppColors.primary.withValues(alpha: 0.15),
           width: 1,
         ),
-        boxShadow: isBlueprint
-            ? null
-            : [
-                BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.2),
-                  blurRadius: 20,
-                  offset: const Offset(0, 8),
-                ),
-                BoxShadow(
-                  color: AppColors.primary.withValues(alpha: 0.03),
-                  blurRadius: 40,
-                  spreadRadius: 2,
-                ),
-              ],
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.2),
+            blurRadius: 20,
+            offset: const Offset(0, 8),
+          ),
+          BoxShadow(
+            color: AppColors.primary.withValues(alpha: 0.03),
+            blurRadius: 40,
+            spreadRadius: 2,
+          ),
+        ],
       ),
       child: Padding(
         padding: const EdgeInsets.all(28),
@@ -51,10 +43,8 @@ class ExperienceCard extends StatelessWidget {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
               decoration: BoxDecoration(
-                color: isBlueprint
-                    ? Colors.transparent
-                    : AppColors.primary.withValues(alpha: 0.1),
-                borderRadius: BorderRadius.circular(isBlueprint ? 0 : 20),
+                color: AppColors.primary.withValues(alpha: 0.1),
+                borderRadius: BorderRadius.circular(20),
                 border: Border.all(
                   color: AppColors.primary.withValues(alpha: 0.3),
                   width: 1,
@@ -62,18 +52,11 @@ class ExperienceCard extends StatelessWidget {
               ),
               child: Text(
                 experience.period,
-                style: isBlueprint
-                    ? GoogleFonts.firaCode(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w500,
-                        color: AppColors.primary,
-                        letterSpacing: 1.0,
-                      )
-                    : GoogleFonts.poppins(
-                        fontSize: 13,
-                        fontWeight: FontWeight.w500,
-                        color: AppColors.primary,
-                      ),
+                style: GoogleFonts.poppins(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w500,
+                  color: AppColors.primary,
+                ),
               ),
             ),
             //
@@ -82,19 +65,12 @@ class ExperienceCard extends StatelessWidget {
             // Title
             Text(
               experience.title,
-              style: isBlueprint
-                  ? GoogleFonts.firaCode(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.textDark,
-                      height: 1.3,
-                    )
-                  : GoogleFonts.poppins(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.textDark,
-                      height: 1.3,
-                    ),
+              style: GoogleFonts.poppins(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: AppColors.textDark,
+                height: 1.3,
+              ),
             ),
             //
             verticalSpace(6),
@@ -102,20 +78,12 @@ class ExperienceCard extends StatelessWidget {
             // Company
             Text(
               experience.company,
-              style: isBlueprint
-                  ? GoogleFonts.firaCode(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                      color: AppColors.primary.withValues(alpha: 0.8),
-                      height: 1.4,
-                      letterSpacing: 0.3,
-                    )
-                  : GoogleFonts.poppins(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w500,
-                      color: AppColors.primary.withValues(alpha: 0.8),
-                      height: 1.4,
-                    ),
+              style: GoogleFonts.poppins(
+                fontSize: 15,
+                fontWeight: FontWeight.w500,
+                color: AppColors.primary.withValues(alpha: 0.8),
+                height: 1.4,
+              ),
             ),
             //
             verticalSpace(16),
@@ -123,18 +91,11 @@ class ExperienceCard extends StatelessWidget {
             // Description
             Text(
               experience.description,
-              style: isBlueprint
-                  ? GoogleFonts.firaCode(
-                      fontSize: 12,
-                      height: 1.7,
-                      color: AppColors.textDark.withValues(alpha: 0.65),
-                      letterSpacing: 0.2,
-                    )
-                  : GoogleFonts.poppins(
-                      fontSize: 14,
-                      height: 1.7,
-                      color: AppColors.textDark.withValues(alpha: 0.75),
-                    ),
+              style: GoogleFonts.poppins(
+                fontSize: 14,
+                height: 1.7,
+                color: AppColors.textDark.withValues(alpha: 0.75),
+              ),
             ),
             //
             verticalSpace(20),
@@ -151,10 +112,8 @@ class ExperienceCard extends StatelessWidget {
                         vertical: 6,
                       ),
                       decoration: BoxDecoration(
-                        color: isBlueprint
-                            ? Colors.transparent
-                            : AppColors.primary.withValues(alpha: 0.08),
-                        borderRadius: BorderRadius.circular(isBlueprint ? 0 : 8),
+                        color: AppColors.primary.withValues(alpha: 0.08),
+                        borderRadius: BorderRadius.circular(8),
                         border: Border.all(
                           color: AppColors.primary.withValues(alpha: 0.2),
                           width: 1,
@@ -162,18 +121,11 @@ class ExperienceCard extends StatelessWidget {
                       ),
                       child: Text(
                         tech,
-                        style: isBlueprint
-                            ? GoogleFonts.firaCode(
-                                fontSize: 11,
-                                color: AppColors.primary.withValues(alpha: 0.9),
-                                fontWeight: FontWeight.w500,
-                                letterSpacing: 0.5,
-                              )
-                            : GoogleFonts.poppins(
-                                fontSize: 12,
-                                color: AppColors.primary.withValues(alpha: 0.9),
-                                fontWeight: FontWeight.w500,
-                              ),
+                        style: GoogleFonts.poppins(
+                          fontSize: 12,
+                          color: AppColors.primary.withValues(alpha: 0.9),
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                     ),
                   )

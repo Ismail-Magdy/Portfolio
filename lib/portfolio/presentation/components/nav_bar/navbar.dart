@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'dart:ui';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'package:ismailmagdy/core/theme/app_colors.dart';
-import 'package:ismailmagdy/core/theme/blueprint_provider.dart';
 import 'package:ismailmagdy/core/constants/app_strings.dart';
 import 'logo_widget.dart';
-import 'blueprint_toggle_button.dart';
 
 class Navbar extends StatefulWidget implements PreferredSizeWidget {
   final GlobalKey aboutKey;
@@ -106,7 +103,6 @@ class _NavbarState extends State<Navbar> {
                 ),
               ),
               const Spacer(),
-              const BlueprintToggleButton(),
             ],
           ),
         ),
@@ -194,10 +190,6 @@ class _NavbarState extends State<Navbar> {
                               widget.experienceKey,
                             ),
                             //
-                            const SizedBox(width: 16),
-                            //
-                            const BlueprintToggleButton(),
-                            //
                           ],
                         ),
                       ),
@@ -215,33 +207,21 @@ class _NavbarState extends State<Navbar> {
   }
 
   Widget _buildNavItem(String label, GlobalKey? key, {VoidCallback? onTap}) {
-    return Builder(
-      builder: (context) {
-        final isBlueprint = context.watch<BlueprintProvider>().isBlueprintMode;
-        return TextButton(
-          onPressed: onTap ?? () => _scrollToSection(key!, context),
-          style: TextButton.styleFrom(
-            padding: const .symmetric(horizontal: 16, vertical: 8),
-            shape: RoundedRectangleBorder(borderRadius: .circular(isBlueprint ? 0 : 20)),
-            foregroundColor: Colors.white.withValues(alpha: 0.1),
-          ),
-          child: Text(
-            label,
-            style: isBlueprint
-                ? GoogleFonts.firaCode(
-                    fontSize: 13,
-                    fontWeight: .w500,
-                    color: AppColors.primary.withValues(alpha: 0.8),
-                    letterSpacing: 0.5,
-                  )
-                : GoogleFonts.poppins(
-                    fontSize: 14,
-                    fontWeight: .w500,
-                    color: AppColors.backgroundLight,
-                  ),
-          ),
-        );
-      },
+    return TextButton(
+      onPressed: onTap ?? () => _scrollToSection(key!, context),
+      style: TextButton.styleFrom(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        foregroundColor: Colors.white.withValues(alpha: 0.1),
+      ),
+      child: Text(
+        label,
+        style: GoogleFonts.poppins(
+          fontSize: 14,
+          fontWeight: FontWeight.w500,
+          color: AppColors.backgroundLight,
+        ),
+      ),
     );
   }
 }

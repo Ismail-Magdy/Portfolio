@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'package:ismailmagdy/core/theme/app_colors.dart';
-import 'package:ismailmagdy/core/theme/blueprint_provider.dart';
 import 'package:ismailmagdy/portfolio/models/skills/skill_model.dart';
-
 class SkillCard extends StatefulWidget {
   final SkillModel skill;
   final IconData icon;
@@ -32,7 +29,6 @@ class _SkillCardState extends State<SkillCard> {
 
   @override
   Widget build(BuildContext context) {
-    final isBlueprint = context.watch<BlueprintProvider>().isBlueprintMode;
     final totalSkills = 15;
     final staggerFraction = widget.index / totalSkills;
     final startDelay = staggerFraction * 0.5;
@@ -71,18 +67,12 @@ class _SkillCardState extends State<SkillCard> {
           transformAlignment: Alignment.center,
           padding: const EdgeInsets.all(18),
           decoration: BoxDecoration(
-            color: isBlueprint
-                ? Colors.transparent
-                : AppColors.cardBackgroundDark,
-            borderRadius: BorderRadius.circular(isBlueprint ? 0 : 12),
+            color: AppColors.cardBackgroundDark,
+            borderRadius: BorderRadius.circular(12),
             border: Border.all(
-              color: isBlueprint
-                  ? (_isHovered
-                      ? AppColors.primary.withValues(alpha: 0.6)
-                      : AppColors.primary.withValues(alpha: 0.25))
-                  : (_isHovered
-                      ? AppColors.primary.withValues(alpha: 0.4)
-                      : AppColors.primary.withValues(alpha: 0.08)),
+              color: _isHovered
+                  ? AppColors.primary.withValues(alpha: 0.4)
+                  : AppColors.primary.withValues(alpha: 0.08),
               width: 1,
             ),
           ),
@@ -107,19 +97,12 @@ class _SkillCardState extends State<SkillCard> {
                   Expanded(
                     child: Text(
                       widget.skill.name,
-                      style: isBlueprint
-                          ? GoogleFonts.firaCode(
-                              fontSize: 13,
-                              fontWeight: FontWeight.w500,
-                              color: AppColors.primary.withValues(alpha: 0.9),
-                              letterSpacing: 0.5,
-                            )
-                          : GoogleFonts.poppins(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                              color: AppColors.textDark.withValues(alpha: 0.9),
-                              letterSpacing: 0.2,
-                            ),
+                      style: GoogleFonts.poppins(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                        color: AppColors.textDark.withValues(alpha: 0.9),
+                        letterSpacing: 0.2,
+                      ),
                     ),
                   ),
                   //
