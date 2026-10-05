@@ -1,4 +1,5 @@
 import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:ismailmagdy/core/constants/app_images.dart';
 import 'package:ismailmagdy/core/theme/app_colors.dart';
@@ -97,7 +98,6 @@ class _PortraitContainerState extends State<PortraitContainer>
                       );
                     },
                   ),
-
                   // The actual square profile image
                   Container(
                     width: imageSize,
@@ -117,10 +117,7 @@ class _PortraitContainerState extends State<PortraitContainer>
                     ),
                     child: ClipRRect(
                       borderRadius: borderRadius,
-                      child: Image.asset(
-                        AppImages.profileImage,
-                        fit: BoxFit.cover,
-                      ),
+                      child: Image.asset(AppImages.profileImage, fit: .cover),
                     ),
                   ),
                   //
@@ -133,3 +130,4 @@ class _PortraitContainerState extends State<PortraitContainer>
     );
   }
 }
+// 137

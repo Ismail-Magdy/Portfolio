@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:ismailmagdy/core/constants/app_strings.dart';
 import 'package:ismailmagdy/core/helpers/spacing.dart';
 import 'package:ismailmagdy/core/theme/app_colors.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:ismailmagdy/portfolio/presentation/components/hero/functions/hero_functions.dart';
 
 class BuildContentWidget extends StatelessWidget {
   const BuildContentWidget({super.key, required this.socialLinks});
@@ -12,7 +12,6 @@ class BuildContentWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Column(
       crossAxisAlignment: .start,
       mainAxisAlignment: .center,
@@ -22,7 +21,7 @@ class BuildContentWidget extends StatelessWidget {
           AppStrings.greeting,
           style: GoogleFonts.poppins(
             fontSize: 24,
-            fontWeight: FontWeight.w400,
+            fontWeight: .w400,
             color: AppColors.textDark.withValues(alpha: 0.8),
           ),
         ),
@@ -33,7 +32,7 @@ class BuildContentWidget extends StatelessWidget {
           AppStrings.name,
           style: GoogleFonts.poppins(
             fontSize: 48,
-            fontWeight: FontWeight.bold,
+            fontWeight: .bold,
             color: AppColors.textDark,
           ),
         ),
@@ -44,7 +43,7 @@ class BuildContentWidget extends StatelessWidget {
           AppStrings.title,
           style: GoogleFonts.poppins(
             fontSize: 32,
-            fontWeight: FontWeight.w600,
+            fontWeight: .w600,
             color: AppColors.primary,
           ),
         ),
@@ -66,38 +65,30 @@ class BuildContentWidget extends StatelessWidget {
           children: [
             // Download CV Button
             MaterialButton(
-              onPressed: _downloadCV,
+              onPressed: downloadCV,
               color: AppColors.primary,
               textColor: Colors.white,
               padding: const .symmetric(horizontal: 32, vertical: 16),
               shape: RoundedRectangleBorder(borderRadius: .circular(8)),
               child: Text(
                 AppStrings.downloadCV,
-                style: GoogleFonts.poppins(fontSize: 16, fontWeight: FontWeight.w600),
+                style: GoogleFonts.poppins(fontSize: 16, fontWeight: .w600),
               ),
             ),
             //
             horizontalSpace(16),
             // Contact Button
             OutlinedButton(
-              onPressed: _contactWhatsApp,
+              onPressed: contactWhatsApp,
               style: OutlinedButton.styleFrom(
                 foregroundColor: AppColors.primary,
                 side: const BorderSide(color: AppColors.primary, width: 2),
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 32,
-                  vertical: 16,
-                ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
+                padding: const .symmetric(horizontal: 32, vertical: 16),
+                shape: RoundedRectangleBorder(borderRadius: .circular(8)),
               ),
               child: Text(
                 AppStrings.contact,
-                style: GoogleFonts.poppins(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                ),
+                style: GoogleFonts.poppins(fontSize: 16, fontWeight: .w600),
               ),
             ),
             //
@@ -112,22 +103,22 @@ class BuildContentWidget extends StatelessWidget {
               Padding(
                 padding: const .only(right: 16),
                 child: InkWell(
-                  onTap: () => _launchSocial(link.url),
+                  onTap: () => launchSocial(link.url),
                   borderRadius: .circular(8),
                   child: Container(
                     width: 45,
                     height: 45,
                     decoration: BoxDecoration(
                       color: AppColors.cardBackgroundDark,
-                      borderRadius: BorderRadius.circular(8),
-                      border: Border.all(
+                      borderRadius: .circular(8),
+                      border: .all(
                         color: AppColors.primary.withValues(alpha: 0.3),
                         width: 1,
                       ),
                     ),
                     child: Center(
                       child: FaIcon(
-                        _getIconForPlatform(link.platform),
+                        getIconForPlatform(link.platform),
                         color: AppColors.primary,
                         size: 20,
                       ),
@@ -141,51 +132,5 @@ class BuildContentWidget extends StatelessWidget {
       ],
     );
   }
-
-  /// Helper Functions
-
-  // Download CV
-  Future<void> _downloadCV() async {
-    //
-    final Uri cvUrl = Uri.parse(
-      "https://drive.google.com/file/d/1hgPnLinxGSvXMkWmJbZ4IzagzBHxovPy/view?usp=sharing",
-    );
-    if (await canLaunchUrl(cvUrl)) {
-      await launchUrl(cvUrl, webOnlyWindowName: "_blank");
-    } else {}
-  }
-
-  // WhatsApp
-  Future<void> _contactWhatsApp() async {
-    final url = Uri.parse("https://wa.me/201206607906");
-    if (await canLaunchUrl(url)) {
-      await launchUrl(url, mode: LaunchMode.externalApplication);
-    }
-  }
-
-  // Social
-  Future<void> _launchSocial(String url) async {
-    final uri = Uri.parse(url);
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri, mode: LaunchMode.externalApplication);
-    }
-  }
-
-  // Get Icon
-  FaIconData _getIconForPlatform(String platform) {
-    switch (platform.toLowerCase()) {
-      case "linkedin":
-        return FontAwesomeIcons.linkedin;
-      case "github":
-        return FontAwesomeIcons.github;
-      case "twitter":
-        return FontAwesomeIcons.twitter;
-      case "instagram":
-        return FontAwesomeIcons.instagram;
-      default:
-        return FontAwesomeIcons.link;
-    }
-  }
-
-  //
 }
+// 192
