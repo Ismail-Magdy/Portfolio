@@ -20,6 +20,7 @@ class ExperienceCard extends StatelessWidget {
           color: AppColors.primary.withValues(alpha: 0.15),
           width: 1,
         ),
+        // Shadows
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.2),
@@ -32,6 +33,7 @@ class ExperienceCard extends StatelessWidget {
             spreadRadius: 2,
           ),
         ],
+        //
       ),
       child: Padding(
         padding: const .all(28),

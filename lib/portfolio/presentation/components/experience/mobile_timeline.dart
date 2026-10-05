@@ -22,8 +22,9 @@ class MobileTimeline extends StatelessWidget {
           child: Stack(
             children: [
               //
-              // Timeline line — left-aligned, behind content
+              // Timeline line & left aligned, behind content
               if (!isLast)
+                //
                 Positioned(
                   top: 11, // vertically centered with the 14px node
                   bottom: 0,
@@ -32,8 +33,8 @@ class MobileTimeline extends StatelessWidget {
                     width: 2,
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
+                        begin: .topCenter,
+                        end: .bottomCenter,
                         colors: [
                           AppColors.primary.withValues(alpha: 0.4),
                           AppColors.primary.withValues(alpha: 0.1),
@@ -45,16 +46,15 @@ class MobileTimeline extends StatelessWidget {
               //
               // Content Row — drives the Stack's height
               Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: .start,
                 children: [
-                  //
                   // Left node area
                   SizedBox(
                     width: 20,
                     child: Padding(
-                      padding: const EdgeInsets.only(top: 4),
+                      padding: const .only(top: 4),
                       child: Align(
-                        alignment: Alignment.topCenter,
+                        alignment: .topCenter,
                         child: TimelineNode(size: 14),
                       ),
                     ),
@@ -65,14 +65,13 @@ class MobileTimeline extends StatelessWidget {
                   // Card
                   Expanded(
                     child: Padding(
-                      padding: const EdgeInsets.only(bottom: 32),
+                      padding: const .only(bottom: 32),
                       child: ExperienceCard(experience: experience),
                     ),
                   ),
                   //
                 ],
               ),
-              //
             ],
           ),
         );

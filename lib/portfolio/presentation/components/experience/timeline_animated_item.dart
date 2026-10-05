@@ -66,7 +66,7 @@ class TimelineAnimatedItemState extends State<TimelineAnimatedItem>
   @override
   Widget build(BuildContext context) {
     return VisibilityDetector(
-      key: Key('timeline-item-${widget.index}'),
+      key: Key("timeline-item-${widget.index}"),
       onVisibilityChanged: _onVisibilityChanged,
       child: FadeTransition(
         opacity: _fadeAnimation,

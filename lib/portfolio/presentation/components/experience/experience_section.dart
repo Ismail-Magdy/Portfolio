@@ -53,8 +53,7 @@ class ExperienceSection extends StatelessWidget {
           ),
           //
           verticalSpace(60),
-          //
-          // Timeline
+          // Timelines
           if (isTabletOrDesktop)
             DesktopTimeline(experiences: experiences)
           //
@@ -66,5 +65,4 @@ class ExperienceSection extends StatelessWidget {
     );
   }
 }
-
 // 356

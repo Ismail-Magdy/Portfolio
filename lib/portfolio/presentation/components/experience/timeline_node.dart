@@ -12,7 +12,8 @@ class TimelineNode extends StatelessWidget {
       height: size,
       decoration: BoxDecoration(
         color: AppColors.primary,
-        shape: BoxShape.circle,
+        shape: .circle,
+        // Shadows
         boxShadow: [
           // Outer glow
           BoxShadow(
@@ -27,16 +28,14 @@ class TimelineNode extends StatelessWidget {
             spreadRadius: 1,
           ),
         ],
+        //
       ),
       // Inner bright core
       child: Center(
         child: Container(
           width: size * 0.45,
           height: size * 0.45,
-          decoration: const BoxDecoration(
-            color: Colors.white,
-            shape: BoxShape.circle,
-          ),
+          decoration: const BoxDecoration(color: Colors.white, shape: .circle),
         ),
       ),
     );
