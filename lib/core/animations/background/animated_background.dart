@@ -1,24 +1,9 @@
 import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:ismailmagdy/core/animations/background/star.dart';
+import 'package:ismailmagdy/core/animations/background/starfield_painter.dart';
 import 'package:ismailmagdy/core/theme/app_colors.dart';
-
-class _Star {
-  double x;
-  double y;
-  double vx;
-  double vy;
-  double radius;
-  double opacity;
-
-  _Star({
-    required this.x,
-    required this.y,
-    required this.vx,
-    required this.vy,
-    required this.radius,
-    required this.opacity,
-  });
-}
 
 class AnimatedBackground extends StatefulWidget {
   const AnimatedBackground({super.key});
@@ -30,7 +15,7 @@ class AnimatedBackground extends StatefulWidget {
 class _AnimatedBackgroundState extends State<AnimatedBackground>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
-  final List<_Star> _stars = [];
+  final List<Star> _stars = [];
   final Random _random = Random();
   Size _lastSize = Size.zero;
 
@@ -54,11 +39,11 @@ class _AnimatedBackgroundState extends State<AnimatedBackground>
     }
   }
 
-  _Star _createStar(Size size) {
+  Star _createStar(Size size) {
     // Speed between 0.15 and 0.5 px per frame — very slow drift
     final speed = 0.15 + _random.nextDouble() * 0.35;
     final angle = _random.nextDouble() * 2 * pi;
-    return _Star(
+    return Star(
       x: _random.nextDouble() * size.width,
       y: _random.nextDouble() * size.height,
       vx: cos(angle) * speed,
@@ -100,7 +85,7 @@ class _AnimatedBackgroundState extends State<AnimatedBackground>
           builder: (context, child) {
             return CustomPaint(
               size: size,
-              painter: _StarfieldPainter(
+              painter: StarfieldPainter(
                 stars: _stars,
                 backgroundColor: AppColors.backgroundDark,
               ),
@@ -111,29 +96,4 @@ class _AnimatedBackgroundState extends State<AnimatedBackground>
     );
   }
 }
-
-class _StarfieldPainter extends CustomPainter {
-  final List<_Star> stars;
-  final Color backgroundColor;
-
-  _StarfieldPainter({required this.stars, required this.backgroundColor});
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    // Draw background
-    canvas.drawRect(
-      Rect.fromLTWH(0, 0, size.width, size.height),
-      Paint()..color = backgroundColor,
-    );
-
-    // Draw stars
-    final paint = Paint()..style = PaintingStyle.fill;
-    for (final star in stars) {
-      paint.color = Colors.white.withValues(alpha: star.opacity);
-      canvas.drawCircle(Offset(star.x, star.y), star.radius, paint);
-    }
-  }
-
-  @override
-  bool shouldRepaint(covariant _StarfieldPainter oldDelegate) => true;
-}
+// 141
