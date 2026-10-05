@@ -1,14 +1,4 @@
-class TeamMember {
-  final String name;
-  final String role;
-  final String imagePath;
-
-  const TeamMember({
-    required this.name,
-    required this.role,
-    required this.imagePath,
-  });
-}
+import 'package:ismailmagdy/portfolio/models/projects/team_member.dart';
 
 class ProjectModel {
   final String id;
@@ -19,8 +9,6 @@ class ProjectModel {
   final String longDescription;
   final List<String> techStack;
   final bool isComingSoon;
-
-  // Social & action links (nullable & buttons only render when non null)
   final String? linkedIn;
   final String? linkedInPartTwo;
   final String? instagram;
@@ -31,7 +19,6 @@ class ProjectModel {
 
   // Team members (nullable)
   final List<TeamMember>? teamMembers;
-
   ProjectModel({
     required this.id,
     required this.title,

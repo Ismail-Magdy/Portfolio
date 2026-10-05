@@ -1,7 +1,9 @@
 import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:ismailmagdy/portfolio/models/projects/team_member.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 import 'package:ismailmagdy/core/helpers/spacing.dart';
 import 'package:ismailmagdy/core/theme/app_colors.dart';
@@ -9,6 +11,7 @@ import 'package:ismailmagdy/portfolio/models/projects/project_model.dart';
 import 'package:ismailmagdy/portfolio/presentation/components/projects/widgets/projects_hover_action_button.dart';
 import 'package:ismailmagdy/portfolio/presentation/components/projects/widgets/projects_sweep_border_painter.dart';
 import 'package:url_launcher/url_launcher.dart';
+
 import '../../../../../core/animations/background/animated_background.dart';
 
 class ProjectDetailsScreen extends StatefulWidget {
