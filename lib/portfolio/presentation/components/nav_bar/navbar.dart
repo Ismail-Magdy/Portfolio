@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'dart:ui';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:ismailmagdy/core/theme/app_colors.dart';
-import 'package:ismailmagdy/core/constants/app_strings.dart';
-import 'logo_widget.dart';
+import 'package:ismailmagdy/portfolio/presentation/components/nav_bar/nav_bar_desktop_view.dart';
+import 'package:ismailmagdy/portfolio/presentation/components/nav_bar/nav_bar_mobile_view.dart';
 
 class Navbar extends StatefulWidget implements PreferredSizeWidget {
   final GlobalKey aboutKey;
@@ -32,8 +29,6 @@ class Navbar extends StatefulWidget implements PreferredSizeWidget {
 }
 
 class _NavbarState extends State<Navbar> {
-  bool _isDrawerOpen = false;
-
   @override
   void initState() {
     super.initState();
@@ -44,34 +39,6 @@ class _NavbarState extends State<Navbar> {
     super.dispose();
   }
 
-  ///
-  void _scrollToSection(GlobalKey key, BuildContext context) {
-    final keyContext = key.currentContext;
-    if (keyContext != null) {
-      Scrollable.ensureVisible(
-        keyContext,
-        duration: const Duration(milliseconds: 500),
-        curve: Curves.easeInOut,
-      );
-    }
-    if (_isDrawerOpen) {
-      Navigator.of(context).pop();
-      setState(() => _isDrawerOpen = false);
-    }
-  }
-
-  void _scrollToTop(BuildContext context) {
-    widget.scrollController.animateTo(
-      0,
-      duration: const Duration(milliseconds: 500),
-      curve: Curves.easeInOut,
-    );
-    if (_isDrawerOpen) {
-      Navigator.of(context).pop();
-      setState(() => _isDrawerOpen = false);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -79,149 +46,22 @@ class _NavbarState extends State<Navbar> {
 
     // Mobile view with circular logo button
     if (isMobile) {
-      return SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.only(top: 20, left: 24, right: 24),
-          child: Row(
-            children: [
-              Container(
-                height: 64,
-                width: 64,
-                decoration: BoxDecoration(
-                  color: Colors.white.withValues(alpha: 0.05),
-                  shape: BoxShape.circle,
-                  border: Border.all(
-                    color: Colors.white.withValues(alpha: 0.1),
-                    width: 1,
-                  ),
-                ),
-                child: ClipOval(
-                  child: BackdropFilter(
-                    filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                    child: const Center(child: LogoWidget()),
-                  ),
-                ),
-              ),
-              const Spacer(),
-            ],
-          ),
-        ),
-      );
+      return NavBarMobileView();
     }
 
     return SafeArea(
       // Desktop view with sliding pull-out navbar
-      child: Align(
-        alignment: .centerLeft,
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 300),
-          curve: Curves.easeInOut,
-          margin: const .only(top: 20, left: 24, right: 24),
-          height: 64,
-          width: screenWidth - 48,
-          decoration: BoxDecoration(
-            color: Colors.white.withValues(alpha: 0.05),
-            borderRadius: .circular(32),
-            border: .all(color: Colors.white.withValues(alpha: 0.1), width: 1),
-          ),
-          // Liquid glass effect
-          child: ClipRRect(
-            borderRadius: .circular(32),
-            child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-              child: SingleChildScrollView(
-                scrollDirection: .horizontal,
-                physics: const NeverScrollableScrollPhysics(),
-                child: SizedBox(
-                  width: screenWidth - 48,
-                  height: 64,
-                  child: Stack(
-                    alignment: .centerLeft,
-                    children: [
-                      // Logo
-                      Positioned(
-                        left: 0,
-                        child: GestureDetector(
-                          onTap: () {
-                            _scrollToTop(context);
-                          },
-                          child: Container(
-                            width: 64,
-                            height: 64,
-                            alignment: .center,
-                            child: const LogoWidget(),
-                          ),
-                        ),
-                      ),
-                      //
-                      // Navigation
-                      Positioned(
-                        right: 20,
-                        child: Row(
-                          mainAxisSize: .min,
-                          children: [
-                            //
-                            _buildNavItem(
-                              AppStrings.about,
-                              null,
-                              onTap: () => _scrollToTop(context),
-                            ),
-                            //
-                            const SizedBox(width: 20),
-                            //
-                            _buildNavItem(AppStrings.skills, widget.skillsKey),
-                            //
-                            const SizedBox(width: 20),
-                            //
-                            _buildNavItem(
-                              AppStrings.projects,
-                              widget.projectsKey,
-                            ),
-                            //
-                            const SizedBox(width: 20),
-                            //
-                            _buildNavItem(
-                              AppStrings.packages,
-                              widget.packagesKey,
-                            ),
-                            //
-                            _buildNavItem(
-                              AppStrings.experience,
-                              widget.experienceKey,
-                            ),
-                            //
-                          ],
-                        ),
-                      ),
-                      //
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
+      child: NavBarDesktopView(
+        aboutKey: widget.aboutKey,
+        experienceKey: widget.experienceKey,
+        packagesKey: widget.packagesKey,
+        projectsKey: widget.projectsKey,
+        screenWidth: screenWidth,
+        skillsKey: widget.skillsKey,
+        scrollController: widget.scrollController,
       ),
       //
     );
   }
-
-  Widget _buildNavItem(String label, GlobalKey? key, {VoidCallback? onTap}) {
-    return TextButton(
-      onPressed: onTap ?? () => _scrollToSection(key!, context),
-      style: TextButton.styleFrom(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        foregroundColor: Colors.white.withValues(alpha: 0.1),
-      ),
-      child: Text(
-        label,
-        style: GoogleFonts.poppins(
-          fontSize: 14,
-          fontWeight: FontWeight.w500,
-          color: AppColors.backgroundLight,
-        ),
-      ),
-    );
-  }
 }
+// 228

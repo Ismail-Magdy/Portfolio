@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+
 import 'dart:ui';
+
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ismailmagdy/core/theme/app_colors.dart';
 import 'package:ismailmagdy/core/constants/app_strings.dart';
@@ -42,12 +44,12 @@ class MobileBottomNavbar extends StatelessWidget {
   }) {
     final isActive = activeIndex == index;
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 4.0),
+      padding: const .symmetric(horizontal: 4.0),
       child: TextButton(
         onPressed: onTap ?? () => _scrollToSection(key!, index),
         style: TextButton.styleFrom(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          padding: const .symmetric(horizontal: 16, vertical: 8),
+          shape: RoundedRectangleBorder(borderRadius: .circular(20)),
           backgroundColor: isActive
               ? Colors.white.withValues(alpha: 0.15)
               : Colors.transparent,
@@ -57,7 +59,7 @@ class MobileBottomNavbar extends StatelessWidget {
           label,
           style: GoogleFonts.poppins(
             fontSize: 14,
-            fontWeight: isActive ? FontWeight.w600 : FontWeight.w500,
+            fontWeight: isActive ? .w600 : .w500,
             color: isActive
                 ? AppColors.backgroundLight
                 : AppColors.backgroundLight.withValues(alpha: 0.7),
