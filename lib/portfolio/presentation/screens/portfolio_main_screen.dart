@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ismailmagdy/portfolio/presentation/components/skills/skills_section.dart';
+import 'package:ismailmagdy/portfolio/presentation/components/skills/components/skills_section.dart';
 
 import '../components/nav_bar/navbar.dart';
 import '../components/nav_bar/mobile_bottom_navbar.dart';

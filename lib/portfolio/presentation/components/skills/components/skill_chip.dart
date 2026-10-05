@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ismailmagdy/core/theme/app_colors.dart';
 import 'package:ismailmagdy/portfolio/models/skills/skill_model.dart';
+
 class SkillCard extends StatefulWidget {
   final SkillModel skill;
   final IconData icon;
@@ -64,8 +65,8 @@ class _SkillCardState extends State<SkillCard> {
             _isHovered ? 1.02 : 1.0,
             1.0,
           ),
-          transformAlignment: Alignment.center,
-          padding: const EdgeInsets.all(18),
+          transformAlignment: .center,
+          padding: const .all(18),
           decoration: BoxDecoration(
             color: AppColors.cardBackgroundDark,
             borderRadius: BorderRadius.circular(12),
@@ -77,8 +78,8 @@ class _SkillCardState extends State<SkillCard> {
             ),
           ),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: .start,
+            mainAxisSize: .min,
             children: [
               //
               Row(
@@ -99,7 +100,7 @@ class _SkillCardState extends State<SkillCard> {
                       widget.skill.name,
                       style: GoogleFonts.poppins(
                         fontSize: 14,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: .w500,
                         color: AppColors.textDark.withValues(alpha: 0.9),
                         letterSpacing: 0.2,
                       ),
