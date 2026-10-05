@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ismailmagdy/core/helpers/spacing.dart';
 import 'package:ismailmagdy/core/theme/app_colors.dart';
 import 'package:ismailmagdy/portfolio/presentation/components/open_source/components/package_card.dart';
 import 'package:ismailmagdy/portfolio/repositories/packages/packages_repository.dart';
@@ -31,7 +32,7 @@ class _OpenSourceSectionState extends State<OpenSourceSection> {
             "Open Source & Packages",
             style: GoogleFonts.poppins(
               fontSize: 36,
-              fontWeight: FontWeight.bold,
+              fontWeight: .bold,
               color: AppColors.textDark,
             ),
           ),
@@ -41,7 +42,7 @@ class _OpenSourceSectionState extends State<OpenSourceSection> {
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             itemCount: packages.length,
-            separatorBuilder: (context, index) => const SizedBox(height: 32),
+            separatorBuilder: (context, index) => verticalSpace(32),
             itemBuilder: (context, index) {
               return PackageCard(package: packages[index]);
             },
