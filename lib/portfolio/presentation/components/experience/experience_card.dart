@@ -15,8 +15,8 @@ class ExperienceCard extends StatelessWidget {
       curve: Curves.easeOutCubic,
       decoration: BoxDecoration(
         color: AppColors.cardBackgroundDark,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(
+        borderRadius: .circular(16),
+        border: .all(
           color: AppColors.primary.withValues(alpha: 0.15),
           width: 1,
         ),
@@ -34,18 +34,17 @@ class ExperienceCard extends StatelessWidget {
         ],
       ),
       child: Padding(
-        padding: const EdgeInsets.all(28),
+        padding: const .all(28),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: .start,
           children: [
-            //
             // Period badge
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+              padding: const .symmetric(horizontal: 14, vertical: 6),
               decoration: BoxDecoration(
                 color: AppColors.primary.withValues(alpha: 0.1),
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(
+                borderRadius: .circular(20),
+                border: .all(
                   color: AppColors.primary.withValues(alpha: 0.3),
                   width: 1,
                 ),
@@ -54,40 +53,37 @@ class ExperienceCard extends StatelessWidget {
                 experience.period,
                 style: GoogleFonts.poppins(
                   fontSize: 13,
-                  fontWeight: FontWeight.w500,
+                  fontWeight: .w500,
                   color: AppColors.primary,
                 ),
               ),
             ),
             //
             verticalSpace(16),
-            //
             // Title
             Text(
               experience.title,
               style: GoogleFonts.poppins(
                 fontSize: 20,
-                fontWeight: FontWeight.bold,
+                fontWeight: .bold,
                 color: AppColors.textDark,
                 height: 1.3,
               ),
             ),
             //
             verticalSpace(6),
-            //
             // Company
             Text(
               experience.company,
               style: GoogleFonts.poppins(
                 fontSize: 15,
-                fontWeight: FontWeight.w500,
+                fontWeight: .w500,
                 color: AppColors.primary.withValues(alpha: 0.8),
                 height: 1.4,
               ),
             ),
             //
             verticalSpace(16),
-            //
             // Description
             Text(
               experience.description,
@@ -99,7 +95,6 @@ class ExperienceCard extends StatelessWidget {
             ),
             //
             verticalSpace(20),
-            //
             // Technologies
             Wrap(
               spacing: 8,
@@ -107,14 +102,11 @@ class ExperienceCard extends StatelessWidget {
               children: experience.technologies
                   .map(
                     (tech) => Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 12,
-                        vertical: 6,
-                      ),
+                      padding: const .symmetric(horizontal: 12, vertical: 6),
                       decoration: BoxDecoration(
                         color: AppColors.primary.withValues(alpha: 0.08),
-                        borderRadius: BorderRadius.circular(8),
-                        border: Border.all(
+                        borderRadius: .circular(8),
+                        border: .all(
                           color: AppColors.primary.withValues(alpha: 0.2),
                           width: 1,
                         ),
@@ -124,7 +116,7 @@ class ExperienceCard extends StatelessWidget {
                         style: GoogleFonts.poppins(
                           fontSize: 12,
                           color: AppColors.primary.withValues(alpha: 0.9),
-                          fontWeight: FontWeight.w500,
+                          fontWeight: .w500,
                         ),
                       ),
                     ),
@@ -138,3 +130,4 @@ class ExperienceCard extends StatelessWidget {
     );
   }
 }
+// 141
