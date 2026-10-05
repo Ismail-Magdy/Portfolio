@@ -1,9 +1,9 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:ismailmagdy/core/theme/app_colors.dart';
 import 'package:ismailmagdy/portfolio/presentation/components/projects/components/project_details_screen.dart';
-import 'package:ismailmagdy/portfolio/presentation/components/projects/widgets/liquid_glass_arrow.dart';
+import 'package:ismailmagdy/portfolio/presentation/components/projects/components/project_iscoming_soon_widget.dart';
+import 'package:ismailmagdy/portfolio/presentation/components/projects/widgets/title_and_liquid_glass_arrow.dart';
+
 import '../../../../models/projects/project_model.dart';
 
 class ProjectCard extends StatefulWidget {
@@ -37,7 +37,6 @@ class _ProjectCardState extends State<ProjectCard>
 
   @override
   Widget build(BuildContext context) {
-
     return MouseRegion(
       onEnter: (_) => setState(() => _isHovered = true),
       onExit: (_) => setState(() => _isHovered = false),
@@ -65,49 +64,52 @@ class _ProjectCardState extends State<ProjectCard>
           transformAlignment: Alignment.center,
           decoration: BoxDecoration(
             color: AppColors.backgroundDark,
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: .circular(16),
             border: Border.all(
               color: _isHovered && !widget.project.isComingSoon
                   ? AppColors.primary.withValues(alpha: 0.4)
                   : Colors.white.withValues(alpha: 0.06),
               width: 1.5,
             ),
+            // Shadows
             boxShadow: _isHovered && !widget.project.isComingSoon
-                    ? [
-                        BoxShadow(
-                          color: AppColors.primary.withValues(alpha: 0.15),
-                          blurRadius: 24,
-                          spreadRadius: 2,
-                          offset: const Offset(0, 8),
-                        ),
-                      ]
-                    : [
-                        BoxShadow(
-                          color: Colors.black.withValues(alpha: 0.2),
-                          blurRadius: 8,
-                          offset: const Offset(0, 4),
-                        ),
-                      ]),
+                ? [
+                    BoxShadow(
+                      color: AppColors.primary.withValues(alpha: 0.15),
+                      blurRadius: 24,
+                      spreadRadius: 2,
+                      offset: const Offset(0, 8),
+                    ),
+                  ]
+                : [
+                    BoxShadow(
+                      color: Colors.black.withValues(alpha: 0.2),
+                      blurRadius: 8,
+                      offset: const Offset(0, 4),
+                    ),
+                  ],
+          ),
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: .circular(16),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
+              crossAxisAlignment: .stretch,
               children: [
                 // Project Image
                 Expanded(
                   child: Hero(
                     tag: widget.project.title,
                     child: ClipRRect(
-                      borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
+                      borderRadius: const .vertical(top: .circular(16)),
                       child: Stack(
                         fit: .expand,
                         children: [
+                          //
                           Opacity(
                             opacity: widget.project.isComingSoon ? 0.3 : 1.0,
                             child: ColorFiltered(
-                              colorFilter: const ColorFilter.mode(
+                              colorFilter: const .mode(
                                 Colors.transparent,
-                                BlendMode.dst,
+                                .dst,
                               ),
                               child: Image.asset(
                                 widget.project.imageOut,
@@ -130,109 +132,23 @@ class _ProjectCardState extends State<ProjectCard>
                               ),
                             ),
                           ),
+                          //
                           if (widget.project.isComingSoon)
-                            Positioned(
-                              top: 16,
-                              right: 16,
-                              child: AnimatedBuilder(
-                                animation: _rippleController,
-                                builder: (context, child) {
-                                  // Pulsing opacity between 0.6 and 1.0
-                                  final pulse =
-                                      0.6 +
-                                      (0.4 *
-                                          (0.5 +
-                                              0.5 *
-                                                  Curves.easeInOut.transform(
-                                                    (_rippleController.value <=
-                                                            0.5
-                                                        ? _rippleController
-                                                                  .value *
-                                                              2
-                                                        : (1 -
-                                                                  _rippleController
-                                                                      .value) *
-                                                              2),
-                                                  )));
-
-                                  return Opacity(opacity: pulse, child: child);
-                                },
-                                child: ClipRRect(
-                                  borderRadius: .circular(4),
-                                  child: BackdropFilter(
-                                    filter: ImageFilter.blur(
-                                      sigmaX: 8,
-                                      sigmaY: 8,
-                                    ),
-                                    child: Container(
-                                      padding: const .symmetric(
-                                        horizontal: 10,
-                                        vertical: 6,
-                                      ),
-                                      decoration: BoxDecoration(
-                                        color: Colors.black.withValues(
-                                          alpha: 0.4,
-                                        ),
-                                        borderRadius: .circular(10),
-                                        border: .all(
-                                          color: Colors.white.withValues(
-                                            alpha: 0.1,
-                                          ),
-                                          width: 0.5,
-                                        ),
-                                      ),
-                                      child: Text(
-                                        "COMING SOON",
-                                        style: GoogleFonts.poppins(
-                                          fontSize: 10,
-                                          fontWeight: .w600,
-                                          letterSpacing: 2.0,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
+                            //
+                            ProjectIscomingSoonWidget(
+                              rippleController: _rippleController,
                             ),
+                          //
                         ],
                       ),
                     ),
                   ),
                 ),
                 // Title + Liquid Glass Arrow
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        const Color(0xFF0D2137),
-                        AppColors.backgroundDark,
-                      ],
-                    ),
-                  ),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          widget.project.title,
-                          style: GoogleFonts.poppins(
-                            fontSize: 17,
-                            fontWeight: FontWeight.w600,
-                            color: AppColors.textDark,
-                          ),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                      const SizedBox(width: 8),
-                      // Liquid glass animated arrow (hide if coming soon)
-                      if (!widget.project.isComingSoon)
-                        LiquidGlassArrow(controller: _rippleController),
-                    ],
-                  ),
+                TitleAndLiquidGlassArrow(
+                  project: widget.project,
+                  projectTitle: widget.project.title,
+                  rippleController: _rippleController,
                 ),
               ],
             ),
@@ -242,3 +158,4 @@ class _ProjectCardState extends State<ProjectCard>
     );
   }
 }
+// 253

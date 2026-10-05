@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ismailmagdy/core/theme/app_colors.dart';
 
 class HoverActionButton extends StatefulWidget {
-  final IconData icon;
+  final FaIconData icon;
   final String label;
   final String url;
   final bool isPrimary;
@@ -16,6 +17,7 @@ class HoverActionButton extends StatefulWidget {
     required this.url,
     required this.isPrimary,
     required this.onTap,
+    List<Color>? gradientColors,
   });
 
   @override
@@ -72,7 +74,7 @@ class HoverActionButtonState extends State<HoverActionButton> {
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(
+              FaIcon(
                 widget.icon,
                 size: 16,
                 color: widget.isPrimary

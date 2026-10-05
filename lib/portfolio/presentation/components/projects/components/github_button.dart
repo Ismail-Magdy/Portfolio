@@ -6,9 +6,9 @@ import 'package:ismailmagdy/core/helpers/spacing.dart';
 import 'package:ismailmagdy/core/theme/app_colors.dart';
 
 class GithubButton extends StatefulWidget {
-  final VoidCallback onPressed;
-
   const GithubButton({super.key, required this.onPressed});
+
+  final VoidCallback onPressed;
 
   @override
   State<GithubButton> createState() => _GithubButtonState();
@@ -38,7 +38,7 @@ class _GithubButtonState extends State<GithubButton> {
             _isHovered ? 1.03 : 1.0,
             1.0,
           ),
-          transformAlignment: Alignment.center,
+          transformAlignment: .center,
           decoration: BoxDecoration(
             color: _isHovered ? hoverBgColor : Colors.transparent,
             borderRadius: .circular(20),
@@ -57,8 +57,11 @@ class _GithubButtonState extends State<GithubButton> {
             mainAxisAlignment: .center,
             mainAxisSize: .min,
             children: [
+              //
               FaIcon(FontAwesomeIcons.github, size: 16, color: borderColor),
+              //
               horizontalSpace(8),
+              //
               Text(
                 AppStrings.gitHub,
                 style: GoogleFonts.poppins(
@@ -67,6 +70,7 @@ class _GithubButtonState extends State<GithubButton> {
                   color: borderColor,
                 ),
               ),
+              //
             ],
           ),
         ),
