@@ -9,7 +9,8 @@ class AppImages {
       "assets/images/projects/meal_monkey.webp";
 
   // Book Shop
-  static const String bookShopImageOut = "assets/images/projects/book_shop.webp";
+  static const String bookShopImageOut =
+      "assets/images/projects/book_shop.webp";
   static const String bookShopImageIn = "assets/images/projects/book_shop.webp";
 
   // Joby App
@@ -25,7 +26,8 @@ class AppImages {
   // Portfolio
   static const String portfolioImageOut =
       "assets/images/projects/portfolio.webp";
-  static const String portfolioImageIn = "assets/images/projects/portfolio.webp";
+  static const String portfolioImageIn =
+      "assets/images/projects/portfolio.webp";
 
   // Spotify
   static const String spotifyImageOut =
