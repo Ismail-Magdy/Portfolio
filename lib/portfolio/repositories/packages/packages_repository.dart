@@ -6,8 +6,7 @@ class PackagesRepository {
       // First Package
       PackageModel(
         title: "Glass Bottom Navigation Bar",
-        shortDescription:
-            "A Beautiful, Modern, and Highly Customizable Glassmorphism Bottom Navigation Bar for Flutter Applications",
+        shortDescription: "A Beautiful, Modern, and Highly Customizable Glassmorphism Bottom Navigation Bar for Flutter Applications",
         imageOut: "assets/images/glass_bottom_nav_bar.jpeg",
         imageIn: "assets/images/glass-in.png",
         imagePath: "assets/images/logo.png",
@@ -33,8 +32,7 @@ class PackagesRepository {
       // Second Package
       PackageModel(
         title: "Global Search Bar",
-        shortDescription:
-            "A powerful, highly customizable, and generic search bar for Flutter with built-in debouncing, search history, and text highlighting.",
+        shortDescription: "A powerful, highly customizable, and generic search bar for Flutter with built-in debouncing, search history, and text highlighting.",
         imageOut: "assets/images/search.png",
         imageIn: "assets/images/search.png",
         imagePath: "assets/images/logo.png",
