@@ -12,10 +12,11 @@ class FooterFlutterBirdLogo extends StatelessWidget {
       mainAxisSize: .min,
       children: [
         Text(
-          "Built with ",
+          "Built with",
           style: GoogleFonts.poppins(
             fontSize: 13,
-            color: AppColors.textDark.withValues(alpha: 0.6),
+            fontWeight: .w600,
+            color: AppColors.textDark.withValues(alpha: 0.7),
           ),
         ),
         //
@@ -27,11 +28,11 @@ class FooterFlutterBirdLogo extends StatelessWidget {
         ),
         //
         Text(
-          " Flutter",
+          "Flutter",
           style: GoogleFonts.poppins(
             fontSize: 13,
             fontWeight: .w600,
-            color: AppColors.textDark.withValues(alpha: 0.6),
+            color: AppColors.textDark.withValues(alpha: 0.7),
           ),
         ),
         //

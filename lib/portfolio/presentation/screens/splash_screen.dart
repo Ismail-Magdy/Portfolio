@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:ismailmagdy/core/theme/app_colors.dart';
 import 'package:ismailmagdy/core/animations/splash/fade_route.dart';
+import 'package:ismailmagdy/portfolio/presentation/components/splash/splash_screen_content.dart';
 import 'package:ismailmagdy/portfolio/presentation/screens/portfolio_main_screen.dart';
 
 /// A premium, minimalist animated splash screen
@@ -24,22 +24,22 @@ class _SplashScreenState extends State<SplashScreen>
     with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
 
-  // (1) Accent line expand
+  // Accent line expand
   late final Animation<double> _lineExpand;
 
-  // (2) Letter animations ("i" and "M")
+  // Letter animations ("i" and "M")
   late final Animation<double> _letterIOpacity;
   late final Animation<Offset> _letterISlide;
   late final Animation<double> _letterMOpacity;
   late final Animation<Offset> _letterMSlide;
 
-  // (3) Subtitle fade
+  // Subtitle fade
   late final Animation<double> _subtitleOpacity;
 
-  // (4) Accent line contract
+  // Accent line contract
   late final Animation<double> _lineContract;
 
-  // (5) Exit scale + fade
+  // Exit scale + fade
   late final Animation<double> _exitScale;
   late final Animation<double> _exitOpacity;
 
@@ -165,90 +165,20 @@ class _SplashScreenState extends State<SplashScreen>
             opacity: _exitOpacity,
             child: ScaleTransition(
               scale: _exitScale,
-              child: Center(
-                child: Column(
-                  mainAxisSize: .min,
-                  children: [
-                    // Logo: "iM"
-                    Row(
-                      mainAxisSize: .min,
-                      crossAxisAlignment: .baseline,
-                      textBaseline: .alphabetic,
-                      children: [
-                        // Letter "i" & slides in from left
-                        SlideTransition(
-                          position: _letterISlide,
-                          child: FadeTransition(
-                            opacity: _letterIOpacity,
-                            child: Text(
-                              "i",
-                              style: GoogleFonts.playfairDisplay(
-                                fontSize: logoFontSize,
-                                fontWeight: .w700,
-                                color: Colors.white,
-                                height: 1.0,
-                              ),
-                            ),
-                          ),
-                        ),
-                        //
-                        // Letter "M" & slides in from right
-                        SlideTransition(
-                          position: _letterMSlide,
-                          child: FadeTransition(
-                            opacity: _letterMOpacity,
-                            child: Text(
-                              "M",
-                              style: GoogleFonts.playfairDisplay(
-                                fontSize: logoFontSize,
-                                fontWeight: .w700,
-                                color: _accent,
-                                height: 1.0,
-                              ),
-                            ),
-                          ),
-                        ),
-                        //
-                      ],
-                    ),
-                    //
-                    const SizedBox(height: 16),
-                    //
-                    // Accent line
-                    Container(
-                      width: lineMaxWidth * lineProgress,
-                      height: 2,
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [
-                            _accent.withValues(alpha: 0.0),
-                            _accent,
-                            _accent.withValues(alpha: 0.0),
-                          ],
-                        ),
-                        borderRadius: .circular(1),
-                      ),
-                    ),
-                    //
-                    const SizedBox(height: 20),
-                    //
-                    // Subtitle: "ISMAIL MAGDY"
-                    FadeTransition(
-                      opacity: _subtitleOpacity,
-                      child: Text(
-                        "ISMAIL MAGDY",
-                        style: GoogleFonts.outfit(
-                          fontSize: subtitleFontSize,
-                          fontWeight: .w300,
-                          letterSpacing: 8,
-                          color: Colors.white.withValues(alpha: 0.6),
-                        ),
-                      ),
-                    ),
-                    //
-                  ],
-                ),
+              //
+              child: SplashScreenContent(
+                accent: _accent,
+                letterIOpacity: _letterIOpacity,
+                letterISlide: _letterISlide,
+                letterMOpacity: _letterMOpacity,
+                letterMSlide: _letterMSlide,
+                lineMaxWidth: lineMaxWidth,
+                lineProgress: lineProgress,
+                logoFontSize: logoFontSize,
+                subtitleFontSize: subtitleFontSize,
+                subtitleOpacity: _subtitleOpacity,
               ),
+              //
             ),
           );
         },
@@ -256,3 +186,4 @@ class _SplashScreenState extends State<SplashScreen>
     );
   }
 }
+// 259
