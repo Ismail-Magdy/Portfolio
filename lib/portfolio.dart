@@ -6,6 +6,7 @@ class Portfolio extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => MaterialApp(
+    title: "ismailmagdy",
     debugShowCheckedModeBanner: false,
     home: const SplashScreen(),
   );

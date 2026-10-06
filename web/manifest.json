@@ -1,11 +1,11 @@
 {
-    "name": "ismailmagdy",
-    "short_name": "ismailmagdy",
+    "name": "Ismail Magdy | Portfolio",
+    "short_name": "Ismail Magdy",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "background_color": "#0A0E17",
+    "theme_color": "#00E5FF",
+    "description": "Ismail Magdy | DevOps Engineer & Flutter Developer specializing in Clean Architecture and high performance cross platform applications",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
