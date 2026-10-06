@@ -21,6 +21,16 @@ class ExperienceRepository {
           "Technical Presentation",
           "Problem Solving",
         ],
+        images: [
+          'assets/images/experience/mega/1.JPG',
+          'assets/images/experience/mega/2.JPG',
+          'assets/images/experience/mega/3.JPG',
+          'assets/images/experience/mega/4.JPG',
+          'assets/images/experience/mega/5.JPG',
+          'assets/images/experience/mega/5D7A7179.JPG',
+          'assets/images/experience/mega/6.JPG',
+          'assets/images/experience/mega/7.JPG',
+        ],
       ),
       //
       ExperienceModel(
@@ -42,6 +52,14 @@ class ExperienceRepository {
           "Agile Methodologies",
           "Team Collaboration",
         ],
+        images: [
+          'assets/images/experience/nti/1.jpeg',
+          'assets/images/experience/nti/2.jpeg',
+          'assets/images/experience/nti/3.jpeg',
+          'assets/images/experience/nti/4.jpeg',
+          'assets/images/experience/nti/5.jpeg',
+          'assets/images/experience/nti/6.jpeg',
+        ],
       ),
       //
       ExperienceModel(
@@ -60,6 +78,15 @@ class ExperienceRepository {
           "REST APIs",
           "Clean Architecture",
           "SOLID Principles",
+        ],
+        images: [
+          'assets/images/experience/ieee/1.jpeg',
+          'assets/images/experience/ieee/2.jpeg',
+          'assets/images/experience/ieee/3.jpeg',
+          'assets/images/experience/ieee/4.jpeg',
+          'assets/images/experience/ieee/5.jpeg',
+          'assets/images/experience/ieee/6.jpeg',
+          'assets/images/experience/ieee/7.jpeg',
         ],
       ),
       //

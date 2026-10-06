@@ -5,6 +5,7 @@ class ExperienceModel {
   final String period;
   final String description;
   final List<String> technologies;
+  final List<String> images;
 
   ExperienceModel({
     required this.id,
@@ -13,5 +14,6 @@ class ExperienceModel {
     required this.period,
     required this.description,
     required this.technologies,
+    this.images = const [],
   });
 }
