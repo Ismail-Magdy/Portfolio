@@ -387,6 +387,7 @@ class _GalleryImageCardState extends State<_GalleryImageCard> {
                 Image.asset(
                   widget.imagePath,
                   fit: BoxFit.cover,
+                  cacheWidth: 800,
                   errorBuilder: (context, error, stackTrace) => Container(
                     color: AppColors.cardBackgroundDark,
                     child: Center(
