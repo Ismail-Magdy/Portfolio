@@ -31,27 +31,27 @@ class ProjectsRepository {
           TeamMember(
             name: "Ismail Magdy",
             role: "Team Leader & Flutter Developer",
-            imagePath: "assets/images/rentora/ismail.jpeg",
+            imagePath: "assets/images/rentora/ismail.webp",
           ),
           TeamMember(
             name: "Essam Ibrahim",
             role: "Flutter Developer",
-            imagePath: "assets/images/rentora/essam.jpeg",
+            imagePath: "assets/images/rentora/essam.webp",
           ),
           TeamMember(
             name: "Ghada Essam",
             role: "Flutter Developer",
-            imagePath: "assets/images/rentora/ghada.jpeg",
+            imagePath: "assets/images/rentora/ghada.webp",
           ),
           TeamMember(
             name: "Wesssm Zakaria",
             role: "Flutter Developer",
-            imagePath: "assets/images/rentora/wessam.jpeg",
+            imagePath: "assets/images/rentora/wessam.webp",
           ),
           TeamMember(
             name: "Kerols Gamal",
             role: "Flutter Developer",
-            imagePath: "assets/images/rentora/kero.jpeg",
+            imagePath: "assets/images/rentora/kero.webp",
           ),
         ],
         isComingSoon: false,

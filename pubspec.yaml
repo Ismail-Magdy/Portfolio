@@ -34,14 +34,14 @@ dependency_overrides:
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/images/logo.png"
+  image_path: "assets/images/projects/logo.webp"
   min_sdk_android: 21
   web:
     generate: true
-    image_path: "assets/images/logo.png"
+    image_path: "assets/images/projects/logo.webp"
   windows:
     generate: true
-    image_path: "assets/images/logo.png"
+    image_path: "assets/images/projects/logo.webp"
     icon_size: 48
 
 flutter:
