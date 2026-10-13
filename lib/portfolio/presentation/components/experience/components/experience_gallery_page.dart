@@ -1,4 +1,5 @@
 import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -161,8 +162,9 @@ class ExperienceGalleryPage extends StatelessWidget {
                                   vertical: 6,
                                 ),
                                 decoration: BoxDecoration(
-                                  color:
-                                      AppColors.primary.withValues(alpha: 0.08),
+                                  color: AppColors.primary.withValues(
+                                    alpha: 0.08,
+                                  ),
                                   borderRadius: BorderRadius.circular(8),
                                   border: Border.all(
                                     color: AppColors.primary.withValues(
@@ -456,18 +458,13 @@ void _openLightbox(
   showDialog(
     context: context,
     barrierColor: Colors.transparent,
-    builder: (context) => _LightboxDialog(
-      initialIndex: initialIndex,
-      images: images,
-    ),
+    builder: (context) =>
+        _LightboxDialog(initialIndex: initialIndex, images: images),
   );
 }
 
 class _LightboxDialog extends StatefulWidget {
-  const _LightboxDialog({
-    required this.initialIndex,
-    required this.images,
-  });
+  const _LightboxDialog({required this.initialIndex, required this.images});
   final int initialIndex;
   final List<String> images;
 
@@ -511,8 +508,10 @@ class _LightboxDialogState extends State<_LightboxDialog>
 
   void _navigate(int delta) {
     setState(() {
-      _currentIndex =
-          (_currentIndex + delta).clamp(0, widget.images.length - 1);
+      _currentIndex = (_currentIndex + delta).clamp(
+        0,
+        widget.images.length - 1,
+      );
       _transformController.value = Matrix4.identity();
     });
   }
@@ -530,7 +529,8 @@ class _LightboxDialogState extends State<_LightboxDialog>
           if (event is! KeyUpEvent) {
             if (event.logicalKey == LogicalKeyboardKey.arrowLeft && hasPrev) {
               _navigate(-1);
-            } else if (event.logicalKey == LogicalKeyboardKey.arrowRight && hasNext) {
+            } else if (event.logicalKey == LogicalKeyboardKey.arrowRight &&
+                hasNext) {
               _navigate(1);
             } else if (event.logicalKey == LogicalKeyboardKey.escape) {
               Navigator.pop(context);
@@ -545,9 +545,7 @@ class _LightboxDialogState extends State<_LightboxDialog>
                 onTap: () => Navigator.pop(context),
                 child: BackdropFilter(
                   filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
-                  child: Container(
-                    color: Colors.black.withValues(alpha: 0.85),
-                  ),
+                  child: Container(color: Colors.black.withValues(alpha: 0.85)),
                 ),
               ),
             ),
@@ -729,3 +727,4 @@ class _LightboxDialogState extends State<_LightboxDialog>
     );
   }
 }
+// 732

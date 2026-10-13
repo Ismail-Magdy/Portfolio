@@ -5,7 +5,7 @@ import '../components/nav_bar/navbar.dart';
 import '../components/nav_bar/mobile_bottom_navbar.dart';
 import '../components/hero/components/hero_section.dart';
 import '../components/projects/components/projects_section.dart';
-import '../components/experience/experience_section.dart';
+import '../components/experience/components/experience_section.dart';
 import '../components/open_source/components/open_source_section.dart';
 import '../components/footer/components/footer.dart';
 import '../../../core/animations/background/animated_background.dart';

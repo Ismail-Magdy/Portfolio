@@ -3,8 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:ismailmagdy/core/constants/app_strings.dart';
 import 'package:ismailmagdy/core/helpers/spacing.dart';
 import 'package:ismailmagdy/core/theme/app_colors.dart';
-import 'package:ismailmagdy/portfolio/presentation/components/experience/desktop_timeline.dart';
-import 'package:ismailmagdy/portfolio/presentation/components/experience/mobile_timeline.dart';
+import 'package:ismailmagdy/portfolio/presentation/components/experience/components/desktop_timeline.dart';
+import 'package:ismailmagdy/portfolio/presentation/components/experience/components/mobile_timeline.dart';
 import 'package:ismailmagdy/portfolio/repositories/experience/experience_repository.dart';
 
 class ExperienceSection extends StatelessWidget {

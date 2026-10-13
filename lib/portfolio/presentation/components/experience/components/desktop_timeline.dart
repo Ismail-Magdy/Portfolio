@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ismailmagdy/core/theme/app_colors.dart';
-import 'package:ismailmagdy/portfolio/presentation/components/experience/experience_card.dart';
-import 'package:ismailmagdy/portfolio/presentation/components/experience/timeline_animated_item.dart';
-import 'package:ismailmagdy/portfolio/presentation/components/experience/timeline_node.dart';
+import 'package:ismailmagdy/portfolio/presentation/components/experience/components/experience_card.dart';
+import 'package:ismailmagdy/portfolio/presentation/components/experience/components/timeline_animated_item.dart';
+import 'package:ismailmagdy/portfolio/presentation/components/experience/components/timeline_node.dart';
 
 class DesktopTimeline extends StatelessWidget {
   const DesktopTimeline({super.key, required this.experiences});
