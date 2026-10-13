@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:ismailmagdy/portfolio/presentation/components/nav_bar/logo_widget.dart';
+import 'package:ismailmagdy/portfolio/presentation/components/nav_bar/visitor_count_badge.dart';
 
 class NavBarMobileView extends StatelessWidget {
   const NavBarMobileView({super.key});
@@ -31,6 +32,8 @@ class NavBarMobileView extends StatelessWidget {
                 ),
               ),
             ),
+            const SizedBox(width: 12),
+            const VisitorCountBadge(),
             const Spacer(),
           ],
         ),
