@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ismailmagdy/core/helpers/spacing.dart';
 import 'package:ismailmagdy/core/theme/app_colors.dart';
 
 class GalleryBackButton extends StatefulWidget {
@@ -35,24 +34,13 @@ class GalleryBackButtonState extends State<GalleryBackButton> {
                   : AppColors.primary.withValues(alpha: 0.2),
             ),
           ),
-          child: Row(
-            mainAxisSize: .min,
-            children: [
-              Icon(
-                Icons.arrow_back_ios_new,
-                size: 18,
-                color: AppColors.primary,
-              ),
-              horizontalSpace(8),
-              Text(
-                "Back",
-                style: GoogleFonts.poppins(
-                  fontSize: 14,
-                  fontWeight: .w500,
-                  color: AppColors.primary,
-                ),
-              ),
-            ],
+          child: Text(
+            "Back",
+            style: GoogleFonts.poppins(
+              fontSize: 14,
+              fontWeight: .w500,
+              color: AppColors.primary,
+            ),
           ),
         ),
       ),
