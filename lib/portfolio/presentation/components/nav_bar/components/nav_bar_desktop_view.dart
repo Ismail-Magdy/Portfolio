@@ -72,7 +72,7 @@ class _NavBarDesktopViewState extends State<NavBarDesktopView> {
                     Positioned(
                       left: 0,
                       child: Row(
-                        mainAxisSize: MainAxisSize.min,
+                        mainAxisSize: .min,
                         children: [
                           GestureDetector(
                             onTap: () => _scrollToTop(context),
@@ -83,8 +83,11 @@ class _NavBarDesktopViewState extends State<NavBarDesktopView> {
                               child: const LogoWidget(),
                             ),
                           ),
+                          //
                           const SizedBox(width: 12),
+                          //
                           const VisitorCountBadge(),
+                          //
                         ],
                       ),
                     ),

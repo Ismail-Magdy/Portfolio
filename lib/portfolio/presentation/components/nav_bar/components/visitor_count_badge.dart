@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ismailmagdy/core/theme/app_colors.dart';
-import 'package:ismailmagdy/portfolio/presentation/components/nav_bar/components/nav_bar_functions.dart';
+import 'package:ismailmagdy/portfolio/presentation/components/nav_bar/functions/nav_bar_functions.dart';
 import 'package:ismailmagdy/portfolio/repositories/visitor/visitor_service.dart';
 
 class VisitorCountBadge extends StatefulWidget {
