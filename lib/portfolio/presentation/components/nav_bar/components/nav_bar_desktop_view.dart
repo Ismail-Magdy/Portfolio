@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ismailmagdy/core/constants/app_strings.dart';
 import 'package:ismailmagdy/core/theme/app_colors.dart';
-import 'package:ismailmagdy/portfolio/presentation/components/nav_bar/logo_widget.dart';
-import 'package:ismailmagdy/portfolio/presentation/components/nav_bar/visitor_count_badge.dart';
+import 'package:ismailmagdy/portfolio/presentation/components/nav_bar/widgets/logo_widget.dart';
+import 'package:ismailmagdy/portfolio/presentation/components/nav_bar/components/visitor_count_badge.dart';
 
 class NavBarDesktopView extends StatefulWidget {
   const NavBarDesktopView({

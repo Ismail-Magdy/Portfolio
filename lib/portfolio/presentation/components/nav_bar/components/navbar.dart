@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ismailmagdy/portfolio/presentation/components/nav_bar/nav_bar_desktop_view.dart';
-import 'package:ismailmagdy/portfolio/presentation/components/nav_bar/nav_bar_mobile_view.dart';
+import 'package:ismailmagdy/portfolio/presentation/components/nav_bar/components/nav_bar_desktop_view.dart';
+import 'package:ismailmagdy/portfolio/presentation/components/nav_bar/components/nav_bar_mobile_view.dart';
 
 class Navbar extends StatefulWidget implements PreferredSizeWidget {
   final GlobalKey aboutKey;

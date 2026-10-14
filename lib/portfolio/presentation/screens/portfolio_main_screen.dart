@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ismailmagdy/portfolio/presentation/components/skills/components/skills_section.dart';
 
-import '../components/nav_bar/navbar.dart';
-import '../components/nav_bar/mobile_bottom_navbar.dart';
+import '../components/nav_bar/components/navbar.dart';
+import '../components/nav_bar/components/mobile_bottom_navbar.dart';
 import '../components/hero/components/hero_section.dart';
 import '../components/projects/components/projects_section.dart';
 import '../components/experience/components/experience_section.dart';
