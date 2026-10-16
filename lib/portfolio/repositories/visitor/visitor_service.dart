@@ -23,18 +23,17 @@ class VisitorService {
     try {
       final response = await http
           .get(
-            Uri.parse('https://api.counterapi.dev/v1/ismailmagdy/portfolio/up'),
+            Uri.parse("https://api.counterapi.dev/v1/ismailmagdy/portfolio/up"),
           )
           .timeout(const Duration(seconds: 10));
 
       if (response.statusCode != 200) {
-        throw Exception('Bad status code: ${response.statusCode}');
+        throw Exception("Bad status code: ${response.statusCode}");
       }
 
       final data = jsonDecode(response.body);
       count.value = (data['count'] as int?) ?? 0;
-    } catch (e) {
-      debugPrint('Counter API Error: $e');
+    } catch (error) {
       // Fallback to 0 so the spinner stops and the badge still renders
       count.value = 0;
     }
