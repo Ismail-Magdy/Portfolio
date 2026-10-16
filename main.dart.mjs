@@ -650,7 +650,11 @@ class CompiledApp {
         }
       },
       rH: (a, i) => a.splice(i, 1),
-      rI: x0 => x0.pop(),
+      rI: () => {
+        return typeof process != "undefined" &&
+               Object.prototype.toString.call(process) == "[object process]" &&
+               process.platform == "win32"
+      },
       s: () => ({}),
       sB: o => {
         if (o === null || o === undefined) return 0;
@@ -669,9 +673,11 @@ class CompiledApp {
       },
       sH: a => a.pop(),
       sI: () => {
-        return typeof process != "undefined" &&
-               Object.prototype.toString.call(process) == "[object process]" &&
-               process.platform == "win32"
+        // On browsers return `globalThis.location.href`
+        if (globalThis.location != null) {
+          return globalThis.location.href;
+        }
+        return null;
       },
       t: (o, p, v) => o[p] = v,
       tB: (o, start, length) => new Float64Array(o.buffer, o.byteOffset + start, length),
@@ -681,13 +687,7 @@ class CompiledApp {
       tF: x0 => x0.hash,
       tG: (x0,x1) => x0.dispatchEvent(x1),
       tH: (x0,x1) => x0.revokeObjectURL(x1),
-      tI: () => {
-        // On browsers return `globalThis.location.href`
-        if (globalThis.location != null) {
-          return globalThis.location.href;
-        }
-        return null;
-      },
+      tI: x0 => x0.pop(),
       u: () => [],
       uB: (o, start, length) => new Float32Array(o.buffer, o.byteOffset + start, length),
       uC: x0 => x0.activeElement,
