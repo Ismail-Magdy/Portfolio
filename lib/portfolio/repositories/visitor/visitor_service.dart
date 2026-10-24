@@ -9,13 +9,13 @@ class VisitorService {
   static final VisitorService _instance = VisitorService._();
   static VisitorService get instance => _instance;
 
-  /// Holds the current visitor count. `null` means still loading
+  /// Holds the current visitor count `null` means still loading
   final ValueNotifier<int?> count = ValueNotifier<int?>(null);
 
   bool _hasFetched = false;
 
   /// Calls the counter API to increment and fetch the current count
-  /// Safe to call multiple times – only the first invocation hits the network
+  /// Safe to call multiple times only the first invocation hits the network
   Future<void> fetchAndIncrement() async {
     if (_hasFetched) return;
     _hasFetched = true;
