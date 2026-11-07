@@ -1,7 +1,9 @@
 class AppImages {
+  /// Personal
   static const String logo = "assets/images/projects/logo.webp";
   static const String profileImage = "assets/images/projects/profile.webp";
 
+  /// Projects
   // Meal Monkey
   static const String mealMonkeyImageOut =
       "assets/images/projects/meal_monkey.webp";

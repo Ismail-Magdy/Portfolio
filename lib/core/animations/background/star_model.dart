@@ -1,4 +1,4 @@
-class Star {
+class StarModel {
   double x;
   double y;
   double vx;
@@ -6,7 +6,7 @@ class Star {
   double radius;
   double opacity;
 
-  Star({
+  StarModel({
     required this.x,
     required this.y,
     required this.vx,

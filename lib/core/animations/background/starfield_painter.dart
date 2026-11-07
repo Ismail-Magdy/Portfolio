@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:ismailmagdy/core/animations/background/star.dart';
+import 'package:ismailmagdy/core/animations/background/star_model.dart';
 
 class StarfieldPainter extends CustomPainter {
-  final List<Star> stars;
+  final List<StarModel> stars;
   final Color backgroundColor;
 
   StarfieldPainter({required this.stars, required this.backgroundColor});

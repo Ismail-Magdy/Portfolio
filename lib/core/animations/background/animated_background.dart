@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:ismailmagdy/core/animations/background/star.dart';
+import 'package:ismailmagdy/core/animations/background/star_model.dart';
 import 'package:ismailmagdy/core/animations/background/starfield_painter.dart';
 import 'package:ismailmagdy/core/theme/app_colors.dart';
 
@@ -15,7 +15,7 @@ class AnimatedBackground extends StatefulWidget {
 class _AnimatedBackgroundState extends State<AnimatedBackground>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
-  final List<Star> _stars = [];
+  final List<StarModel> _stars = [];
   final Random _random = Random();
   Size _lastSize = Size.zero;
 
@@ -39,11 +39,11 @@ class _AnimatedBackgroundState extends State<AnimatedBackground>
     }
   }
 
-  Star _createStar(Size size) {
+  StarModel _createStar(Size size) {
     // Speed between 0.15 and 0.5 px per frame — very slow drift
     final speed = 0.15 + _random.nextDouble() * 0.35;
     final angle = _random.nextDouble() * 2 * pi;
-    return Star(
+    return StarModel(
       x: _random.nextDouble() * size.width,
       y: _random.nextDouble() * size.height,
       vx: cos(angle) * speed,
