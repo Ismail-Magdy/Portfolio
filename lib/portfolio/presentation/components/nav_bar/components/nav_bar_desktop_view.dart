@@ -5,7 +5,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:ismailmagdy/core/constants/app_strings.dart';
 import 'package:ismailmagdy/core/theme/app_colors.dart';
 import 'package:ismailmagdy/portfolio/presentation/components/nav_bar/widgets/logo_widget.dart';
-import 'package:ismailmagdy/portfolio/presentation/components/nav_bar/components/visitor_count_badge.dart';
 
 class NavBarDesktopView extends StatefulWidget {
   const NavBarDesktopView({
@@ -71,24 +70,14 @@ class _NavBarDesktopViewState extends State<NavBarDesktopView> {
                     // Logo + Visitor Count
                     Positioned(
                       left: 0,
-                      child: Row(
-                        mainAxisSize: .min,
-                        children: [
-                          GestureDetector(
-                            onTap: () => _scrollToTop(context),
-                            child: Container(
-                              width: 64,
-                              height: 64,
-                              alignment: .center,
-                              child: const LogoWidget(),
-                            ),
-                          ),
-                          //
-                          const SizedBox(width: 12),
-                          //
-                          const VisitorCountBadge(),
-                          //
-                        ],
+                      child: GestureDetector(
+                        onTap: () => _scrollToTop(context),
+                        child: Container(
+                          width: 64,
+                          height: 64,
+                          alignment: .center,
+                          child: const LogoWidget(),
+                        ),
                       ),
                     ),
                     //
