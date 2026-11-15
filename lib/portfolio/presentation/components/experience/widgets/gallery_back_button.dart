@@ -22,13 +22,13 @@ class GalleryBackButtonState extends State<GalleryBackButton> {
         onTap: () => Navigator.pop(context),
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+          padding: const .symmetric(horizontal: 16, vertical: 10),
           decoration: BoxDecoration(
             color: _hovering
                 ? AppColors.primary.withValues(alpha: 0.15)
                 : AppColors.primary.withValues(alpha: 0.08),
-            borderRadius: BorderRadius.circular(12),
-            border: Border.all(
+            borderRadius: .circular(12),
+            border: .all(
               color: _hovering
                   ? AppColors.primary.withValues(alpha: 0.5)
                   : AppColors.primary.withValues(alpha: 0.2),

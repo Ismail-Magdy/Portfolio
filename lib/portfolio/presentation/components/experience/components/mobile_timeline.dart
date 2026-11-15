@@ -18,7 +18,7 @@ class MobileTimeline extends StatelessWidget {
 
         return TimelineAnimatedItem(
           index: index,
-          slideFromLeft: false, // Always slide from right on mobile
+          slideFromLeft: false,
           child: Stack(
             children: [
               //
@@ -26,9 +26,9 @@ class MobileTimeline extends StatelessWidget {
               if (!isLast)
                 //
                 Positioned(
-                  top: 11, // vertically centered with the 14px node
+                  top: 11,
                   bottom: 0,
-                  left: 9, // centered within the 20px left column (20/2 - 2/2)
+                  left: 9,
                   child: Container(
                     width: 2,
                     decoration: BoxDecoration(
@@ -72,6 +72,7 @@ class MobileTimeline extends StatelessWidget {
                   //
                 ],
               ),
+              //
             ],
           ),
         );

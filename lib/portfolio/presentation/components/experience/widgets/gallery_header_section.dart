@@ -21,11 +21,11 @@ class GalleryHeaderSection extends StatelessWidget {
         verticalSpace(16),
         // Period badge
         Container(
-          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+          padding: const .symmetric(horizontal: 14, vertical: 6),
           decoration: BoxDecoration(
             color: AppColors.primary.withValues(alpha: 0.1),
-            borderRadius: BorderRadius.circular(20),
-            border: Border.all(
+            borderRadius: .circular(20),
+            border: .all(
               color: AppColors.primary.withValues(alpha: 0.3),
               width: 1,
             ),
@@ -34,11 +34,12 @@ class GalleryHeaderSection extends StatelessWidget {
             experience.period,
             style: GoogleFonts.poppins(
               fontSize: 13,
-              fontWeight: FontWeight.w500,
+              fontWeight: .w500,
               color: AppColors.primary,
             ),
           ),
         ),
+        //
         verticalSpace(20),
         // Title
         Text(
@@ -50,6 +51,7 @@ class GalleryHeaderSection extends StatelessWidget {
             height: 1.2,
           ),
         ),
+        //
         verticalSpace(12),
         // Company
         Text(
@@ -61,6 +63,7 @@ class GalleryHeaderSection extends StatelessWidget {
             height: 1.4,
           ),
         ),
+        //
         verticalSpace(24),
         // Description
         Text(
@@ -71,6 +74,7 @@ class GalleryHeaderSection extends StatelessWidget {
             color: AppColors.textDark.withValues(alpha: 0.7),
           ),
         ),
+        //
         verticalSpace(20),
         // Technologies
         Wrap(
@@ -100,6 +104,7 @@ class GalleryHeaderSection extends StatelessWidget {
               )
               .toList(),
         ),
+        //
         verticalSpace(48),
         // Gallery divider
         if (experience.images.isNotEmpty) ...[

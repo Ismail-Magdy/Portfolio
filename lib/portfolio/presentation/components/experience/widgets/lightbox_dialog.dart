@@ -99,7 +99,7 @@ class _LightboxDialogState extends State<LightboxDialog>
             // Main image
             Center(
               child: Padding(
-                padding: const EdgeInsets.all(60),
+                padding: const .all(60),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(16),
                   child: InteractiveViewer(
@@ -145,10 +145,8 @@ class _LightboxDialogState extends State<LightboxDialog>
                       color: _closeHover
                           ? Colors.white.withValues(alpha: 0.2)
                           : Colors.white.withValues(alpha: 0.1),
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                        color: Colors.white.withValues(alpha: 0.15),
-                      ),
+                      shape: .circle,
+                      border: .all(color: Colors.white.withValues(alpha: 0.15)),
                     ),
                     child: Icon(
                       Icons.close_rounded,
@@ -167,10 +165,7 @@ class _LightboxDialogState extends State<LightboxDialog>
               right: 0,
               child: Center(
                 child: Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 8,
-                  ),
+                  padding: const .symmetric(horizontal: 16, vertical: 8),
                   decoration: BoxDecoration(
                     color: Colors.black.withValues(alpha: 0.6),
                     borderRadius: .circular(20),
@@ -209,8 +204,8 @@ class _LightboxDialogState extends State<LightboxDialog>
                           color: _leftHover
                               ? AppColors.primary.withValues(alpha: 0.3)
                               : Colors.white.withValues(alpha: 0.1),
-                          shape: BoxShape.circle,
-                          border: Border.all(
+                          shape: .circle,
+                          border: .all(
                             color: _leftHover
                                 ? AppColors.primary.withValues(alpha: 0.6)
                                 : Colors.white.withValues(alpha: 0.15),

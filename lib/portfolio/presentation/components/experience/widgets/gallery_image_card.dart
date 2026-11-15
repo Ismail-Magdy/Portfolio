@@ -39,7 +39,7 @@ class GalleryImageCardState extends State<GalleryImageCard> {
           decoration: BoxDecoration(
             color: AppColors.cardBackgroundDark,
             borderRadius: BorderRadius.circular(16),
-            border: Border.all(
+            border: .all(
               color: _hovering
                   ? AppColors.primary.withValues(alpha: 0.5)
                   : Colors.white.withValues(alpha: 0.08),
@@ -64,11 +64,11 @@ class GalleryImageCardState extends State<GalleryImageCard> {
           child: ClipRRect(
             borderRadius: BorderRadius.circular(15),
             child: Stack(
-              fit: StackFit.expand,
+              fit: .expand,
               children: [
                 Image.asset(
                   widget.imagePath,
-                  fit: BoxFit.cover,
+                  fit: .cover,
                   cacheWidth: 800,
                   errorBuilder: (context, error, stackTrace) => Container(
                     color: AppColors.cardBackgroundDark,

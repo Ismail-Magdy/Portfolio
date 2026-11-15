@@ -13,7 +13,7 @@ class DesktopTimeline extends StatelessWidget {
     return Column(
       children: List.generate(experiences.length, (index) {
         final experience = experiences[index];
-        final isLeft = index.isEven; // even = left, odd = right
+        final isLeft = index.isEven;
         final isLast = index == experiences.length - 1;
 
         return TimelineAnimatedItem(
